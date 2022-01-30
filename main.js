@@ -88,6 +88,60 @@ function main() {
     }
 }
 
+function checkUser(username, password, cb) {
+    username = (username || '').toString().replace(FORBIDDEN_CHARS, '_').replace(/\s/g, '_').replace(/\./g, '_').toLowerCase();
+
+    if (bruteForce[username] && bruteForce[username].errors > 4) {
+        let minutes = Date.now() - bruteForce[username].time;
+        if (bruteForce[username].errors < 7) {
+            if (Date.now() - bruteForce[username].time < 60000) {
+                minutes = 1;
+            } else {
+                minutes = 0;
+            }
+        } else
+        if (bruteForce[username].errors < 10) {
+            if (Date.now() - bruteForce[username].time < 180000) {
+                minutes = Math.ceil((180000 - minutes) / 60000);
+            } else {
+                minutes = 0;
+            }
+        } else
+        if (bruteForce[username].errors < 15) {
+            if (Date.now() - bruteForce[username].time < 600000) {
+                minutes = Math.ceil((600000 - minutes) / 60000);
+            } else {
+                minutes = 0;
+            }
+        } else
+        if (Date.now() - bruteForce[username].time < 3600000) {
+            minutes = Math.ceil((3600000 - minutes) / 60000);
+        } else {
+            minutes = 0;
+        }
+
+        if (minutes) {
+            return cb(`Too many errors. Try again in ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}.`, false);
+        }
+    }
+
+    adapter.checkPassword(username, password, res => {
+        if (!res) {
+            bruteForce[username] = bruteForce[username] || {errors: 0};
+            bruteForce[username].time = Date.now();
+            bruteForce[username].errors++;
+        } else if (bruteForce[username]) {
+            delete bruteForce[username];
+        }
+
+        if (res) {
+            return cb(null, username);
+        } else {
+            return cb(null, false);
+        }
+    });
+}
+
 //settings: {
 //    "port":   8080,
 //    "auth":   false,
@@ -174,7 +228,7 @@ function initWebServer(settings) {
             settings.ttl             = settings.ttl || 3600;
             settings.forceWebSockets = settings.forceWebSockets || false;
 
-            server.io = new IOSocket(server.server, settings, adapter);
+            server.io = new IOSocket(server.server, settings, adapter, null, store, checkUser);
         });
     } else {
         adapter.log.error('port missing');

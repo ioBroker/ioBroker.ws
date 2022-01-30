@@ -1,18 +1,20 @@
-![Logo](admin/socketio.png)
-# ioBroker socket.io
+![Logo](admin/ws.png)
+# ioBroker.ws
 
-![Number of Installations](http://iobroker.live/badges/socketio-installed.svg) ![Number of Installations](http://iobroker.live/badges/socketio-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.socketio.svg)](https://www.npmjs.com/package/iobroker.socketio)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.socketio.svg)](https://www.npmjs.com/package/iobroker.socketio)
+![Number of Installations](http://iobroker.live/badges/ws-installed.svg) ![Number of Installations](http://iobroker.live/badges/ws-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.ws.svg)](https://www.npmjs.com/package/iobroker.ws)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.ws.svg)](https://www.npmjs.com/package/iobroker.ws)
 
-[![NPM](https://nodei.co/npm/iobroker.socketio.png?downloads=true)](https://nodei.co/npm/iobroker.socketio/)
+[![NPM](https://nodei.co/npm/iobroker.ws.png?downloads=true)](https://nodei.co/npm/iobroker.ws/)
 
-This adapter used by WEB applications and adapters to communicate with ioBroker using websockets and the socket.io protocol.
+This adapter used by WEB applications and adapters to communicate with ioBroker using websockets.
+
+It is almost the same as ioBroker.socketio, but does not use socket.io library and only simulates it.
 
 **Important Note: Since v4.0 of this adapter pure Websockets are used exclusively! Socket.io is no longer implemented by the socket.io library, but simulated via pure WebSockets!**
 
 Users can use this adapter to connect their products to ioBroker via web sockets. Actually this adapter is e.g. used by Flot, Rickshaw, Vis and mobile to extract data from ioBroker.
 
-You can find in the example [directory](https://github.com/ioBroker/ioBroker.socketio/tree/master/example) simple application that uses this interface to show some data.
+You can find in the example [directory](https://github.com/ioBroker/ioBroker.ws/tree/master/example) simple application that uses this interface to show some data.
 
 By using of socket.io interface user should understand the [basics and concept](https://github.com/ioBroker/ioBroker) of the system.
 
@@ -311,240 +313,8 @@ You can set option *Force Web-Sockets* to force using only web-sockets transport
 -->
 
 ## Changelog
-### 4.0.3 (2022-01-30)
-* (bluefox) Removed the deprecated "passport.socketio" packet
-
-### 4.0.2 (2022-01-30)
-* (bluefox) Removed "force web sockets" option
-
-### 4.0.1 (2022-01-29)
-* (bluefox) Fixed authentication
-
-### 4.0.0 (2022-01-29)
-* (bluefox) Remove socket-io and use only web sockets
-
-### 3.1.5 (2021-10-22)
-* (foxriver76) make error logging on failed authentication more specific
-* (foxriver76) "request" was replaced by "axios"
-
-### 3.1.4 (2021-01-13)
-* (Apollon77) Define instanceObject "connected" to prevent warning with js-controller 3.2
-
-### 3.1.3 (2021-01-12)
-* (Apollon77) fix socketio dependency
-
-### 3.1.2 (2021-01-09)
-* (bluefox) Support of new Let's Encrypt (only with js-controller 3.2.x)
-
-### 3.0.13 (2020-08-21)
-* (bluefox) Added getAdapterName method
-
-### 3.0.12 (2020-07-27)
-* (Apollon77) socket.io pingTimeout and pinInterval increased to prevent too fast reconnections and bigger visualizations
-
-### 3.0.11 (2020-07-23)
-* (Apollon77) make sure web adapter gets restarted on socketio adapter upgrade
-
-### 3.0.10 (2020-07-16)
-* (Apollon77) Error caught when trying to write an empty base64 value into a file (Sentry )
-
-### 3.0.9 (2020-06-11)
-* (Apollon77) optimize error handling on webserver initialization again
-
-### 3.0.8 (2020-06-10)
-* (Apollon77) Make sure adapter does not crash if getHttp is called with an invalid URL (Sentry IOBROKER-WEB-R)
-
-### 3.0.7 (2020-05-04)
-* (Apollon77) webserver initialization optimized again to prevent errors with invalid certificates
-
-### 3.0.6 (2020-04-30)
-* (bluefox) errors on webserver initialization are handled properly
-
-### 3.0.5 (2020-04-23)
-* (bluefox) Caught the web server errors
-
-### 3.0.4 (2020-04-23)
-* fix crash reason when server closes (Sentry IOBROKER-SOCKETIO-2/3/4/5)
-
-### 3.0.3 (2020-04-16)
-* (Apollon77) Remove usage of deprecated object methods; prevent js-controller 3.0 warnings
-* (Apollon77) Add Sentry error reporting
-
-### 3.0.2 (2020-03-07)
-* (bluefox) Unload of adapter was corrected
-
-### 3.0.1 (2020-02-23)
-* (Apollon77) Workaround for socket.io bug #3555 added to make sure always the correct client files are delivered
-
-### 3.0.0 (2020-01-15)
-* (Apollon77) upgrade all dependencies, especially socketio to current version! This might break ipad 1/2 devices
-
-### 2.1.2 (2019-09-28)
-* (Apollon77) optimize shutdown for compact mode
-
-### 2.1.1 (2018-06-09)
-* (bluefox) Used socket.io Version 1.7.2
-* (bluefox) Fix authentication problem
-
-### 2.1.0 (2018-05-04)
-* (bluefox) Used socket.io Version 1.7.4
-
-### 2.0.1 (2018-02-28)
-* (bluefox) Dropped support of old browsers. Please do not update if you have iPad 1 and so on.
-
-### 1.9.0 (2018-01-14)
-* (bluefox) Ready for admin3
-
-### 1.8.7 (2017-11-29)
-* (bluefox) Tune cloud work
-
-### 1.8.5 (2017-10-22)
-* (bluefox) Escape [] in subscriptions
-
-### 1.8.4 (2017-10-16)
-* (bluefox) Check callback validity
-
-### 1.8.3 (2017-10-09)
-* (bluefox) Allow authentication via URL
-
-### 1.8.2 (2017-09-20)
-* (bluefox) Fix cmdExec command
-
-### 1.8.1 (2017-09-13)
-* (bluefox) Fix user access rights for sendToHost
-
-### 1.8.0 (2017-08-06)
-* (bluefox) Support the access to admin via iobroker.pro
-
-### 1.7.5 (2017-05-24)
-* (bluefox) fix error if subscribe is empty
-
-### 1.7.4 (2017-01-04)
-* (bluefox) fix error with authentication
-
-### 1.7.3 (2016-11-13)
-* (bluefox) support of socket extensions
-
-### 1.7.2 (2016-11-06)
-* (bluefox) Fix unsubscribe of states
-
-### 1.7.1 (2016-10-11)
-* (bluefox) Fix authentication for app
-
-### 1.7.0 (2016-08-30)
-* (bluefox) compatible only with new admin
-
-### 1.6.1 (2016-08-29)
-* (bluefox) fix error by checking user name
-
-### 1.6.0 (2016-08-27)
-* (bluefox) support of letsencrypt certificates
-
-### 1.5.4 (2016-08-26)
-* (bluefox) fix error in socket.js
-
-### 1.5.3 (2016-08-14)
-* (bluefox) support of force only web sockets transport
-
-### 1.5.2 (2016-07-06)
-* (bluefox) support of chained certificates
-
-### 1.5.1 (2016-06-28)
-* (bluefox) add sendToHost command
-
-### 1.5.0 (2016-06-17)
-* (bluefox) preparations for cloud
-
-### 1.4.1 (2016-05-13)
-* (bluefox) change getHistory function
-
-### 1.4.0 (2016-04-24)
-* (bluefox) encode json files
-
-### 1.3.0 (2016-03-17)
-* (bluefox) rename files
-
-### 1.2.3 (2015-12-24)
-* (bluefox) support of authentication over URL
-
-### 1.2.2 (2015-12-09)
-* (bluefox) remove unused parameter "cache"
-
-### 1.2.0 (2015-11-15)
-* (bluefox) add version compatibility check
-
-### 1.1.0 (2015-11-14)
-* (Smiling_Jack) add getHistory
-
-### 1.0.0 (2015-09-30)
-* (bluefox) stop adapter before update
-
-### 0.4.5 (2015-08-11)
-* (bluefox) update packets
-
-### 0.4.4 (2015-07-07)
-* (bluefox) extend writeFile with mode
-
-### 0.4.3 (2015-07-06)
-* (bluefox) add chmodFile
-
-### 0.4.1 (2015-06-13)
-* (bluefox) add default ttl
-* (bluefox) enable run from "web" and add permissions check
-
-### 0.4.0 (2015-06-13)
-* (bluefox) add permissions support
-
-### 0.3.1 (2015-05-19)
-* (bluefox) support of subscribe on objectChanged
-
-### 0.3.0 (2015-04-23)
-* (bluefox) enable security
-
-### 0.2.3 (2015-03-07)
-* (bluefox) extend getStates to support list of objects
-
-### 0.2.2 (2015-02-14)
-* (bluefox) fix error with objectChanged event
-
-### 0.2.0 (2015-01-16)
-* (bluefox) make socket usable as module
-
-### 0.1.6 (2015-01-08)
-* (bluefox) support of subscribe for different sockets. Support of socket names. Diagnostic info in socket.0.connected
-
-### 0.1.5 (2015-01-07)
-* (bluefox) fix error with update of states and objects
-
-### 0.1.4 (2015-01-06)
-* (bluefox) support of file manager in vis
-
-### 0.1.3 (2015-01-02)
-* (bluefox) enable adapter by default
-
-### 0.1.2 (2015-01-02)
-* (bluefox) add "request" module to package.json
-
-### 0.1.1 (2015-01-02)
-* (bluefox) enable npm install
-
-### 0.1.0 (2014-12-28)
-* (bluefox) support of read/write files
-
-### 0.0.5 (2014-12-19)
-* (bluefox) support of setObjects command
-
-### 0.0.4 (2014-12-10)
-* (bluefox) support of https sockets
-
-### 0.0.3 (2014-12-05)
-* (bluefox) support of https sockets
-
-### 0.0.2 (2014-11-24)
-* (bluefox) fix error by start
-
-### 0.0.1 (2014-10-10)
-* (bluefox) authentication works
+### __WORK IN PROGRESS__
+* (bluefox) Initial commit
 
 ## License
 
