@@ -1,10 +1,10 @@
 {
   "common": {
-    "name": "socketio",
+    "name": "ws",
     "version": "4.0.3",
-    "title": "socket.io",
+    "title": "Web socket",
     "titleLang": {
-      "en": "socket.io"
+      "en": "Web socket"
     },
     "desc": {
       "en": "This adapter allows to communicate different web applications with ioBroker",
@@ -19,90 +19,7 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
-      "4.0.3": {
-        "en": "Removed the deprecated \"passport.socketio\" packet",
-        "de": "Das veraltete „passport.socketio“-Paket wurde entfernt",
-        "ru": "Удален устаревший пакет «passport.socketio».",
-        "pt": "Removido o pacote \"passport.socketio\" obsoleto",
-        "nl": "Het verouderde pakket \"passport.socketio\" verwijderd",
-        "fr": "Suppression du paquet \"passport.socketio\" obsolète",
-        "it": "Rimosso il deprecato pacchetto \"passport.socketio\".",
-        "es": "Se eliminó el paquete obsoleto \"passport.socketio\"",
-        "pl": "Usunięto przestarzały pakiet „passport.socketio”",
-        "zh-cn": "删除了已弃用的“passport.socketio”数据包"
-      },
-      "4.0.2": {
-        "en": "Removed \"force web sockets\" option",
-        "de": "Die Option „Web-Sockets erzwingen“ wurde entfernt",
-        "ru": "Удалена опция «форсировать веб-сокеты».",
-        "pt": "Removida a opção \"forçar soquetes da web\"",
-        "nl": "Optie \"force web sockets\" verwijderd",
-        "fr": "Suppression de l'option \"forcer les sockets Web\"",
-        "it": "Rimossa l'opzione \"forza prese web\".",
-        "es": "Se eliminó la opción \"forzar sockets web\"",
-        "pl": "Usunięto opcję „wymuszenie gniazd sieciowych”",
-        "zh-cn": "删除了“强制 Web 套接字”选项"
-      },
-      "4.0.1": {
-        "en": "Fixed authentication",
-        "de": "Feste Authentifizierung",
-        "ru": "Фиксированная аутентификация",
-        "pt": "Autenticação fixa",
-        "nl": "Vaste authenticatie",
-        "fr": "Authentification fixe",
-        "it": "Autenticazione fissa",
-        "es": "Autenticación fija",
-        "pl": "Naprawiono uwierzytelnianie",
-        "zh-cn": "固定身份验证"
-      },
-      "4.0.0": {
-        "en": "Remove socket-io and use only web sockets",
-        "de": "Socket-io entfernen und nur Web-Sockets verwenden",
-        "ru": "Удалите socket-io и используйте только веб-сокеты",
-        "pt": "Remova o socket-io e use apenas web sockets",
-        "nl": "Verwijder socket-io en gebruik alleen websockets",
-        "fr": "Supprimer socket-io et utiliser uniquement des sockets Web",
-        "it": "Rimuovere socket-io e utilizzare solo socket web",
-        "es": "Elimine socket-io y use solo sockets web",
-        "pl": "Usuń socket-io i używaj tylko gniazd sieciowych",
-        "zh-cn": "删除 socket-io 并仅使用 Web 套接字"
-      },
-      "3.1.5": {
-        "en": "make error logging on failed authentication more specific\n\"request\" was repalced by \"axios\"",
-        "de": "Fehlerprotokollierung bei fehlgeschlagener Authentifizierung genauer machen\n\"request\" wurde durch \"axios\" ersetzt",
-        "ru": "сделать регистрацию ошибок при неудачной аутентификации более конкретной\n\"запрос\" был заменен на \"аксиомы\"",
-        "pt": "tornar mais específico o log de erros na autenticação com falha\n\"pedido\" foi repetido por \"axios\"",
-        "nl": "maak foutregistratie bij mislukte authenticatie specifieker\n\"verzoek\" is vervangen door \"axios\"",
-        "fr": "rendre plus spécifique l'erreur de connexion lors de l'échec de l'authentification\n\"demande\" a été remplacée par \"axios\"",
-        "it": "rendere più specifica la registrazione degli errori in caso di autenticazione non riuscita\n\"richiesta\" è stato sostituito da \"axios\"",
-        "es": "hacer que el registro de errores en la autenticación fallida sea más específico\n\"solicitud\" fue reemplazada por \"axios\"",
-        "pl": "uszczegółowić błąd logowania przy nieudanej autoryzacji\n„request” został zastąpiony przez „axios”",
-        "zh-cn": "使错误登录失败的身份验证更具体\n“请求”被“axios”取代"
-      },
-      "3.1.4": {
-        "en": "Define instanceObject \"connected\" to prevent warning with js-controller 3.2",
-        "de": "Definieren Sie instanceObject \"verbunden\", um eine Warnung mit js-controller 3.2 zu vermeiden",
-        "ru": "Определите instanceObject \"connected\", чтобы предотвратить предупреждение с помощью js-controller 3.2",
-        "pt": "Defina instanceObject \"conectado\" para evitar aviso com js-controller 3.2",
-        "nl": "Definieer instanceObject \"connected\" om waarschuwing te voorkomen met js-controller 3.2",
-        "fr": "Définissez instanceObject \"connecté\" pour éviter l'avertissement avec js-controller 3.2",
-        "it": "Definire instanceObject \"connesso\" per evitare avvisi con js-controller 3.2",
-        "es": "Defina instanceObject \"conectado\" para evitar advertencias con js-controller 3.2",
-        "pl": "Zdefiniuj obiekt instanceObject „połączony”, aby zapobiec ostrzeżeniu za pomocą kontrolera js 3.2",
-        "zh-cn": "定义instanceObject“ connected”以防止使用js-controller 3.2发出警告"
-      },
-      "3.1.3": {
-        "en": "fix socketio dependency",
-        "de": "Behebung der Socketio-Abhängigkeit",
-        "ru": "исправить зависимость socketio",
-        "pt": "consertar dependência de socketio",
-        "nl": "fix socketio-afhankelijkheid",
-        "fr": "correction de la dépendance socketio",
-        "it": "correggere la dipendenza da socketio",
-        "es": "arreglar la dependencia de socketio",
-        "pl": "naprawić zależność od gniazda",
-        "zh-cn": "修复套接字依赖"
-      }
+
     },
     "authors": [
       "bluefox <dogafox@gmail.com>"
@@ -111,18 +28,20 @@
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "loglevel": "info",
-    "readme": "https://github.com/ioBroker/ioBroker.socketio/blob/master/README.md",
-    "icon": "socketio.png",
+    "readme": "https://github.com/ioBroker/ioBroker.ws/blob/master/README.md",
+    "icon": "ws.png",
     "keywords": [
       "web",
-      "socket.io",
+      "web socket",
       "communication"
     ],
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.socketio/master/admin/socketio.png",
+    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.ws/master/admin/ws.png",
     "type": "communication",
     "stopBeforeUpdate": true,
-    "materialize": true,
+    "adminUI": {
+      "config": "json"
+    },
     "compact": true,
     "stopTimeout": 5000,
     "dependencies": [
@@ -130,12 +49,17 @@
         "js-controller": ">=2.0.0"
       }
     ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.0.0"
+      }
+    ],
     "restartAdapters": [
       "web"
     ],
     "plugins": {
       "sentry": {
-        "dsn": "https://c420b84a0da648bb8f2374541aa92888@sentry.iobroker.net/17"
+        "dsn": "https://3f4953a5e15d4ff2a381affb010d0778@sentry.iobroker.net/170"
       }
     }
   },
