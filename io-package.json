@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,7 +19,18 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
-
+      "1.0.1": {
+        "en": "Initial commit",
+        "de": "Erste Zusage",
+        "ru": "Первоначальная фиксация",
+        "pt": "Confirmação inicial",
+        "nl": "Initiële commit",
+        "fr": "Validation initiale",
+        "it": "Impegno iniziale",
+        "es": "Compromiso inicial",
+        "pl": "Zatwierdzenie początkowe",
+        "zh-cn": "初始提交"
+      }
     },
     "authors": [
       "bluefox <dogafox@gmail.com>"
