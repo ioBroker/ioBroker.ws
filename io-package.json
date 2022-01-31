@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,18 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "1.1.0": {
+        "en": "Distributed the compatible client file together with the backen",
+        "de": "Verteilte die kompatible Client-Datei zusammen mit dem Backen",
+        "ru": "Распространил совместимый клиентский файл вместе с бэкеном",
+        "pt": "Distribuiu o arquivo de cliente compatível junto com o backen",
+        "nl": "Het compatibele clientbestand samen met de backen gedistribueerd",
+        "fr": "Distribué le fichier client compatible avec le backen",
+        "it": "Distribuito il file client compatibile insieme al backen",
+        "es": "Distribuyó el archivo de cliente compatible junto con el backen",
+        "pl": "Dystrybucja kompatybilnego pliku klienta wraz z backen",
+        "zh-cn": "将兼容的客户端文件与后端一起分发"
+      },
       "1.0.1": {
         "en": "Initial commit",
         "de": "Erste Zusage",
