@@ -96,7 +96,9 @@
       "sentry": {
         "dsn": "https://3f4953a5e15d4ff2a381affb010d0778@sentry.iobroker.net/170"
       }
-    }
+    },
+    "connectionType": "local",
+    "dataSource": "push"
   },
   "native": {
     "port": 8084,
