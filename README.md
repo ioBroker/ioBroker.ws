@@ -313,7 +313,7 @@ You can set option *Force Web-Sockets* to force using only web-sockets transport
 -->
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 1.1.4 (2022-02-13)
 * (bluefox) Changed name `info.connection` to `info.connected`
 
 ### 1.1.2 (2022-02-13)
