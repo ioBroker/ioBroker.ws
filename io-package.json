@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,18 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "1.1.6": {
+        "en": "Added `unlink` and `rename` to web functions",
+        "de": "„Unlink“ und „Rename“ zu den Webfunktionen hinzugefügt",
+        "ru": "Добавлены «отвязать» и «переименовать» в веб-функции.",
+        "pt": "Adicionado `unlink` e `rename` para funções da web",
+        "nl": "`unlink` en `rename` toegevoegd aan webfuncties",
+        "fr": "Ajout de `unlink` et `rename` aux fonctions Web",
+        "it": "Aggiunti \"scollega\" e \"rinomina\" alle funzioni web",
+        "es": "Se agregó `unlink` y `rename` a las funciones web",
+        "pl": "Dodano `odłącz` i `zmień nazwę` do funkcji sieciowych",
+        "zh-cn": "为 web 函数添加了 `unlink` 和 `rename`"
+      },
       "1.1.5": {
         "en": "Added `unlink` and `rename` to web functions",
         "de": "„Unlink“ und „Rename“ zu den Webfunktionen hinzugefügt",
@@ -90,18 +102,6 @@
         "es": "Distribuyó el archivo de cliente compatible junto con el backen",
         "pl": "Dystrybucja kompatybilnego pliku klienta wraz z backen",
         "zh-cn": "将兼容的客户端文件与后端一起分发"
-      },
-      "1.0.1": {
-        "en": "Initial commit",
-        "de": "Erste Zusage",
-        "ru": "Первоначальная фиксация",
-        "pt": "Confirmação inicial",
-        "nl": "Initiële commit",
-        "fr": "Validation initiale",
-        "it": "Impegno iniziale",
-        "es": "Compromiso inicial",
-        "pl": "Zatwierdzenie początkowe",
-        "zh-cn": "初始提交"
       }
     },
     "authors": [
