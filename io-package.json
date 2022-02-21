@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "1.1.6",
+    "version": "1.2.0",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,18 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "1.2.0": {
+        "en": "Made it possible to have more than one socket from one page",
+        "de": "Es wurde möglich, mehr als einen Sockel auf einer Seite zu haben",
+        "ru": "Сделали возможным иметь более одного сокета на одной странице",
+        "pt": "Tornou possível ter mais de um soquete de uma página",
+        "nl": "Maakte het mogelijk om meer dan één socket op één pagina te hebben",
+        "fr": "Rendu possible d'avoir plus d'un socket à partir d'une page",
+        "it": "Ha permesso di avere più di una presa da una pagina",
+        "es": "Hizo posible tener más de un socket de una página",
+        "pl": "Umożliwiono posiadanie więcej niż jednego gniazda z jednej strony",
+        "zh-cn": "使一页可以有多个套接字"
+      },
       "1.1.6": {
         "en": "Added `unlink` and `rename` to web functions",
         "de": "„Unlink“ und „Rename“ zu den Webfunktionen hinzugefügt",
@@ -90,18 +102,6 @@
         "es": "Archivo de cliente ws actualizado",
         "pl": "Zaktualizowany plik klienta ws",
         "zh-cn": "更新了ws客户端文件"
-      },
-      "1.1.0": {
-        "en": "Distributed the compatible client file together with the backen",
-        "de": "Verteilte die kompatible Client-Datei zusammen mit dem Backen",
-        "ru": "Распространил совместимый клиентский файл вместе с бэкеном",
-        "pt": "Distribuiu o arquivo de cliente compatível junto com o backen",
-        "nl": "Het compatibele clientbestand samen met de backen gedistribueerd",
-        "fr": "Distribué le fichier client compatible avec le backen",
-        "it": "Distribuito il file client compatibile insieme al backen",
-        "es": "Distribuyó el archivo de cliente compatible junto con el backen",
-        "pl": "Dystrybucja kompatybilnego pliku klienta wraz z backen",
-        "zh-cn": "将兼容的客户端文件与后端一起分发"
       }
     },
     "authors": [

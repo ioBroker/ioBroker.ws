@@ -313,7 +313,7 @@ You can set option *Force Web-Sockets* to force using only web-sockets transport
 -->
 
 ## Changelog
-### __WORK IN PROGRESS__
+### 1.2.0 (2022-02-21)
 * (bluefox) Made it possible to have more than one socket from one page
 
 ### 1.1.6 (2022-02-16)
