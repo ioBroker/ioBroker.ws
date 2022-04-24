@@ -7,7 +7,7 @@ const adapterName = require('./package.json').name.split('.').pop();
 const utils       = require('@iobroker/adapter-core'); // Get common adapter utils
 const SocketWS    = require('./lib/socketWS.js');
 const LE          = require(utils.controllerDir + '/lib/letsencrypt.js');
-const ws          = require('iobroker.ws.server');
+const ws          = require('@iobroker/ws-server');
 
 let webServer     = null;
 let store         = null;
@@ -156,7 +156,7 @@ function initWebServer(settings) {
         app:       null,
         server:    null,
         io:        null,
-        settings:  settings
+        settings
     };
 
     settings.port = parseInt(settings.port, 10) || 0;
@@ -165,15 +165,16 @@ function initWebServer(settings) {
         if (settings.secure && !settings.certificates) {
             return null;
         }
+
+        settings.crossDomain     = true;
+        settings.ttl             = settings.ttl || 3600;
+        settings.forceWebSockets = settings.forceWebSockets || false;
+
         if (settings.auth) {
-            const session =          require('express-session');
-            const AdapterStore =     require(utils.controllerDir + '/lib/session.js')(session, settings.ttl);
+            const session      = require('express-session');
+            const AdapterStore = require(utils.controllerDir + '/lib/session.js')(session, settings.ttl);
             // Authentication checked by server itself
             store = new AdapterStore({adapter: adapter});
-            settings.secret           = secret;
-            settings.store            = store;
-            settings.ttl              = settings.ttl || 3600;
-            settings.forceWebSockets  = settings.forceWebSockets || false;
         }
 
         adapter.getPort(settings.port, async port => {
@@ -227,10 +228,6 @@ function initWebServer(settings) {
                 adapter.setState('info.connection', true, true);
                 serverListening = true
             });
-
-            settings.crossDomain     = true;
-            settings.ttl             = settings.ttl || 3600;
-            settings.forceWebSockets = settings.forceWebSockets || false;
 
             server.io = new SocketWS(settings, adapter);
             server.io.start(server.server, ws, {userKey: 'connect.sid', checkUser, store, secret});
