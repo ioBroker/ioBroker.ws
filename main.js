@@ -5,8 +5,9 @@
 
 const adapterName = require('./package.json').name.split('.').pop();
 const utils       = require('@iobroker/adapter-core'); // Get common adapter utils
-const IOSocket    = require('./lib/socket.js');
+const SocketWS    = require('./lib/socketWS.js');
 const LE          = require(utils.controllerDir + '/lib/letsencrypt.js');
+const ws          = require('iobroker.ws.server');
 
 let webServer     = null;
 let store         = null;
@@ -151,7 +152,6 @@ function checkUser(username, password, cb) {
 //    "bind":   "0.0.0.0", // "::"
 //}
 function initWebServer(settings) {
-
     const server = {
         app:       null,
         server:    null,
@@ -232,7 +232,8 @@ function initWebServer(settings) {
             settings.ttl             = settings.ttl || 3600;
             settings.forceWebSockets = settings.forceWebSockets || false;
 
-            server.io = new IOSocket(server.server, settings, adapter, null, store, checkUser);
+            server.io = new SocketWS(settings, adapter);
+            server.io.start(server.server, ws, {userKey: 'connect.sid', checkUser, store, secret});
         });
     } else {
         adapter.log.error('port missing');
