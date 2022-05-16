@@ -313,7 +313,7 @@ You can set option *Force Web-Sockets* to force using only web-sockets transport
 -->
 
 ## Changelog
-### 2.0.1 (2022-05-16)
+### **WORK IN PROGRESS**
 * (bluefox) Process `writeDirAsZip` locally
 
 ### 2.0.0 (2022-05-12)

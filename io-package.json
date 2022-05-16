@@ -19,18 +19,6 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
-      "2.0.1": {
-        "en": "Process `writeDirAsZip` locally",
-        "de": "Verarbeite `writeDirAsZip` lokal",
-        "ru": "Обработать `writeDirAsZip` локально",
-        "pt": "Processe `writeDirAsZip` localmente",
-        "nl": "Verwerk `writeDirAsZip` lokaal",
-        "fr": "Traiter `writeDirAsZip` localement",
-        "it": "Elabora localmente `writeDirAsZip`",
-        "es": "Procesar `writeDirAsZip` localmente",
-        "pl": "Przetwarzaj `writeDirAsZip` lokalnie",
-        "zh-cn": "在本地处理`writeDirAsZip`"
-      },
       "2.0.0": {
         "en": "Used common sockets (could be buggy)",
         "de": "Gebrauchte gemeinsame Steckdosen (könnte fehlerhaft sein)",
