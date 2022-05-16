@@ -313,6 +313,9 @@ You can set option *Force Web-Sockets* to force using only web-sockets transport
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Process `writeDirAsZip` locally
+
 ### 2.0.0 (2022-05-12)
 * (bluefox) Used common sockets (could be buggy)
 
