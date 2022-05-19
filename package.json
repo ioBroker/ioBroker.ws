@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.0",
-    "@iobroker/socket-classes": ">=0.3.2",
-    "@iobroker/ws-server": "^2.0.0",
+    "@iobroker/socket-classes": ">=0.4.0",
+    "@iobroker/ws-server": "^2.1.0",
     "express-session": "^1.17.3"
   },
   "devDependencies": {
