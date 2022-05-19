@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,18 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.0.3": {
+        "en": "Hide warn messages",
+        "de": "Warnmeldungen ausblenden",
+        "ru": "Скрыть предупреждающие сообщения",
+        "pt": "Ocultar mensagens de aviso",
+        "nl": "Waarschuwingsberichten verbergen",
+        "fr": "Masquer les messages d'avertissement",
+        "it": "Nascondi i messaggi di avviso",
+        "es": "Ocultar mensajes de advertencia",
+        "pl": "Ukryj ostrzeżenia",
+        "zh-cn": "隐藏警告消息"
+      },
       "2.0.2": {
         "en": "Process `writeDirAsZip` locally",
         "de": "Verarbeite `writeDirAsZip` lokal",
@@ -90,18 +102,6 @@
         "es": "Se agregó `unlink` y `rename` a las funciones web",
         "pl": "Dodano `odłącz` i `zmień nazwę` do funkcji sieciowych",
         "zh-cn": "为 Web 函数添加了“取消链接”和“重命名”"
-      },
-      "1.1.4": {
-        "en": "Changed name `info.connection` to `info.connected`",
-        "de": "Name „info.connection“ in „info.connected“ geändert",
-        "ru": "Изменено имя `info.connection` на `info.connected`",
-        "pt": "Alterado o nome `info.connection` para `info.connected`",
-        "nl": "Naam van `info.connection` gewijzigd in `info.connected`",
-        "fr": "Changement du nom `info.connection` en `info.connected`",
-        "it": "Nome modificato `info.connection` in `info.connected`",
-        "es": "Se cambió el nombre `info.connection` a `info.connected`",
-        "pl": "Zmieniono nazwę `info.connection` na `info.connected`",
-        "zh-cn": "将名称“info.connection”更改为“info.connected”"
       }
     },
     "authors": [
