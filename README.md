@@ -313,7 +313,7 @@ You can set option *Force Web-Sockets* to force using only web-sockets transport
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.1.0 (2022-05-21)
 * (bluefox) Updated ws library to 8.6.0
 * (bluefox) Corrected the load of `iobroker.ws` as integrated socket
 
