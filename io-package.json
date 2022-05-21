@@ -19,42 +19,6 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
-      "2.0.3": {
-        "en": "Hide warn messages",
-        "de": "Warnmeldungen ausblenden",
-        "ru": "Скрыть предупреждающие сообщения",
-        "pt": "Ocultar mensagens de aviso",
-        "nl": "Waarschuwingsberichten verbergen",
-        "fr": "Masquer les messages d'avertissement",
-        "it": "Nascondi i messaggi di avviso",
-        "es": "Ocultar mensajes de advertencia",
-        "pl": "Ukryj ostrzeżenia",
-        "zh-cn": "隐藏警告消息"
-      },
-      "2.0.2": {
-        "en": "Process `writeDirAsZip` locally",
-        "de": "Verarbeite `writeDirAsZip` lokal",
-        "ru": "Обработать `writeDirAsZip` локально",
-        "pt": "Processe `writeDirAsZip` localmente",
-        "nl": "Verwerk `writeDirAsZip` lokaal",
-        "fr": "Traiter `writeDirAsZip` localement",
-        "it": "Elabora localmente `writeDirAsZip`",
-        "es": "Procesar `writeDirAsZip` localmente",
-        "pl": "Przetwarzaj `writeDirAsZip` lokalnie",
-        "zh-cn": "在本地处理`writeDirAsZip`"
-      },
-      "2.0.0": {
-        "en": "Used common sockets (could be buggy)",
-        "de": "Gebrauchte gemeinsame Steckdosen (könnte fehlerhaft sein)",
-        "ru": "Использовались обычные розетки (могут глючить)",
-        "pt": "Soquetes comuns usados (podem estar com bugs)",
-        "nl": "Gebruikte gemeenschappelijke stopcontacten (kan buggy zijn)",
-        "fr": "Prises communes utilisées (pourraient être boguées)",
-        "it": "Prese comuni usate (potrebbero essere difettose)",
-        "es": "Enchufes comunes usados (podrían tener errores)",
-        "pl": "Używane wspólne gniazda (mogą być wadliwe)",
-        "zh-cn": "使用过的普通插座（可能有问题）"
-      },
       "1.3.0": {
         "en": "Added `log` socket command",
         "de": "`log`-Socket-Befehl hinzugefügt",
