@@ -15,5 +15,6 @@
   "Port to check the domain": "Porta para verificar o domínio",
   "Let's Encrypt SSL": "Let's Encrypt SSL",
   "Read about Let's Encrypt certificates": "Leia sobre os certificados Let's Encrypt",
-  "Undo": "Desfazer"
+  "Undo": "Desfazer",
+  "Language for only this instance": "Idioma apenas para esta instância"
 }

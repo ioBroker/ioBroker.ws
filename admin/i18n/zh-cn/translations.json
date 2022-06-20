@@ -15,5 +15,6 @@
   "Port to check the domain": "检查域的端口",
   "Let's Encrypt SSL": "Let's Encrypt SSL",
   "Read about Let's Encrypt certificates": "阅读 Let's Encrypt 证书",
-  "Undo": "撤消"
+  "Undo": "撤消",
+  "Language for only this instance": "仅此实例的语言"
 }

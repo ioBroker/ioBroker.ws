@@ -15,5 +15,6 @@
   "Port to check the domain": "Порт для проверки доменного имени",
   "Let's Encrypt SSL": "Let's Encrypt SSL",
   "Read about Let's Encrypt certificates": "Читать о сертификатах Let's Encrypt",
-  "Undo": "Отменить"
+  "Undo": "Отменить",
+  "Language for only this instance": "Язык только для этого экземпляра"
 }

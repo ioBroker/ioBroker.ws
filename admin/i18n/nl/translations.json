@@ -15,5 +15,6 @@
   "Port to check the domain": "Poort om het domein te controleren",
   "Let's Encrypt SSL": "Let's Encrypt SSL",
   "Read about Let's Encrypt certificates": "Lees over Let's Encrypt-certificaten",
-  "Undo": "ongedaan maken"
+  "Undo": "ongedaan maken",
+  "Language for only this instance": "Taal voor alleen deze instantie"
 }
