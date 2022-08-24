@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.1.3",
+    "version": "2.1.4",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,18 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.1.4": {
+        "en": "Caught error by subscribe",
+        "de": "Caught-Fehler durch abonnieren",
+        "ru": "Поймать ошибку по подписке",
+        "pt": "Erro capturado por assinatura",
+        "nl": "Kreeg fouten",
+        "fr": "Erreur coquine par abonné",
+        "it": "Errore catturato da sottoscrivere",
+        "es": "Error comprado por subscribirse",
+        "pl": "Caught error by a subscriber",
+        "zh-cn": "签 约的过失"
+      },
       "2.1.3": {
         "en": "Corrected getAdapterInstances method",
         "de": "Korrigierte getAdapterInstances Methode",
@@ -90,18 +102,6 @@
         "es": "Hizo posible tener más de un socket de una página",
         "pl": "Umożliwiono posiadanie więcej niż jednego gniazda z jednej strony",
         "zh-cn": "使一页可以有多个套接字"
-      },
-      "1.1.6": {
-        "en": "Added `unlink` and `rename` to web functions",
-        "de": "„Unlink“ und „Rename“ zu den Webfunktionen hinzugefügt",
-        "ru": "Добавлены «отвязать» и «переименовать» в веб-функции.",
-        "pt": "Adicionado `unlink` e `rename` para funções da web",
-        "nl": "`unlink` en `rename` toegevoegd aan webfuncties",
-        "fr": "Ajout de `unlink` et `rename` aux fonctions Web",
-        "it": "Aggiunti \"scollega\" e \"rinomina\" alle funzioni web",
-        "es": "Se agregó `unlink` y `rename` a las funciones web",
-        "pl": "Dodano `odłącz` i `zmień nazwę` do funkcji sieciowych",
-        "zh-cn": "为 web 函数添加了 `unlink` 和 `rename`"
       }
     },
     "authors": [
