@@ -6,7 +6,7 @@
 const adapterName = require('./package.json').name.split('.').pop();
 const utils       = require('@iobroker/adapter-core'); // Get common adapter utils
 const SocketWS    = require('./lib/socketWS.js');
-const LE          = require(utils.controllerDir + '/lib/letsencrypt.js');
+const LE          = utils.commonTools.letsEncrypt;
 const ws          = require('@iobroker/ws-server');
 
 let webServer     = null;
@@ -172,7 +172,7 @@ function initWebServer(settings) {
 
         if (settings.auth) {
             const session      = require('express-session');
-            const AdapterStore = require(utils.controllerDir + '/lib/session.js')(session, settings.ttl);
+            const AdapterStore = utils.commonTools.session(session, settings.ttl);
             // Authentication checked by server itself
             store = new AdapterStore({adapter: adapter});
         }
