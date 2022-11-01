@@ -28,7 +28,7 @@
     "@iobroker/adapter-dev": "^1.1.0",
     "@iobroker/ws": "^1.1.2",
     "@iobroker/testing": "^4.1.0",
-    "mocha": "^10.0.0",
+    "mocha": "^10.1.0",
     "chai": "^4.3.6",
     "gulp": "^4.0.2"
   },
