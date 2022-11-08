@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.1.5",
+    "version": "2.2.0",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.2.0": {
+        "en": "Prepare for future js-controller versions\nFunction `getObjects`for web was extended by devices, channels and enums",
+        "de": "Bereiten Sie sich auf zukünftige js-Controller-Versionen\nFunktion getObjects`for web wurde durch Geräte, Kanäle und Enums erweitert",
+        "ru": "Подготовьтесь к будущим версиям js-controller\nФункция getObjects`for web была расширена устройствами, каналами и enums",
+        "pt": "Prepare-se para futuras versões js-controller\nFunção getObjects`for web foi estendida por dispositivos, canais e enums",
+        "nl": "Bereid je voor op toekomstige Js-controller versie\nVertaling:",
+        "fr": "Préparez-vous pour les versions futures de js-controller\nFonction getObjects`for web was extended by devices, channels and enums",
+        "it": "Prepararsi per le future versioni js-controller\nFunzione getObjects`for web è stato esteso da dispositivi, canali ed enums",
+        "es": "Prepararse para futuras versiones js-controller\nFunción getObjects`for web was extended by devices, channels and enums",
+        "pl": "Prepare for future js-controller version\nFunkcjonalne zapotrzebowanie na stronie zostało przedłużone przez urządzenia, kanały i enum",
+        "uk": "Підготовка до майбутніх версій js-controller\nФункція getObjects`для веб-сторінок було розширено пристроями, каналами та енумами",
+        "zh-cn": "今后防污版本的编制\n使用装置、渠道和网站扩展了“Objects”的功能。"
+      },
       "2.1.5": {
         "en": "Caught error by subscribe",
         "de": "Caught-Fehler durch abonnieren",
@@ -90,18 +103,6 @@
         "es": "Se agregó el comando de socket `log`",
         "pl": "Dodano polecenie `log` socket",
         "zh-cn": "添加了 `log` 套接字命令"
-      },
-      "1.2.0": {
-        "en": "Made it possible to have more than one socket from one page",
-        "de": "Es wurde möglich, mehr als einen Sockel auf einer Seite zu haben",
-        "ru": "Сделали возможным иметь более одного сокета на одной странице",
-        "pt": "Tornou possível ter mais de um soquete de uma página",
-        "nl": "Maakte het mogelijk om meer dan één socket op één pagina te hebben",
-        "fr": "Rendu possible d'avoir plus d'un socket à partir d'une page",
-        "it": "Ha permesso di avere più di una presa da una pagina",
-        "es": "Hizo posible tener más de un socket de una página",
-        "pl": "Umożliwiono posiadanie więcej niż jednego gniazda z jednej strony",
-        "zh-cn": "使一页可以有多个套接字"
       }
     },
     "authors": [
