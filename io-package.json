@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.3.0": {
+        "en": "Added `fileChange` event",
+        "de": "Datei hinzufügen Event ändern",
+        "ru": "Добавлен файл Изменить событие",
+        "pt": "Adicionado arquivo Evento de mudança",
+        "nl": "Vervoegd dossier Veranderingsevenement",
+        "fr": "Fichier ajouté Changement d ' événement",
+        "it": "Aggiunto il file Cambia evento",
+        "es": "Añadido el archivo Cambio de evento",
+        "pl": "Added file Zmiana",
+        "uk": "Додано файл Зміна події",
+        "zh-cn": "增加档案 变革活动"
+      },
       "2.2.1": {
         "en": "Prepare for future js-controller versions\nFunction `getObjects`for web was extended by devices, channels and enums",
         "de": "Bereiten Sie sich auf zukünftige js-Controller-Versionen\nFunktion getObjects`for web wurde durch Geräte, Kanäle und Enums erweitert",
@@ -91,18 +104,6 @@
         "es": "Biblioteca ws actualizada a 8.6.0\nSe corrigió la carga de `iobroker.ws` como socket integrado",
         "pl": "Zaktualizowano bibliotekę ws do 8.6.0\nPoprawiono obciążenie `iobroker.ws` jako zintegrowane gniazdo",
         "zh-cn": "将 ws 库更新到 8.6.0\n更正了“iobroker.ws”作为集成套接字的负载"
-      },
-      "1.3.0": {
-        "en": "Added `log` socket command",
-        "de": "`log`-Socket-Befehl hinzugefügt",
-        "ru": "Добавлена команда сокета `log`",
-        "pt": "Adicionado comando de socket `log`",
-        "nl": "`log` socket-opdracht toegevoegd",
-        "fr": "Ajout de la commande socket `log`",
-        "it": "Aggiunto il comando socket `log`",
-        "es": "Se agregó el comando de socket `log`",
-        "pl": "Dodano polecenie `log` socket",
-        "zh-cn": "添加了 `log` 套接字命令"
       }
     },
     "authors": [
