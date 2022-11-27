@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.3.1": {
+        "en": "Added `fileChange` event",
+        "de": "Datei hinzufügen Event ändern",
+        "ru": "Добавлен файл Изменить событие",
+        "pt": "Adicionado arquivo Evento de mudança",
+        "nl": "Vervoegd dossier Veranderingsevenement",
+        "fr": "Fichier ajouté Changement d ' événement",
+        "it": "Aggiunto il file Cambia evento",
+        "es": "Añadido el archivo Cambio de evento",
+        "pl": "Added file Zmiana",
+        "uk": "Додано файл Зміна події",
+        "zh-cn": "增加档案 变革活动"
+      },
       "2.3.0": {
         "en": "Added `fileChange` event",
         "de": "Datei hinzufügen Event ändern",
@@ -92,18 +105,6 @@
         "es": "No mostrar necesidad Mensaje de registro",
         "pl": "Nie wymagać wiadomość",
         "zh-cn": "不需要说明 后勤信息"
-      },
-      "2.1.0": {
-        "en": "Updated ws library to 8.6.0\nCorrected the load of `iobroker.ws` as integrated socket",
-        "de": "ws-Bibliothek auf 8.6.0 aktualisiert\nDas Laden von `iobroker.ws` als integrierter Socket wurde korrigiert",
-        "ru": "Обновлена библиотека ws до версии 8.6.0.\nИсправлена загрузка iobroker.ws как встроенного сокета.",
-        "pt": "Biblioteca ws atualizada para 8.6.0\nCorrigido o carregamento de `iobroker.ws` como soquete integrado",
-        "nl": "Ws-bibliotheek bijgewerkt naar 8.6.0\nDe belasting van `iobroker.ws` gecorrigeerd als geïntegreerde socket",
-        "fr": "Mise à jour de la bibliothèque ws vers 8.6.0\nCorrection du chargement de `iobroker.ws` en tant que socket intégré",
-        "it": "Libreria ws aggiornata alla 8.6.0\nCorretto il carico di `iobroker.ws` come socket integrato",
-        "es": "Biblioteca ws actualizada a 8.6.0\nSe corrigió la carga de `iobroker.ws` como socket integrado",
-        "pl": "Zaktualizowano bibliotekę ws do 8.6.0\nPoprawiono obciążenie `iobroker.ws` jako zintegrowane gniazdo",
-        "zh-cn": "将 ws 库更新到 8.6.0\n更正了“iobroker.ws”作为集成套接字的负载"
       }
     },
     "authors": [
