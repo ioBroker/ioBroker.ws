@@ -11,7 +11,7 @@ let onObjectChanged = null;
 let sendToID = 1;
 
 const adapterShortName = setup.adapterName.substring(setup.adapterName.indexOf('.') + 1);
-const runningMode = require(__dirname + '/../io-package.json').common.mode;
+const runningMode = require('../io-package.json').common.mode;
 
 function checkConnectionOfAdapter(cb, counter) {
     counter = counter || 0;
