@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.3.2": {
+        "en": "used new socket-classes",
+        "de": "neue sockel-klassen",
+        "ru": "использовали новые socket-классы",
+        "pt": "usado novas classes de soquete",
+        "nl": "gebruikte nieuwe sok-classes",
+        "fr": "nouvelles classes de socket utilisées",
+        "it": "nuove classi prese usate",
+        "es": "usó nuevas clases de socket",
+        "pl": "nowe typy gniazd",
+        "uk": "використовуються нові розетки-класи",
+        "zh-cn": "使用新的手寸"
+      },
       "2.3.1": {
         "en": "Added `fileChange` event",
         "de": "Datei hinzufügen Event ändern",
@@ -93,18 +106,6 @@
         "es": "Permitido sobrecargar el lenguaje del sistema",
         "pl": "Wszystko to było przeciążenie języka systemowego",
         "zh-cn": "允许使用系统语文"
-      },
-      "2.1.1": {
-        "en": "Do not show requireLog message",
-        "de": "Nicht zeigen Log-Nachricht",
-        "ru": "Не показывать требуйте Войти сообщение",
-        "pt": "Não mostrar necessidade Mensagem de registo",
-        "nl": "Toon niet Logisch bericht",
-        "fr": "Ne pas montrer besoin Message d ' ouverture",
-        "it": "Non mostrare richiesta Messaggio di log",
-        "es": "No mostrar necesidad Mensaje de registro",
-        "pl": "Nie wymagać wiadomość",
-        "zh-cn": "不需要说明 后勤信息"
       }
     },
     "authors": [
