@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.3.3",
+    "version": "2.3.4",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.3.4": {
+        "en": "corrected connection string",
+        "de": "korrigierter verbindungsstring",
+        "ru": "исправлена строка соединения",
+        "pt": "string de conexão corrigida",
+        "nl": "vertaling:",
+        "fr": "chaîne de connexion corrigée",
+        "it": "stringa di connessione corretta",
+        "es": "corregido cadena de conexión",
+        "pl": "poprawiona łącza",
+        "uk": "виправлено рядок з'єднання",
+        "zh-cn": "b. 修改后的线路"
+      },
       "2.3.3": {
         "en": "used new socket-classes",
         "de": "neue sockel-klassen",
@@ -94,18 +107,6 @@
         "es": "Método corregido getAdapterInstances",
         "pl": "Poprawiona metoda gotowania AdapterInstance",
         "zh-cn": "改用阿达佩特文法"
-      },
-      "2.1.2": {
-        "en": "Allowed to overload the system language",
-        "de": "Erlaubt, die Systemsprache zu überlasten",
-        "ru": "Разрешено перегрузить язык системы",
-        "pt": "Permitido sobrecarregar a linguagem do sistema",
-        "nl": "Genoemd om de systeemtaal te overbelasten",
-        "fr": "Permet de surcharger la langue du système",
-        "it": "Consentito di sovraccaricare la lingua di sistema",
-        "es": "Permitido sobrecargar el lenguaje del sistema",
-        "pl": "Wszystko to było przeciążenie języka systemowego",
-        "zh-cn": "允许使用系统语文"
       }
     },
     "authors": [
