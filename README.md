@@ -313,7 +313,7 @@ You can set option *Force Web-Sockets* to force using only web-sockets transport
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.3.6 (2023-03-03)
 * (bluefox) Allowed deletion of fullcalendar objects
 
 ### 2.3.5 (2023-01-29)
