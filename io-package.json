@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.3.6",
+    "version": "2.4.0",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.4.0": {
+        "en": "(bluefox) extended the getObjects function with the possibility to read the list of IDs",
+        "de": "(bluefox) erweitert die getObjects-Funktion mit der Möglichkeit, die Liste der IDs zu lesen",
+        "ru": "(bluefox) расширена функция getObjects с возможностью читать список IDs",
+        "pt": "(bluefox) estendeu a função getObjects com a possibilidade de ler a lista de IDs",
+        "nl": "Verlengde de getobject functioneren met de mogelijkheid om de lijst van ID's te lezen",
+        "fr": "(bluefox) a étendu la fonction getObjects avec la possibilité de lire la liste des ID",
+        "it": "(bluefox) ha esteso la funzione getObjects con la possibilità di leggere l'elenco degli ID",
+        "es": "(bluefox) extendió la función getObjects con la posibilidad de leer la lista de IDs",
+        "pl": "(bluefox) przedłużyła funkcję getObjects z możliwością odczytania listy ID",
+        "uk": "(bluefox) розширена функція getObjects з можливістю читання списку ідентифікаторів",
+        "zh-cn": "(bluefox) 扩大读者功能,使之有可能阅读裁研所的名单。"
+      },
       "2.3.6": {
         "en": "Allowed deletion of fullcalendar objects",
         "de": "Erlaubtes Löschen von Fullcalendar-Objekten",
@@ -96,19 +109,6 @@
         "pl": "Added file Zmiana",
         "uk": "Додано файл Зміна події",
         "zh-cn": "增加档案 变革活动"
-      },
-      "2.2.1": {
-        "en": "Prepare for future js-controller versions\nFunction `getObjects`for web was extended by devices, channels and enums",
-        "de": "Bereiten Sie sich auf zukünftige js-Controller-Versionen\nFunktion getObjects`for web wurde durch Geräte, Kanäle und Enums erweitert",
-        "ru": "Подготовьтесь к будущим версиям js-controller\nФункция getObjects`for web была расширена устройствами, каналами и enums",
-        "pt": "Prepare-se para futuras versões js-controller\nFunção getObjects`for web foi estendida por dispositivos, canais e enums",
-        "nl": "Bereid je voor op toekomstige Js-controller versie\nVertaling:",
-        "fr": "Préparez-vous pour les versions futures de js-controller\nFonction getObjects`for web was extended by devices, channels and enums",
-        "it": "Prepararsi per le future versioni js-controller\nFunzione getObjects`for web è stato esteso da dispositivi, canali ed enums",
-        "es": "Prepararse para futuras versiones js-controller\nFunción getObjects`for web was extended by devices, channels and enums",
-        "pl": "Prepare for future js-controller version\nFunkcjonalne zapotrzebowanie na stronie zostało przedłużone przez urządzenia, kanały i enum",
-        "uk": "Підготовка до майбутніх версій js-controller\nФункція getObjects`для веб-сторінок було розширено пристроями, каналами та енумами",
-        "zh-cn": "今后防污版本的编制\n使用装置、渠道和网站扩展了“Objects”的功能。"
       }
     },
     "authors": [
