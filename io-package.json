@@ -120,6 +120,7 @@
     "loglevel": "info",
     "readme": "https://github.com/ioBroker/ioBroker.ws/blob/master/README.md",
     "icon": "ws.png",
+    "messagebox": true,
     "keywords": [
       "web",
       "web socket",
