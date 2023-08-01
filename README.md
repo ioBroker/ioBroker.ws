@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### 2.5.1 (2023-07-31)
+### **WORK IN PROGRESS**
 * (bluefox) Added the subscribing on the specific instance messages
 
 ### 2.4.0 (2023-07-07)
