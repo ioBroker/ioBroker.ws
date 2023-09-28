@@ -69,6 +69,9 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) upgraded socket-classes to correct the error by unsubscribing on client disconnect
+
 ### 2.5.5 (2023-09-14)
 * (foxriver76) upgraded socket-classes to fix crash cases
 
