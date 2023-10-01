@@ -33,7 +33,7 @@
     "@iobroker/ws": "^1.1.2",
     "@iobroker/testing": "^4.1.0",
     "mocha": "^10.2.0",
-    "chai": "^4.3.7",
+    "chai": "^4.3.10",
     "gulp": "^4.0.2"
   },
   "bugs": {
