@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.5.6",
+    "version": "2.5.7",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.5.7": {
+        "en": "upgraded socket-classes to fix vis problems",
+        "de": "erweiterte sockel-klassen, um vis-probleme zu beheben",
+        "ru": "обновленные socket-классы, чтобы исправить проблемы vis",
+        "pt": "upgrade de classes de soquete para corrigir problemas de vis",
+        "nl": "opgewaardeerde sokklasse om visproblemen op te lossen",
+        "fr": "les classes de socket améliorées pour résoudre les problèmes vis",
+        "it": "classi di presa aggiornate per risolvere i problemi vis",
+        "es": "reclasos actualizados para solucionar problemas vis",
+        "pl": "ulepszona klasa gniazd do rozwiązywania problemów wizowych",
+        "uk": "оновлені розетки-класи для фіксації проблем ві",
+        "zh-cn": "升级成套,以防问题"
+      },
       "2.5.6": {
         "en": "upgraded socket-classes to correct the error by unsubscribing on client disconnect",
         "de": "erweiterte steckdosen-klassen, um den fehler zu korrigieren, indem sie auf client trennen",
@@ -96,19 +109,6 @@
         "pl": "Delecja obiektów pełnocalendarnych",
         "uk": "Дозволено видалення повноцінних об’єктів",
         "zh-cn": "允许删除全面升级的物体"
-      },
-      "2.3.5": {
-        "en": "added `publishFileAll` method (for future use)",
-        "de": "veröffentlichung FileAll-Methode (für zukünftige Nutzung)",
-        "ru": "добавлена публикация FileAll метод (для будущего использования)",
-        "pt": "publicação adicionada Método FileAll (para uso futuro)",
-        "nl": "vertaling: FileAll methode (voor toekomstige gebruik)",
-        "fr": "publié FileAll method (for future use)",
-        "it": "aggiunto pubblicare Metodo FileAll (per uso futuro)",
-        "es": "publicado Método FileAll (para uso futuro)",
-        "pl": "publikować File All method (ang.)",
-        "uk": "додано ФайлВесь метод (для майбутнього використання)",
-        "zh-cn": "出版 所有方法(今后使用)"
       }
     },
     "authors": [
