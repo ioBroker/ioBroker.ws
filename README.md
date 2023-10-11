@@ -69,6 +69,9 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Corrected adapter termination if the alias has no target
+
 ### 2.5.7 (2023-10-07)
 * (foxriver76) upgraded socket-classes to fix vis problems
 
