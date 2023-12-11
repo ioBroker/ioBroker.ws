@@ -8,7 +8,6 @@ const utils       = require('@iobroker/adapter-core'); // Get common adapter uti
 const SocketWS    = require('./lib/socketWS.js');
 const LE          = utils.commonTools.letsEncrypt;
 const ws          = require('@iobroker/ws-server');
-const FORBIDDEN_CHARS = /[\][*,;'"`<>\\\s?]/g; // with space
 
 let webServer     = null;
 let store         = null;
@@ -115,7 +114,7 @@ function main() {
 }
 
 function checkUser(username, password, cb) {
-    username = (username || '').toString().replace(FORBIDDEN_CHARS, '_').replace(/\s/g, '_').replace(/\./g, '_').toLowerCase();
+    username = (username || '').toString().replace(adapter.FORBIDDEN_CHARS, '_').replace(/\s/g, '_').replace(/\./g, '_').toLowerCase();
 
     if (bruteForce[username] && bruteForce[username].errors > 4) {
         let minutes = Date.now() - bruteForce[username].time;
