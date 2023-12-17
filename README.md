@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.5.10 (2023-12-17)
 * (foxriver76) updated ws-server to increase file limit to 500 MB
 
 ### 2.5.9 (2023-12-14)

@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.5.9",
+    "version": "2.5.10",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.5.10": {
+        "en": "updated ws-server to increase file limit to 500 MB",
+        "de": "aktualisiert ws-server, um Dateilimit auf 500 MB zu erhöhen",
+        "ru": "обновленный ws-сервер для увеличения лимита файлов до 500 МБ",
+        "pt": "ws-server atualizado para aumentar o limite de arquivo para 500 MB",
+        "nl": "verhoogde WS-server om de bestandslimiet te verhogen tot 500 MB",
+        "fr": "mis à jour ws-server pour augmenter la limite de fichiers à 500 Mo",
+        "it": "aggiornato ws-server per aumentare il limite di file a 500 MB",
+        "es": "actualizado ws-servidor para aumentar el límite de archivo a 500 MB",
+        "pl": "uaktualnianie ws-server do zwiększenia limitu plików do 500 MB",
+        "uk": "оновлений ws-сервер для збільшення ліміту файлу до 500 Мб",
+        "zh-cn": "a. 更新的保存者将档案限制增加到500 马克"
+      },
       "2.5.9": {
         "en": "Corrected the crash if authentication is enabled",
         "de": "Korrigiert den Crash, wenn die Authentifizierung aktiviert ist",
@@ -96,19 +109,6 @@
         "pl": "zastrzeżenie",
         "uk": "доданий відсутній вузол16 вимога",
         "zh-cn": "增加未满足要求"
-      },
-      "2.5.3": {
-        "en": "Added the subscribing on the specific instance messages",
-        "de": "Hinzugefügt die Anmeldung auf den spezifischen Instanz Nachrichten",
-        "ru": "Добавлена подписка на конкретные сообщения",
-        "pt": "Adicionado a subscrição nas mensagens de instância específica",
-        "nl": "Voegde de subscribing toe op de specifieke instantie berichten",
-        "fr": "Ajout de l'inscription sur les messages d'instance spécifiques",
-        "it": "Aggiunto la sottoscrizione sui messaggi di istanza specifici",
-        "es": "Añadido el subscribir en los mensajes de instancia específicos",
-        "pl": "Dodać subskrypcję określonych wiadomości",
-        "uk": "Додано підспріб на конкретних повідомленнях екземпляра",
-        "zh-cn": "添加关于具体事例信息的字"
       }
     },
     "authors": [
