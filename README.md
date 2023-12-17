@@ -72,6 +72,12 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 ### **WORK IN PROGRESS**
 * (foxriver76) updated ws-server to increase file limit to 500 MB
 
+### 2.5.9 (2023-12-14)
+* (joltcoke) Corrected the crash if authentication is enabled
+
+### 2.5.8 (2023-10-11)
+* (bluefox) Corrected adapter termination if the alias has no target
+
 ### 2.5.7 (2023-10-07)
 * (foxriver76) upgraded socket-classes to fix vis problems
 
