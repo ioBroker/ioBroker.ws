@@ -154,7 +154,12 @@
       }
     },
     "connectionType": "local",
-    "dataSource": "push"
+    "dataSource": "push",
+    "licenseInformation": {
+      "type": "free",
+      "link": "https://github.com/ioBroker/ioBroker.ws/blob/master/LICENSE"
+    },
+    "tier": 3
   },
   "native": {
     "port": 8084,
