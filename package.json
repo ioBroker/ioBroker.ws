@@ -19,7 +19,7 @@
     "node": ">= 16"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.0.4",
+    "@iobroker/adapter-core": "^3.0.6",
     "@iobroker/socket-classes": "1.5.0",
     "@iobroker/ws-server": "^2.1.2",
     "express-session": "^1.18.0"
