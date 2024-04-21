@@ -1,6 +1,6 @@
 {
   "name": "iobroker.ws",
-  "version": "2.5.11",
+  "version": "2.6.0",
   "description": "This adapter allows to communicate different web applications with ioBroker.",
   "author": {
     "name": "bluefox",

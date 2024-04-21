@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.5.11",
+    "version": "2.6.0",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.6.0": {
+        "en": "use `@iobroker/webserver`",
+        "de": "`@iobroker/webserver `",
+        "ru": "`@iobroker/webserver \"",
+        "pt": "use `@iobroker/webserver \"",
+        "nl": "gebruik  wat",
+        "fr": "utiliser `@iobroker/webserver \"",
+        "it": "utilizzare `@iobroker/webserver #",
+        "es": "use `@iobroker/webserver `",
+        "pl": "use '@ iobroker / webserver'",
+        "uk": "використання `@iobroker/webserver й",
+        "zh-cn": "使用 xqio 经纪人/网络服务器 `"
+      },
       "2.5.11": {
         "en": "Some packages were updated",
         "de": "Einige Pakete wurden aktualisiert",
@@ -96,19 +109,6 @@
         "pl": "ulepszona klasa gniazd w celu poprawy błędów niepodpisanych przez nieodłączność klienta",
         "uk": "модернізовані розетки-класи для виправлення помилки від'єднанням клієнтів",
         "zh-cn": "升级成套,以纠正错误,不用说用户脱节。"
-      },
-      "2.5.5": {
-        "en": "upgraded socket-classes to fix crash cases",
-        "de": "erweiterte steckdosen-klassen, um crashfälle zu beheben",
-        "ru": "обновленные socket-классы для исправления аварийных случаев",
-        "pt": "classes de soquete atualizadas para corrigir casos de acidente",
-        "nl": "opgewaardeerde socket-classes om crash gevallen te repareren",
-        "fr": "les classes de socket améliorées pour réparer les cas de crash",
-        "it": "classi di socket aggiornate per risolvere casi di crash",
-        "es": "reclasos actualizados para fijar casos de choque",
-        "pl": "ulepszona klasa gniazd do naprawy przypadków katastrofy",
-        "uk": "оновлені розетки-класи для фіксації аварійних випадків",
-        "zh-cn": "b. 升级的火箭弹"
       }
     },
     "authors": [
