@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.5.10",
+    "version": "2.5.11",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.5.11": {
+        "en": "Some packages were updated",
+        "de": "Einige Pakete wurden aktualisiert",
+        "ru": "Некоторые пакеты были обновлены",
+        "pt": "Alguns pacotes foram atualizados",
+        "nl": "Sommige pakketten werden bijgewerkt",
+        "fr": "Certains paquets ont été mis à jour",
+        "it": "Alcuni pacchetti sono stati aggiornati",
+        "es": "Algunos paquetes se actualizaron",
+        "pl": "Niektóre pakiety zostały zaktualizowane",
+        "uk": "Деякі пакети були оновлено",
+        "zh-cn": "一些软件包已更新"
+      },
       "2.5.10": {
         "en": "updated ws-server to increase file limit to 500 MB",
         "de": "aktualisiert ws-server, um Dateilimit auf 500 MB zu erhöhen",
@@ -96,19 +109,6 @@
         "pl": "ulepszona klasa gniazd do naprawy przypadków katastrofy",
         "uk": "оновлені розетки-класи для фіксації аварійних випадків",
         "zh-cn": "b. 升级的火箭弹"
-      },
-      "2.5.4": {
-        "en": "added missing node16 requirement",
-        "de": "fehlende knoten16 anforderung",
-        "ru": "добавлено отсутствует требование к node16",
-        "pt": "requisito adicional node16 faltando",
-        "nl": "vermiste vereiste",
-        "fr": "exigence node16 manquante",
-        "it": "aggiunto mancante node16 requisito",
-        "es": "nodo16 faltante",
-        "pl": "zastrzeżenie",
-        "uk": "доданий відсутній вузол16 вимога",
-        "zh-cn": "增加未满足要求"
       }
     },
     "authors": [
