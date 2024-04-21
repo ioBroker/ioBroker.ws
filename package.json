@@ -36,7 +36,7 @@
     "@iobroker/ws": "^1.1.2",
     "chai": "^4.4.1",
     "gulp": "^4.0.2",
-    "mocha": "^10.3.0"
+    "mocha": "^10.4.0"
   },
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.ws/issues"
