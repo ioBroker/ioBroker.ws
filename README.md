@@ -69,6 +69,9 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (foxriver76) use `@iobroker/webserver`
+
 ### 2.5.11 (2024-02-22)
 * (bluefox) Some packages were updated
 

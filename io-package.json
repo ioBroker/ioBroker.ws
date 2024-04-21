@@ -114,7 +114,6 @@
     "authors": [
       "bluefox <dogafox@gmail.com>"
     ],
-    "license": "MIT",
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "loglevel": "info",
@@ -155,11 +154,11 @@
     },
     "connectionType": "local",
     "dataSource": "push",
+    "tier": 3,
     "licenseInformation": {
       "type": "free",
-      "link": "https://github.com/ioBroker/ioBroker.ws/blob/master/LICENSE"
-    },
-    "tier": 3
+      "license": "MIT"
+    }
   },
   "native": {
     "port": 8084,
