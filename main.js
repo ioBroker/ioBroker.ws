@@ -6,7 +6,7 @@
 const adapterName = require('./package.json').name.split('.').pop();
 const utils = require('@iobroker/adapter-core'); // Get common adapter utils
 const SocketWS = require('./lib/socketWS.js');
-const { WebServer } = '@iobroker/webserver';
+const { WebServer } = require('@iobroker/webserver');
 const ws = require('@iobroker/ws-server');
 
 let webServer = null;
