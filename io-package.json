@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.6.0",
+    "version": "2.6.1",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.6.1": {
+        "en": "fixed require of webserver",
+        "de": "fester bedarf von webserver",
+        "ru": "фиксированная потребность веб-сервера",
+        "pt": "requerimento fixo de servidor web",
+        "nl": "vaste eis van webserver",
+        "fr": "demande fixe du serveur web",
+        "it": "richiesta fissa di webserver",
+        "es": "requerimiento fijo del servidor web",
+        "pl": "stałe zapotrzebowanie serwera www",
+        "uk": "фіксована потреба вебсервера",
+        "zh-cn": "网页服务器的固定要求"
+      },
       "2.6.0": {
         "en": "use `@iobroker/webserver`",
         "de": "`@iobroker/webserver `",
@@ -96,19 +109,6 @@
         "pl": "ulepszona klasa gniazd do rozwiązywania problemów wizowych",
         "uk": "оновлені розетки-класи для фіксації проблем ві",
         "zh-cn": "升级成套,以防问题"
-      },
-      "2.5.6": {
-        "en": "upgraded socket-classes to correct the error by unsubscribing on client disconnect",
-        "de": "erweiterte steckdosen-klassen, um den fehler zu korrigieren, indem sie auf client trennen",
-        "ru": "обновленные socket-классы, чтобы исправить ошибку, отписывая на отключение клиента",
-        "pt": "classes de soquete atualizadas para corrigir o erro ao dessubscrever no cliente desconectar",
-        "nl": "opgewaardeerde socket-class om de fout te corrigeren door onbeduidende cliënt te verbreken",
-        "fr": "les classes de socket améliorées pour corriger l'erreur en désabonnement sur le client déconnecté",
-        "it": "classi di socket aggiornate per correggere l'errore cancellando la registrazione sul client",
-        "es": "reclasos actualizados para corregir el error al darse de baja en la desconexión del cliente",
-        "pl": "ulepszona klasa gniazd w celu poprawy błędów niepodpisanych przez nieodłączność klienta",
-        "uk": "модернізовані розетки-класи для виправлення помилки від'єднанням клієнтів",
-        "zh-cn": "升级成套,以纠正错误,不用说用户脱节。"
       }
     },
     "authors": [
