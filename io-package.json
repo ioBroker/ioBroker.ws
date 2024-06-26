@@ -16,6 +16,7 @@
       "it": "Questo adattatore consente di comunicare diverse applicazioni Web con ioBroker",
       "es": "Este adaptador permite comunicar diferentes aplicaciones web con ioBroker",
       "pl": "Ten adapter umożliwia komunikację z różnymi aplikacjami WWW za pomocą ioBroker",
+      "uk": "Цей адаптер дозволяє спілкуватися різним веб-додаткам з ioBroker",
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
@@ -155,6 +156,7 @@
     "connectionType": "local",
     "dataSource": "push",
     "tier": 3,
+    "license": "MIT",
     "licenseInformation": {
       "type": "free",
       "license": "MIT"
