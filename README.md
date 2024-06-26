@@ -69,6 +69,9 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (bluefox) Corrected call of getObjectView with null parameter
+
 ### 2.6.1 (2024-04-22)
 * (foxriver76) fixed require of webserver
 
