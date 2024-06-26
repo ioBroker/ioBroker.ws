@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "2.6.1",
+    "version": "2.6.2",
     "title": "Web socket",
     "titleLang": {
       "en": "Web socket"
@@ -19,6 +19,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "2.6.2": {
+        "en": "Corrected call of getObjectView with null parameter",
+        "de": "Korrigierter Anruf von getObject Ansicht mit Null-Parameter",
+        "ru": "Исправленный звонок getObject Просмотр с нулевым параметром",
+        "pt": "Chamada correta de getObject Ver com parâmetro nulo",
+        "nl": "Gecorrigeerde aanroep van getObject Beeld met nul parameter",
+        "fr": "Appel corrigé de getObject Affichage avec paramètre null",
+        "it": "Chiamata corretta di getObject Visualizza con parametro null",
+        "es": "Llamada corregida de getObject Ver con parámetro null",
+        "pl": "Poprawione wywołanie getObject Widok z parametrem null",
+        "uk": "Виправлений виклик getObject Перегляд з параметром null",
+        "zh-cn": "已更正的调取对象 以无效参数查看"
+      },
       "2.6.1": {
         "en": "fixed require of webserver",
         "de": "fester bedarf von webserver",
@@ -96,19 +109,6 @@
         "pl": "Poprawne rozwiązanie adaptacyjne, jeśli alias nie ma docelowego celu",
         "uk": "Виправлено припинення адаптера, якщо псевдонім не має цілей",
         "zh-cn": "如果除其它外别无目标,适应适应人员终止"
-      },
-      "2.5.7": {
-        "en": "upgraded socket-classes to fix vis problems",
-        "de": "erweiterte sockel-klassen, um vis-probleme zu beheben",
-        "ru": "обновленные socket-классы, чтобы исправить проблемы vis",
-        "pt": "upgrade de classes de soquete para corrigir problemas de vis",
-        "nl": "opgewaardeerde sokklasse om visproblemen op te lossen",
-        "fr": "les classes de socket améliorées pour résoudre les problèmes vis",
-        "it": "classi di presa aggiornate per risolvere i problemi vis",
-        "es": "reclasos actualizados para solucionar problemas vis",
-        "pl": "ulepszona klasa gniazd do rozwiązywania problemów wizowych",
-        "uk": "оновлені розетки-класи для фіксації проблем ві",
-        "zh-cn": "升级成套,以防问题"
       }
     },
     "authors": [

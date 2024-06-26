@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.6.2 (2024-06-26)
 * (bluefox) Corrected call of getObjectView with null parameter
 
 ### 2.6.1 (2024-04-22)
