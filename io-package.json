@@ -156,7 +156,6 @@
     "connectionType": "local",
     "dataSource": "push",
     "tier": 3,
-    "license": "MIT",
     "licenseInformation": {
       "type": "free",
       "license": "MIT"
