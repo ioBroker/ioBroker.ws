@@ -1,0 +1,19 @@
+// Root tsconfig to set the settings and power editor support for all TS files
+{
+    "compilerOptions": {
+        "noEmit": false,
+        "declaration": true,
+        "skipLibCheck": true,
+        "module": "commonjs",
+        "outDir": "./dist/",
+        "resolveJsonModule": true,
+        "target": "esnext",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "useUnknownInCatchVariables": false,
+        "types": ["@types/node", "@iobroker/types"],
+    },
+    "include": ["src/*.ts", "src/*.d.ts"],
+    "exclude": ["node_modules/**", "dist/**"]
+}
