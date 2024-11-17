@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.7.0 (2024-11-17)
 * (bluefox) Update ws-server library
 
 ### 2.6.2 (2024-06-26)
