@@ -31,7 +31,7 @@ Object is meta information that describes data point and could content: max/min 
 
 ### State
 State is the actual value of the data point and presented by javascript object: 
-```js
+```
 {
     val: VALUE, 
     ack: ACKNOWLEDGED, 
