@@ -10,5 +10,6 @@ export interface WsAdapterConfig {
     defaultUser: string;
     leEnabled: boolean;
     leUpdate: boolean;
+    language: ioBroker.Languages;
     leCheckPort: number | string;
 }

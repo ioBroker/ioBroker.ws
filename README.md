@@ -42,7 +42,7 @@ State is the actual value of the data point and presented by javascript object:
 }
 ```
 
-States change itself very frequently in compare to the objects. (Normally objects should be changed once by creation and that's all) 
+States change itself very frequentxly in compare to the objects. (Normally objects should be changed once by creation and that's all) 
 
 ### Acknowledgment
 Every state has the attribute `ack`. It shows the direction of command. 

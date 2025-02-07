@@ -1,10 +1,15 @@
-import { SocketCommon, passportSocket, type PassportHttpRequest, type Store } from '@iobroker/socket-classes';
+import {
+    SocketCommon,
+    passportSocket,
+    type PassportHttpRequest,
+    type Store,
+    type SocketSubscribeTypes,
+} from '@iobroker/socket-classes';
 import type { Socket as WebSocketClient } from '@iobroker/ws-server';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import type { AddressInfo } from 'node:net';
 import type { WsAdapterConfig } from '../types';
-import type { SocketSubscribeTypes } from '@iobroker/socket-classes/dist/types';
 
 // From settings used only secure, auth and crossDomain
 export class SocketWS extends SocketCommon {

@@ -240,6 +240,7 @@ class WsAdapter extends adapter_core_1.Adapter {
                     crossDomain: true,
                     forceWebSockets: true, // this is irrelevant for ws
                     defaultUser: this.wsConfig.defaultUser,
+                    language: this.wsConfig.language,
                 };
                 this.server.io = new socketWS_1.SocketWS(settings, this);
                 this.server.io.start(this.server.server, ws_server_1.SocketIO, {

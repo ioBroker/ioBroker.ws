@@ -1,7 +1,6 @@
-import { SocketCommon, type Store } from '@iobroker/socket-classes';
+import { SocketCommon, type Store, type SocketSubscribeTypes } from '@iobroker/socket-classes';
 import type { Socket as WebSocketClient } from '@iobroker/ws-server';
 import type { AddressInfo } from 'node:net';
-import type { SocketSubscribeTypes } from '@iobroker/socket-classes/dist/types';
 export declare class SocketWS extends SocketCommon {
     #private;
     __getIsNoDisconnect(): boolean;

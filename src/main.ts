@@ -256,6 +256,7 @@ export class WsAdapter extends Adapter {
                         crossDomain: true,
                         forceWebSockets: true, // this is irrelevant for ws
                         defaultUser: this.wsConfig.defaultUser,
+                        language: this.wsConfig.language,
                     };
 
                     this.server.io = new SocketWS(settings, this);
