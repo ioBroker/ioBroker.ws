@@ -1,4 +1,4 @@
-const { writeFileSync, readFileSync } = require('fs');
+const { writeFileSync, readFileSync } = require('node:fs');
 
 const socket = require.resolve('@iobroker/ws').replace(/\\/g, '/');
-writeFileSync(`${__dirname}/lib/socket.io.js`, readFileSync(socket));
+writeFileSync(`${__dirname}/dist/lib/socket.io.js`, readFileSync(socket));

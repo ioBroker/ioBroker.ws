@@ -1,0 +1,20 @@
+{
+  "Authentication": "Аутентификация",
+  "Chained certificate": "'Chained' сертификат",
+  "IP": "IP",
+  "Language for only this instance": "Язык только для этого экземпляра",
+  "Let's Encrypt SSL": "Let's Encrypt SSL",
+  "Let's Encrypt settings": "Настройки Let's Encrypt",
+  "Listen on all IPs": "Открыть сокет на всех IP адресах",
+  "Port": "Порт",
+  "Port to check the domain": "Порт для проверки доменного имени",
+  "Private certificate": "'Private' сертификат",
+  "Public certificate": "'Public' сертификат",
+  "Read about Let's Encrypt certificates": "Читать о сертификатах Let's Encrypt",
+  "Run as": "Запустить от пользователя",
+  "Secure(HTTPS)": "Шифрование(HTTPS)",
+  "Undo": "Отменить",
+  "Use Lets Encrypt certificates": "Использовать сертификаты Let's Encrypt",
+  "Use this instance for automatic update": "Обновлять сертификаты в этом драйвере",
+  "help_tip": "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями"
+}

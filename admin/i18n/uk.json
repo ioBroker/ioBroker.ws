@@ -1,0 +1,20 @@
+{
+  "Authentication": "Аутентифікація",
+  "Chained certificate": "Прикутий сертифікат",
+  "IP": "IP",
+  "Language for only this instance": "Мова лише для цього екземпляра",
+  "Let's Encrypt SSL": "Давайте зашифруємо SSL",
+  "Let's Encrypt settings": "Давайте зашифруємо налаштування",
+  "Listen on all IPs": "Слухати на всіх IP",
+  "Port": "Порт",
+  "Port to check the domain": "Порт для перевірки домену",
+  "Private certificate": "Приватний сертифікат",
+  "Public certificate": "Публічний сертифікат",
+  "Read about Let's Encrypt certificates": "Прочитайте про сертифікати Let's Encrypt",
+  "Run as": "Бігати як",
+  "Secure(HTTPS)": "Безпечний (HTTPS)",
+  "Undo": "Скасувати",
+  "Use Lets Encrypt certificates": "Використовуйте сертифікати Let's Encrypt",
+  "Use this instance for automatic update": "Використовуйте цей екземпляр для автоматичного оновлення",
+  "help_tip": "Після збереження адаптер негайно перезавантажується з новою конфігурацією"
+}

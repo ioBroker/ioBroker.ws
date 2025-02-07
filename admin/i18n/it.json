@@ -1,0 +1,20 @@
+{
+  "Authentication": "Autenticazione",
+  "Chained certificate": "Certificato incatenato",
+  "IP": "IP",
+  "Language for only this instance": "Linguaggio solo per questa istanza",
+  "Let's Encrypt SSL": "Let's Encrypt SSL",
+  "Let's Encrypt settings": "Let's Encrypt settings",
+  "Listen on all IPs": "Ascolta su tutti gli IP",
+  "Port": "Porta",
+  "Port to check the domain": "Porta per controllare il dominio",
+  "Private certificate": "Certificato privato",
+  "Public certificate": "Certificato pubblico",
+  "Read about Let's Encrypt certificates": "Leggi i certificati Let's Encrypt",
+  "Run as": "Correre come",
+  "Secure(HTTPS)": "Sicuro (HTTPS)",
+  "Undo": "Annullare",
+  "Use Lets Encrypt certificates": "Utilizza Let's Encrypt certificates",
+  "Use this instance for automatic update": "Utilizza questa istanza per l'aggiornamento automatico",
+  "help_tip": "Al salvataggio, l'adattatore si riavvia immediatamente con la nuova configurazione"
+}

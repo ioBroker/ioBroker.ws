@@ -1,0 +1,20 @@
+{
+  "Authentication": "验证",
+  "Chained certificate": "链式证书",
+  "IP": "知识产权",
+  "Language for only this instance": "仅此实例的语言",
+  "Let's Encrypt SSL": "Let's Encrypt SSL",
+  "Let's Encrypt settings": "让我们加密设置",
+  "Listen on all IPs": "监听所有 IP",
+  "Port": "港口",
+  "Port to check the domain": "检查域的端口",
+  "Private certificate": "私人证书",
+  "Public certificate": "公共证书",
+  "Read about Let's Encrypt certificates": "阅读 Let's Encrypt 证书",
+  "Run as": "运行方式",
+  "Secure(HTTPS)": "安全（HTTPS）",
+  "Undo": "撤消",
+  "Use Lets Encrypt certificates": "使用 Let's Encrypt 证书",
+  "Use this instance for automatic update": "使用此实例进行自动更新",
+  "help_tip": "保存后适配器立即使用新配置重新启动"
+}
