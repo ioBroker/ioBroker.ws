@@ -69,8 +69,8 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
-* (@GermanBluefox) Adapter was rewritten in TypeScript  
+### 3.0.0 (2025-02-08)
+* (@GermanBluefox) Adapter was rewritten in TypeScript
 
 ### 2.7.0 (2024-11-17)
 * (@GermanBluefox) Update ws-server library
