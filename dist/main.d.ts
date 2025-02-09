@@ -10,9 +10,9 @@ export declare class WsAdapter extends Adapter {
     constructor(options?: Partial<AdapterOptions>);
     onUnload(callback: () => void): void;
     onMessage(obj: ioBroker.Message): void;
-    checkUser(username: string, password: string, cb: (error: null | Error, result?: {
+    checkUser: (username: string, password: string, cb: (error: null | Error, result?: {
         logged_in: boolean;
-    }) => void): void;
+    }) => void) => void;
     initWebServer(): void;
     main(): Promise<void>;
 }

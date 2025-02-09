@@ -164,7 +164,7 @@ export class SocketWS extends SocketCommon {
                 sessionId,
                 (
                     _err: Error | null,
-                    obj: {
+                    obj?: {
                         cookie: {
                             originalMaxAge: number;
                             expires: string;
@@ -210,7 +210,7 @@ export class SocketWS extends SocketCommon {
                 sessionId,
                 (
                     _err: Error | null,
-                    obj: {
+                    obj?: {
                         cookie: {
                             originalMaxAge: number;
                             expires: string;

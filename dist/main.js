@@ -98,7 +98,7 @@ class WsAdapter extends adapter_core_1.Adapter {
         // d - data
         this.server?.io?.publishInstanceMessageAll(obj.from, obj.message.m, obj.message.s, obj.message.d);
     }
-    checkUser(username, password, cb) {
+    checkUser = (username, password, cb) => {
         username = (username || '')
             .toString()
             .replace(this.FORBIDDEN_CHARS, '_')
@@ -155,7 +155,7 @@ class WsAdapter extends adapter_core_1.Adapter {
             }
             return cb(null);
         });
-    }
+    };
     initWebServer() {
         this.wsConfig.port = parseInt(this.wsConfig.port, 10) || 0;
         if (this.wsConfig.port) {
@@ -241,6 +241,7 @@ class WsAdapter extends adapter_core_1.Adapter {
                     forceWebSockets: true, // this is irrelevant for ws
                     defaultUser: this.wsConfig.defaultUser,
                     language: this.wsConfig.language,
+                    secret: this.secret,
                 };
                 this.server.io = new socketWS_1.SocketWS(settings, this);
                 this.server.io.start(this.server.server, ws_server_1.SocketIO, {

@@ -5,7 +5,7 @@ import * as session from 'express-session';
 import { Adapter, type AdapterOptions, commonTools, EXIT_CODES } from '@iobroker/adapter-core'; // Get common adapter utils
 import { WebServer } from '@iobroker/webserver';
 import { SocketIO, type Socket as WebSocketClient } from '@iobroker/ws-server';
-import type { Store } from '@iobroker/socket-classes';
+import type {SocketSettings, Store} from '@iobroker/socket-classes';
 import type { WsAdapterConfig } from './types';
 import { SocketWS } from './lib/socketWS';
 import { readFileSync } from 'node:fs';
@@ -79,7 +79,7 @@ export class WsAdapter extends Adapter {
         this.server?.io?.publishInstanceMessageAll(obj.from, obj.message.m, obj.message.s, obj.message.d);
     }
 
-    checkUser(
+    checkUser = (
         username: string,
         password: string,
         cb: (
@@ -88,7 +88,7 @@ export class WsAdapter extends Adapter {
                 logged_in: boolean;
             },
         ) => void,
-    ): void {
+    ): void => {
         username = (username || '')
             .toString()
             .replace(this.FORBIDDEN_CHARS, '_')
@@ -237,18 +237,7 @@ export class WsAdapter extends Adapter {
                         },
                     );
 
-                    const settings: {
-                        language?: ioBroker.Languages;
-                        defaultUser?: string;
-                        ttl?: number;
-                        secure?: boolean;
-                        auth?: boolean;
-                        crossDomain?: boolean;
-                        extensions?: (socket: WebSocketClient) => void;
-                        port?: number;
-                        compatibilityV2?: boolean;
-                        forceWebSockets?: boolean;
-                    } = {
+                    const settings: SocketSettings = {
                         ttl: this.wsConfig.ttl as number,
                         port: this.wsConfig.port,
                         secure: this.wsConfig.secure,
@@ -257,6 +246,7 @@ export class WsAdapter extends Adapter {
                         forceWebSockets: true, // this is irrelevant for ws
                         defaultUser: this.wsConfig.defaultUser,
                         language: this.wsConfig.language,
+                        secret: this.secret,
                     };
 
                     this.server.io = new SocketWS(settings, this);
