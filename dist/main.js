@@ -35,12 +35,12 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WsAdapter = void 0;
 const node_crypto_1 = require("node:crypto");
+const node_fs_1 = require("node:fs");
 const session = __importStar(require("express-session"));
 const adapter_core_1 = require("@iobroker/adapter-core"); // Get common adapter utils
 const webserver_1 = require("@iobroker/webserver");
 const ws_server_1 = require("@iobroker/ws-server");
 const socketWS_1 = require("./lib/socketWS");
-const node_fs_1 = require("node:fs");
 class WsAdapter extends adapter_core_1.Adapter {
     wsConfig;
     server = {
@@ -49,10 +49,10 @@ class WsAdapter extends adapter_core_1.Adapter {
         app: null,
     };
     socketIoFile;
-    bruteForce = {};
     store = null;
     secret = 'Zgfr56gFe87jJOM';
     certificates;
+    bruteForce = {};
     constructor(options = {}) {
         super({
             ...options,

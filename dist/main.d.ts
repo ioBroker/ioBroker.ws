@@ -3,10 +3,10 @@ export declare class WsAdapter extends Adapter {
     private wsConfig;
     private server;
     private readonly socketIoFile;
-    private bruteForce;
     private store;
     private secret;
     private certificates;
+    private bruteForce;
     constructor(options?: Partial<AdapterOptions>);
     onUnload(callback: () => void): void;
     onMessage(obj: ioBroker.Message): void;
