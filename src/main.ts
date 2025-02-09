@@ -1,14 +1,17 @@
 import { randomBytes } from 'node:crypto';
 import type { IncomingMessage, OutgoingMessage, Server as HttpServer } from 'node:http';
 import type { Server as HttpsServer } from 'node:https';
+import { readFileSync } from 'node:fs';
+
 import * as session from 'express-session';
+
 import { Adapter, type AdapterOptions, commonTools, EXIT_CODES } from '@iobroker/adapter-core'; // Get common adapter utils
 import { WebServer } from '@iobroker/webserver';
-import { SocketIO, type Socket as WebSocketClient } from '@iobroker/ws-server';
-import type {SocketSettings, Store} from '@iobroker/socket-classes';
+import { SocketIO } from '@iobroker/ws-server';
+import type { SocketSettings, Store } from '@iobroker/socket-classes';
+
 import type { WsAdapterConfig } from './types';
 import { SocketWS } from './lib/socketWS';
-import { readFileSync } from 'node:fs';
 
 type Server = HttpServer | HttpsServer;
 
@@ -24,10 +27,11 @@ export class WsAdapter extends Adapter {
         app: null,
     };
     private readonly socketIoFile: string;
-    private bruteForce: { [ip: string]: { errors: number; time: number } } = {};
     private store: Store | null = null;
     private secret = 'Zgfr56gFe87jJOM';
     private certificates: ioBroker.Certificates | undefined;
+
+    private bruteForce: { [ip: string]: { errors: number; time: number } } = {};
 
     public constructor(options: Partial<AdapterOptions> = {}) {
         super({
@@ -143,7 +147,7 @@ export class WsAdapter extends Adapter {
             }
             return cb(null);
         });
-    }
+    };
 
     initWebServer(): void {
         this.wsConfig.port = parseInt(this.wsConfig.port as string, 10) || 0;
