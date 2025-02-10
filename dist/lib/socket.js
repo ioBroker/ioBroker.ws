@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Socket = void 0;
 const ws_server_1 = require("@iobroker/ws-server");
 const socketWS_1 = require("./socketWS");
 const socket_classes_1 = require("@iobroker/socket-classes");
@@ -35,5 +36,5 @@ class Socket {
         }
     }
 }
-module.exports = Socket;
+exports.Socket = Socket;
 //# sourceMappingURL=socket.js.map
