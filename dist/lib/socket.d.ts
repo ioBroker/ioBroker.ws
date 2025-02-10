@@ -7,6 +7,7 @@ export declare class Socket {
     ioServer: SocketWS | null;
     constructor(server: Server, settings: SocketSettings, adapter: ioBroker.Adapter, store: Store, checkUser?: (user: string, pass: string, cb: (error: Error | null, result?: {
         logged_in: boolean;
+        user?: string;
     }) => void) => void);
     getWhiteListIpForAddress(remoteIp: string, whiteListSettings: {
         [address: string]: WhiteListSettings;

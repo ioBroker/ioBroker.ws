@@ -9,6 +9,7 @@ export declare class SocketWS extends SocketCommon {
         secret: string;
         checkUser?: (user: string, pass: string, cb: (error: Error | null, result?: {
             logged_in: boolean;
+            user?: string;
         }) => void) => void;
     }): void;
     __getUserFromSocket(socket: WebSocketClient, callback: (error: string | null, user?: string) => void): void;

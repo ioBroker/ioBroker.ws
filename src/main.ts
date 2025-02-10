@@ -90,6 +90,7 @@ export class WsAdapter extends Adapter {
             error: null | Error,
             result?: {
                 logged_in: boolean;
+                user?: string;
             },
         ) => void,
     ): void => {

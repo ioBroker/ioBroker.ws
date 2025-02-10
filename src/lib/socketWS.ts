@@ -59,6 +59,7 @@ export class SocketWS extends SocketCommon {
                 error: Error | null,
                 result?: {
                     logged_in: boolean;
+                    user?: string;
                 },
             ) => void,
         ) => void;

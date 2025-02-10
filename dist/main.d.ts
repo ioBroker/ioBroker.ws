@@ -12,6 +12,7 @@ export declare class WsAdapter extends Adapter {
     onMessage(obj: ioBroker.Message): void;
     checkUser: (username: string, password: string, cb: (error: null | Error, result?: {
         logged_in: boolean;
+        user?: string;
     }) => void) => void;
     initWebServer(): void;
     main(): Promise<void>;

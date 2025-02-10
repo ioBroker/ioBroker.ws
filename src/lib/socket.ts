@@ -27,6 +27,7 @@ export class Socket {
                 error: Error | null,
                 result?: {
                     logged_in: boolean;
+                    user?: string;
                 },
             ) => void,
         ) => void,
