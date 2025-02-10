@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### 3.0.1 (2025-02-09)
+### **WORK IN PROGRESS**
 * (@GermanBluefox) Adapter was rewritten in TypeScript
 
 ### 2.7.0 (2024-11-17)

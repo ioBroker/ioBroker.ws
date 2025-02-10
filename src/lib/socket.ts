@@ -13,7 +13,7 @@ import {
 
 type Server = HttpServer | HttpsServer;
 
-class Socket {
+export class Socket {
     public ioServer: SocketWS | null;
     constructor(
         server: Server,
@@ -71,5 +71,3 @@ class Socket {
         }
     }
 }
-
-module.exports = Socket;
