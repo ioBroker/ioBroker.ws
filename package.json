@@ -20,9 +20,9 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.2.3",
-    "@iobroker/socket-classes": "^2.0.10",
+    "@iobroker/socket-classes": "^2.0.11",
     "@iobroker/webserver": "^1.0.8",
-    "@iobroker/ws-server": "^4.2.5",
+    "@iobroker/ws-server": "^4.2.6",
     "express-session": "^1.18.1"
   },
   "devDependencies": {
