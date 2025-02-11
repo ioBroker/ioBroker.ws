@@ -1,202 +1,223 @@
 {
-    "common": {
-        "name": "ws",
-        "version": "3.0.4",
-        "titleLang": {
-            "en": "Native Web socket",
-            "de": "Native Web socket",
-            "ru": "Native Web socket",
-            "pt": "Native Web socket",
-            "nl": "Native Web socket",
-            "fr": "Native Web socket",
-            "it": "Native Web socket",
-            "es": "Native Web socket",
-            "pl": "Native Web socket",
-            "uk": "Native Web socket",
-            "zh-cn": "Native Web socket"
-        },
-        "desc": {
-            "en": "This adapter allows to communicate different web applications with ioBroker via pure web sockets. Not socket.io",
-            "de": "Dieser Adapter ermöglicht die Kommunikation verschiedener Web-Anwendungen mit ioBroker",
-            "ru": "Этот адаптер позволяет соединяться различным веб-приложениям с ioBroker",
-            "pt": "Este adaptador permite comunicar diferentes aplicativos da web com ioBroker",
-            "nl": "Met deze adapter kunt u verschillende webtoepassingen communiceren met ioBroker",
-            "fr": "Cet adaptateur permet de communiquer différentes applications web avec ioBroker",
-            "it": "Questo adattatore consente di comunicare diverse applicazioni Web con ioBroker",
-            "es": "Este adaptador permite comunicar diferentes aplicaciones web con ioBroker",
-            "pl": "Ten adapter umożliwia komunikację z różnymi aplikacjami WWW za pomocą ioBroker",
-            "uk": "Цей адаптер дозволяє спілкуватися різним веб-додаткам з ioBroker",
-            "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
-        },
-        "news": {
-            "3.0.4": {
-                "en": "Adapter was rewritten in TypeScript",
-                "de": "Adapter wurde in TypeScript neu geschrieben",
-                "ru": "Адаптер был переписан в TypeScript",
-                "pt": "Adapter foi reescrito no TypeScript",
-                "nl": "Adapter is herschreven in TypeScript",
-                "fr": "Adaptateur a été réécrit dans TypeScript",
-                "it": "L'adattatore è stato riscritto in TypeScript",
-                "es": "Adaptador fue reescrito en TipoScript",
-                "pl": "Adapter został przepisany w TypeScript",
-                "uk": "Адаптер був записаний у TypeScript",
-                "zh-cn": "适配器在类型脚本中重写"
-            },
-            "2.6.2": {
-                "en": "Corrected call of getObjectView with null parameter",
-                "de": "Korrigierter Anruf von getObject Ansicht mit Null-Parameter",
-                "ru": "Исправленный звонок getObject Просмотр с нулевым параметром",
-                "pt": "Chamada correta de getObject Ver com parâmetro nulo",
-                "nl": "Gecorrigeerde aanroep van getObject Beeld met nul parameter",
-                "fr": "Appel corrigé de getObject Affichage avec paramètre null",
-                "it": "Chiamata corretta di getObject Visualizza con parametro null",
-                "es": "Llamada corregida de getObject Ver con parámetro null",
-                "pl": "Poprawione wywołanie getObject Widok z parametrem null",
-                "uk": "Виправлений виклик getObject Перегляд з параметром null",
-                "zh-cn": "已更正的调取对象 以无效参数查看"
-            },
-            "2.6.1": {
-                "en": "fixed require of webserver",
-                "de": "fester bedarf von webserver",
-                "ru": "фиксированная потребность веб-сервера",
-                "pt": "requerimento fixo de servidor web",
-                "nl": "vaste eis van webserver",
-                "fr": "demande fixe du serveur web",
-                "it": "richiesta fissa di webserver",
-                "es": "requerimiento fijo del servidor web",
-                "pl": "stałe zapotrzebowanie serwera www",
-                "uk": "фіксована потреба вебсервера",
-                "zh-cn": "网页服务器的固定要求"
-            },
-            "2.6.0": {
-                "en": "use `@iobroker/webserver`",
-                "de": "`@iobroker/webserver `",
-                "ru": "`@iobroker/webserver \"",
-                "pt": "use `@iobroker/webserver \"",
-                "nl": "gebruik  wat",
-                "fr": "utiliser `@iobroker/webserver \"",
-                "it": "utilizzare `@iobroker/webserver #",
-                "es": "use `@iobroker/webserver `",
-                "pl": "use '@ iobroker / webserver'",
-                "uk": "використання `@iobroker/webserver й",
-                "zh-cn": "使用 xqio 经纪人/网络服务器 `"
-            },
-            "2.5.11": {
-                "en": "Some packages were updated",
-                "de": "Einige Pakete wurden aktualisiert",
-                "ru": "Некоторые пакеты были обновлены",
-                "pt": "Alguns pacotes foram atualizados",
-                "nl": "Sommige pakketten werden bijgewerkt",
-                "fr": "Certains paquets ont été mis à jour",
-                "it": "Alcuni pacchetti sono stati aggiornati",
-                "es": "Algunos paquetes se actualizaron",
-                "pl": "Niektóre pakiety zostały zaktualizowane",
-                "uk": "Деякі пакети були оновлено",
-                "zh-cn": "一些软件包已更新"
-            },
-            "2.5.10": {
-                "en": "updated ws-server to increase file limit to 500 MB",
-                "de": "aktualisiert ws-server, um Dateilimit auf 500 MB zu erhöhen",
-                "ru": "обновленный ws-сервер для увеличения лимита файлов до 500 МБ",
-                "pt": "ws-server atualizado para aumentar o limite de arquivo para 500 MB",
-                "nl": "verhoogde WS-server om de bestandslimiet te verhogen tot 500 MB",
-                "fr": "mis à jour ws-server pour augmenter la limite de fichiers à 500 Mo",
-                "it": "aggiornato ws-server per aumentare il limite di file a 500 MB",
-                "es": "actualizado ws-servidor para aumentar el límite de archivo a 500 MB",
-                "pl": "uaktualnianie ws-server do zwiększenia limitu plików do 500 MB",
-                "uk": "оновлений ws-сервер для збільшення ліміту файлу до 500 Мб",
-                "zh-cn": "a. 更新的保存者将档案限制增加到500 马克"
-            }
-        },
-        "authors": ["bluefox <dogafox@gmail.com>"],
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "loglevel": "info",
-        "readme": "https://github.com/ioBroker/ioBroker.ws/blob/master/README.md",
-        "icon": "ws.svg",
-        "messagebox": true,
-        "keywords": ["web", "web socket", "communication"],
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.ws/master/admin/ws.svg",
-        "type": "communication",
-        "stopBeforeUpdate": true,
-        "adminUI": {
-            "config": "json"
-        },
-        "compact": true,
-        "stopTimeout": 5000,
-        "dependencies": [
-            {
-                "js-controller": ">=5.0.19"
-            }
-        ],
-        "globalDependencies": [
-            {
-                "admin": ">=5.0.0"
-            }
-        ],
-        "restartAdapters": ["web"],
-        "plugins": {
-            "sentry": {
-                "dsn": "https://3f4953a5e15d4ff2a381affb010d0778@sentry.iobroker.net/170"
-            }
-        },
-        "connectionType": "local",
-        "dataSource": "push",
-        "tier": 3,
-        "licenseInformation": {
-            "type": "free",
-            "license": "MIT"
-        }
+  "common": {
+    "name": "ws",
+    "version": "3.0.5",
+    "titleLang": {
+      "en": "Native Web socket",
+      "de": "Native Web socket",
+      "ru": "Native Web socket",
+      "pt": "Native Web socket",
+      "nl": "Native Web socket",
+      "fr": "Native Web socket",
+      "it": "Native Web socket",
+      "es": "Native Web socket",
+      "pl": "Native Web socket",
+      "uk": "Native Web socket",
+      "zh-cn": "Native Web socket"
     },
-    "native": {
-        "port": 8084,
-        "auth": false,
-        "secure": false,
-        "bind": "0.0.0.0",
-        "ttl": 3600,
-        "certPublic": "",
-        "certPrivate": "",
-        "certChained": "",
-        "defaultUser": "admin",
-        "leEnabled": false,
-        "leUpdate": false,
-        "leCheckPort": 80
+    "desc": {
+      "en": "This adapter allows to communicate different web applications with ioBroker via pure web sockets. Not socket.io",
+      "de": "Dieser Adapter ermöglicht die Kommunikation verschiedener Web-Anwendungen mit ioBroker",
+      "ru": "Этот адаптер позволяет соединяться различным веб-приложениям с ioBroker",
+      "pt": "Este adaptador permite comunicar diferentes aplicativos da web com ioBroker",
+      "nl": "Met deze adapter kunt u verschillende webtoepassingen communiceren met ioBroker",
+      "fr": "Cet adaptateur permet de communiquer différentes applications web avec ioBroker",
+      "it": "Questo adattatore consente di comunicare diverse applicazioni Web con ioBroker",
+      "es": "Este adaptador permite comunicar diferentes aplicaciones web con ioBroker",
+      "pl": "Ten adapter umożliwia komunikację z różnymi aplikacjami WWW za pomocą ioBroker",
+      "uk": "Цей адаптер дозволяє спілкуватися різним веб-додаткам з ioBroker",
+      "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connected",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "Info about connected socket clients",
-                "type": "string",
-                "read": true,
-                "write": false,
-                "def": ""
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If web server started",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
-    ]
+    "news": {
+      "3.0.5": {
+        "en": "Corrected address detection\nCorrected language settings",
+        "de": "Korrigierte Adresserkennung\nKorrigierte Spracheinstellungen",
+        "ru": "Исправленное обнаружение адреса\nИсправленные языковые настройки",
+        "pt": "Detecção de endereços corrigida\nDefinições de linguagem corretas",
+        "nl": "Gecorrigeerde adresdetectie\nGecorrigeerde taalinstellingen",
+        "fr": "Détection d'adresses corrigée\nRéglages de langue corrigés",
+        "it": "Rilevamento corretto degli indirizzi\nImpostazioni linguistiche corrette",
+        "es": "Detección de direcciones corregida\nAjustes de idiomas corregidos",
+        "pl": "Poprawione wykrywanie adresów\nSkorygowane ustawienia językowe",
+        "uk": "Правильне виявлення адреси\nВиправлені налаштування мови",
+        "zh-cn": "纠正地址检测\n校正语言设置"
+      },
+      "3.0.4": {
+        "en": "Adapter was rewritten in TypeScript",
+        "de": "Adapter wurde in TypeScript neu geschrieben",
+        "ru": "Адаптер был переписан в TypeScript",
+        "pt": "Adapter foi reescrito no TypeScript",
+        "nl": "Adapter is herschreven in TypeScript",
+        "fr": "Adaptateur a été réécrit dans TypeScript",
+        "it": "L'adattatore è stato riscritto in TypeScript",
+        "es": "Adaptador fue reescrito en TipoScript",
+        "pl": "Adapter został przepisany w TypeScript",
+        "uk": "Адаптер був записаний у TypeScript",
+        "zh-cn": "适配器在类型脚本中重写"
+      },
+      "2.6.2": {
+        "en": "Corrected call of getObjectView with null parameter",
+        "de": "Korrigierter Anruf von getObject Ansicht mit Null-Parameter",
+        "ru": "Исправленный звонок getObject Просмотр с нулевым параметром",
+        "pt": "Chamada correta de getObject Ver com parâmetro nulo",
+        "nl": "Gecorrigeerde aanroep van getObject Beeld met nul parameter",
+        "fr": "Appel corrigé de getObject Affichage avec paramètre null",
+        "it": "Chiamata corretta di getObject Visualizza con parametro null",
+        "es": "Llamada corregida de getObject Ver con parámetro null",
+        "pl": "Poprawione wywołanie getObject Widok z parametrem null",
+        "uk": "Виправлений виклик getObject Перегляд з параметром null",
+        "zh-cn": "已更正的调取对象 以无效参数查看"
+      },
+      "2.6.1": {
+        "en": "fixed require of webserver",
+        "de": "fester bedarf von webserver",
+        "ru": "фиксированная потребность веб-сервера",
+        "pt": "requerimento fixo de servidor web",
+        "nl": "vaste eis van webserver",
+        "fr": "demande fixe du serveur web",
+        "it": "richiesta fissa di webserver",
+        "es": "requerimiento fijo del servidor web",
+        "pl": "stałe zapotrzebowanie serwera www",
+        "uk": "фіксована потреба вебсервера",
+        "zh-cn": "网页服务器的固定要求"
+      },
+      "2.6.0": {
+        "en": "use `@iobroker/webserver`",
+        "de": "`@iobroker/webserver `",
+        "ru": "`@iobroker/webserver \"",
+        "pt": "use `@iobroker/webserver \"",
+        "nl": "gebruik  wat",
+        "fr": "utiliser `@iobroker/webserver \"",
+        "it": "utilizzare `@iobroker/webserver #",
+        "es": "use `@iobroker/webserver `",
+        "pl": "use '@ iobroker / webserver'",
+        "uk": "використання `@iobroker/webserver й",
+        "zh-cn": "使用 xqio 经纪人/网络服务器 `"
+      },
+      "2.5.11": {
+        "en": "Some packages were updated",
+        "de": "Einige Pakete wurden aktualisiert",
+        "ru": "Некоторые пакеты были обновлены",
+        "pt": "Alguns pacotes foram atualizados",
+        "nl": "Sommige pakketten werden bijgewerkt",
+        "fr": "Certains paquets ont été mis à jour",
+        "it": "Alcuni pacchetti sono stati aggiornati",
+        "es": "Algunos paquetes se actualizaron",
+        "pl": "Niektóre pakiety zostały zaktualizowane",
+        "uk": "Деякі пакети були оновлено",
+        "zh-cn": "一些软件包已更新"
+      },
+      "2.5.10": {
+        "en": "updated ws-server to increase file limit to 500 MB",
+        "de": "aktualisiert ws-server, um Dateilimit auf 500 MB zu erhöhen",
+        "ru": "обновленный ws-сервер для увеличения лимита файлов до 500 МБ",
+        "pt": "ws-server atualizado para aumentar o limite de arquivo para 500 MB",
+        "nl": "verhoogde WS-server om de bestandslimiet te verhogen tot 500 MB",
+        "fr": "mis à jour ws-server pour augmenter la limite de fichiers à 500 Mo",
+        "it": "aggiornato ws-server per aumentare il limite di file a 500 MB",
+        "es": "actualizado ws-servidor para aumentar el límite de archivo a 500 MB",
+        "pl": "uaktualnianie ws-server do zwiększenia limitu plików do 500 MB",
+        "uk": "оновлений ws-сервер для збільшення ліміту файлу до 500 Мб",
+        "zh-cn": "a. 更新的保存者将档案限制增加到500 马克"
+      }
+    },
+    "authors": [
+      "bluefox <dogafox@gmail.com>"
+    ],
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "loglevel": "info",
+    "readme": "https://github.com/ioBroker/ioBroker.ws/blob/master/README.md",
+    "icon": "ws.svg",
+    "messagebox": true,
+    "keywords": [
+      "web",
+      "web socket",
+      "communication"
+    ],
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.ws/master/admin/ws.svg",
+    "type": "communication",
+    "stopBeforeUpdate": true,
+    "adminUI": {
+      "config": "json"
+    },
+    "compact": true,
+    "stopTimeout": 5000,
+    "dependencies": [
+      {
+        "js-controller": ">=5.0.19"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.0.0"
+      }
+    ],
+    "restartAdapters": [
+      "web"
+    ],
+    "plugins": {
+      "sentry": {
+        "dsn": "https://3f4953a5e15d4ff2a381affb010d0778@sentry.iobroker.net/170"
+      }
+    },
+    "connectionType": "local",
+    "dataSource": "push",
+    "tier": 3,
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    }
+  },
+  "native": {
+    "port": 8084,
+    "auth": false,
+    "secure": false,
+    "bind": "0.0.0.0",
+    "ttl": 3600,
+    "certPublic": "",
+    "certPrivate": "",
+    "certChained": "",
+    "defaultUser": "admin",
+    "leEnabled": false,
+    "leUpdate": false,
+    "leCheckPort": 80
+  },
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connected",
+      "type": "state",
+      "common": {
+        "role": "state",
+        "name": "Info about connected socket clients",
+        "type": "string",
+        "read": true,
+        "write": false,
+        "def": ""
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If web server started",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }
