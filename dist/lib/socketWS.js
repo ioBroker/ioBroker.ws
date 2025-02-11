@@ -119,6 +119,13 @@ class SocketWS extends socket_classes_1.SocketCommon {
             // @ts-expect-error socket.io
             address = socket.conn.request.connection.remoteAddress;
         }
+        if (address && typeof address !== 'object') {
+            return {
+                address,
+                family: address.includes(':') ? 'IPv6' : 'IPv4',
+                port: 0,
+            };
+        }
         return address;
     }
     #waitForSessionEnd(socket) {

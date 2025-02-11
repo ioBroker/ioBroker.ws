@@ -1,6 +1,7 @@
 import { Adapter, type AdapterOptions } from '@iobroker/adapter-core';
+import type { WsAdapterConfig } from './types';
 export declare class WsAdapter extends Adapter {
-    private wsConfig;
+    config: WsAdapterConfig;
     private server;
     private readonly socketIoFile;
     private store;
