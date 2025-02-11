@@ -16,7 +16,7 @@ import { SocketWS } from './lib/socketWS';
 type Server = HttpServer | HttpsServer;
 
 export class WsAdapter extends Adapter {
-    private wsConfig: WsAdapterConfig;
+    declare public config: WsAdapterConfig;
     private server: {
         server: null | Server;
         io: null | SocketWS;
@@ -52,7 +52,6 @@ export class WsAdapter extends Adapter {
         });
 
         this.socketIoFile = readFileSync(`${__dirname}/lib/socket.io.js`).toString('utf-8');
-        this.wsConfig = this.config as WsAdapterConfig;
         this.on('log', (obj: ioBroker.LogMessage): void => this.server?.io?.sendLog(obj));
     }
 
@@ -60,7 +59,7 @@ export class WsAdapter extends Adapter {
         try {
             void this.setState('info.connected', '', true);
             void this.setState('info.connection', false, true);
-            this.log.info(`terminating http${this.wsConfig.secure ? 's' : ''} server on port ${this.wsConfig.port}`);
+            this.log.info(`terminating http${this.config.secure ? 's' : ''} server on port ${this.config.port}`);
             this.server.io?.close();
             this.server.server?.close();
 
@@ -151,27 +150,27 @@ export class WsAdapter extends Adapter {
     };
 
     initWebServer(): void {
-        this.wsConfig.port = parseInt(this.wsConfig.port as string, 10) || 0;
+        this.config.port = parseInt(this.config.port as string, 10) || 0;
 
-        if (this.wsConfig.port) {
-            if (this.wsConfig.secure && !this.certificates) {
+        if (this.config.port) {
+            if (this.config.secure && !this.certificates) {
                 return;
             }
 
-            this.wsConfig.ttl = this.wsConfig.ttl || 3600;
+            this.config.ttl = this.config.ttl || 3600;
 
-            if (this.wsConfig.auth) {
-                const AdapterStore = commonTools.session(session, this.wsConfig.ttl);
+            if (this.config.auth) {
+                const AdapterStore = commonTools.session(session, this.config.ttl);
                 // Authentication checked by server itself
                 this.store = new AdapterStore({ adapter: this });
             }
 
             this.getPort(
-                this.wsConfig.port,
-                !this.wsConfig.bind || this.wsConfig.bind === '0.0.0.0' ? undefined : this.wsConfig.bind || undefined,
+                this.config.port,
+                !this.config.bind || this.config.bind === '0.0.0.0' ? undefined : this.config.bind || undefined,
                 async (port: number): Promise<void> => {
-                    if (parseInt(port as unknown as string, 10) !== this.wsConfig.port) {
-                        this.log.error(`port ${this.wsConfig.port} already in use`);
+                    if (parseInt(port as unknown as string, 10) !== this.config.port) {
+                        this.log.error(`port ${this.config.port} already in use`);
                         return this.terminate
                             ? this.terminate(EXIT_CODES.ADAPTER_REQUESTED_TERMINATION)
                             : process.exit(EXIT_CODES.ADAPTER_REQUESTED_TERMINATION);
@@ -192,7 +191,7 @@ export class WsAdapter extends Adapter {
                     try {
                         const webserver = new WebServer({
                             adapter: this,
-                            secure: this.wsConfig.secure,
+                            secure: this.config.secure,
                             app: this.server.app,
                         });
 
@@ -221,7 +220,7 @@ export class WsAdapter extends Adapter {
                                     'You can call in shell following scrip to allow it for node.js: "iobroker fix"',
                             );
                         } else {
-                            this.log.error(`Cannot start server on ${this.wsConfig.bind || '0.0.0.0'}:${port}: ${e}`);
+                            this.log.error(`Cannot start server on ${this.config.bind || '0.0.0.0'}:${port}: ${e}`);
                         }
                         if (!serverListening) {
                             this.terminate
@@ -232,10 +231,8 @@ export class WsAdapter extends Adapter {
 
                     // Start the web server
                     this.server.server.listen(
-                        this.wsConfig.port,
-                        !this.wsConfig.bind || this.wsConfig.bind === '0.0.0.0'
-                            ? undefined
-                            : this.wsConfig.bind || undefined,
+                        this.config.port,
+                        !this.config.bind || this.config.bind === '0.0.0.0' ? undefined : this.config.bind || undefined,
                         () => {
                             void this.setState('info.connection', true, true);
                             serverListening = true;
@@ -243,14 +240,14 @@ export class WsAdapter extends Adapter {
                     );
 
                     const settings: SocketSettings = {
-                        ttl: this.wsConfig.ttl as number,
-                        port: this.wsConfig.port,
-                        secure: this.wsConfig.secure,
-                        auth: this.wsConfig.auth,
+                        ttl: this.config.ttl as number,
+                        port: this.config.port,
+                        secure: this.config.secure,
+                        auth: this.config.auth,
                         crossDomain: true,
                         forceWebSockets: true, // this is irrelevant for ws
-                        defaultUser: this.wsConfig.defaultUser,
-                        language: this.wsConfig.language,
+                        defaultUser: this.config.defaultUser,
+                        language: this.config.language,
                         secret: this.secret,
                     };
 
@@ -271,11 +268,9 @@ export class WsAdapter extends Adapter {
     }
 
     async main(): Promise<void> {
-        this.wsConfig = this.config as WsAdapterConfig;
-
-        if (this.wsConfig.auth) {
-            // Generate secret for session manager
+        if (this.config.auth) {
             const systemConfig = await this.getForeignObjectAsync('system.config');
+            // Generate secret for session manager
             if (systemConfig) {
                 if (!systemConfig.native?.secret) {
                     systemConfig.native = systemConfig.native || {};
@@ -294,7 +289,7 @@ export class WsAdapter extends Adapter {
             }
         }
 
-        if (this.wsConfig.secure) {
+        if (this.config.secure) {
             // Load certificates
             await new Promise<void>(resolve =>
                 this.getCertificates(

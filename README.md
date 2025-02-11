@@ -69,6 +69,10 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (@GermanBluefox) Corrected address detection
+* (@GermanBluefox) Corrected language settings
+
 ### 3.0.4 (2025-02-11)
 * (@GermanBluefox) Adapter was rewritten in TypeScript
 
