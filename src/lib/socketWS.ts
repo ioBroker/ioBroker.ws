@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser';
 import type { AddressInfo } from 'node:net';
 import type { WsAdapterConfig } from '../types';
 
-interface InternalToken {
+interface InternalStorageToken {
     token: string;
     exp: number;
     user: string;
@@ -123,7 +123,7 @@ export class SocketWS extends SocketCommon {
                 const accessSocket = cookies.find(cookie => cookie.split('=')[0] === 'access_token');
                 if (accessSocket) {
                     const token = accessSocket.split('=')[1];
-                    void this.adapter.getSession(`a:${token}`, (obj: InternalToken | undefined): void => {
+                    void this.adapter.getSession(`a:${token}`, (obj: InternalStorageToken | undefined): void => {
                         if (!obj?.user) {
                             if (socket._acl) {
                                 socket._acl.user = '';
