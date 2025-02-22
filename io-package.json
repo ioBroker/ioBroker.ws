@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "3.0.5",
+    "version": "3.0.6",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "3.0.6": {
+        "en": "Added OAuth2 authentication",
+        "de": "OAuth2 Authentifizierung hinzugefügt",
+        "ru": "Проверка подлинности OAuth2",
+        "pt": "Autenticação de OAuth2 adicionada",
+        "nl": "OAuth2-authenticatie toegevoegd",
+        "fr": "Ajout de l'authentification OAuth2",
+        "it": "Aggiunta autenticazione OAuth2",
+        "es": "Autenticación OAuth2",
+        "pl": "Dodano uwierzytelnianie OAuth2",
+        "uk": "Додано автентифікацію OAuth2",
+        "zh-cn": "添加 OAuth2 认证"
+      },
       "3.0.5": {
         "en": "Corrected address detection\nCorrected language settings",
         "de": "Korrigierte Adresserkennung\nKorrigierte Spracheinstellungen",
@@ -106,19 +119,6 @@
         "pl": "Niektóre pakiety zostały zaktualizowane",
         "uk": "Деякі пакети були оновлено",
         "zh-cn": "一些软件包已更新"
-      },
-      "2.5.10": {
-        "en": "updated ws-server to increase file limit to 500 MB",
-        "de": "aktualisiert ws-server, um Dateilimit auf 500 MB zu erhöhen",
-        "ru": "обновленный ws-сервер для увеличения лимита файлов до 500 МБ",
-        "pt": "ws-server atualizado para aumentar o limite de arquivo para 500 MB",
-        "nl": "verhoogde WS-server om de bestandslimiet te verhogen tot 500 MB",
-        "fr": "mis à jour ws-server pour augmenter la limite de fichiers à 500 Mo",
-        "it": "aggiornato ws-server per aumentare il limite di file a 500 MB",
-        "es": "actualizado ws-servidor para aumentar el límite de archivo a 500 MB",
-        "pl": "uaktualnianie ws-server do zwiększenia limitu plików do 500 MB",
-        "uk": "оновлений ws-сервер для збільшення ліміту файлу до 500 Мб",
-        "zh-cn": "a. 更新的保存者将档案限制增加到500 马克"
       }
     },
     "authors": [

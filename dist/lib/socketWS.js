@@ -81,6 +81,26 @@ class SocketWS extends socket_classes_1.SocketCommon {
             });
         }
         else {
+            if (socket.conn.request.headers?.cookie) {
+                const cookies = socket.conn.request.headers.cookie.split(';');
+                const accessSocket = cookies.find(cookie => cookie.split('=')[0] === 'access_token');
+                if (accessSocket) {
+                    const token = accessSocket.split('=')[1];
+                    void this.adapter.getSession(`a:${token}`, (obj) => {
+                        if (!obj?.user) {
+                            if (socket._acl) {
+                                socket._acl.user = '';
+                            }
+                            socket.emit(socket_classes_1.SocketCommon.COMMAND_RE_AUTHENTICATE);
+                            callback('Cannot detect user');
+                        }
+                        else {
+                            callback(null, obj.user ? `system.user.${obj.user}` : '');
+                        }
+                    });
+                    return;
+                }
+            }
             try {
                 if (socket.conn.request.sessionID) {
                     socket._sessionID = socket.conn.request.sessionID;
