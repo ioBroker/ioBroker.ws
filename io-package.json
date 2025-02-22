@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "3.0.6",
+    "version": "3.0.7",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "3.0.7": {
+        "en": "Added OAuth2 authentication",
+        "de": "OAuth2 Authentifizierung hinzugefügt",
+        "ru": "Проверка подлинности OAuth2",
+        "pt": "Autenticação de OAuth2 adicionada",
+        "nl": "OAuth2-authenticatie toegevoegd",
+        "fr": "Ajout de l'authentification OAuth2",
+        "it": "Aggiunta autenticazione OAuth2",
+        "es": "Autenticación OAuth2",
+        "pl": "Dodano uwierzytelnianie OAuth2",
+        "uk": "Додано автентифікацію OAuth2",
+        "zh-cn": "添加 OAuth2 认证"
+      },
       "3.0.6": {
         "en": "Added OAuth2 authentication",
         "de": "OAuth2 Authentifizierung hinzugefügt",
@@ -106,19 +119,6 @@
         "pl": "use '@ iobroker / webserver'",
         "uk": "використання `@iobroker/webserver й",
         "zh-cn": "使用 xqio 经纪人/网络服务器 `"
-      },
-      "2.5.11": {
-        "en": "Some packages were updated",
-        "de": "Einige Pakete wurden aktualisiert",
-        "ru": "Некоторые пакеты были обновлены",
-        "pt": "Alguns pacotes foram atualizados",
-        "nl": "Sommige pakketten werden bijgewerkt",
-        "fr": "Certains paquets ont été mis à jour",
-        "it": "Alcuni pacchetti sono stati aggiornati",
-        "es": "Algunos paquetes se actualizaron",
-        "pl": "Niektóre pakiety zostały zaktualizowane",
-        "uk": "Деякі пакети були оновлено",
-        "zh-cn": "一些软件包已更新"
       }
     },
     "authors": [
