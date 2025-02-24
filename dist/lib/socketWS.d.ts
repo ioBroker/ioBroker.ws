@@ -6,13 +6,14 @@ export declare class SocketWS extends SocketCommon {
     __getIsNoDisconnect(): boolean;
     __initAuthentication(authOptions: {
         store: Store;
-        secret: string;
+        secret?: string;
+        oauth2Only?: boolean;
         checkUser?: (user: string, pass: string, cb: (error: Error | null, result?: {
             logged_in: boolean;
             user?: string;
         }) => void) => void;
     }): void;
-    __getUserFromSocket(socket: WebSocketClient, callback: (error: string | null, user?: string) => void): void;
+    __getUserFromSocket(socket: WebSocketClient, callback: (error: string | null, user?: string, expirationTime?: number) => void): void;
     __getClientAddress(socket: WebSocketClient): AddressInfo;
     __updateSession(socket: WebSocketClient): boolean;
     __getSessionID(socket: WebSocketClient): string | null;

@@ -1,12 +1,15 @@
 import { randomBytes } from 'node:crypto';
-import type { IncomingMessage, OutgoingMessage, Server as HttpServer } from 'node:http';
+import type { Server as HttpServer } from 'node:http';
 import type { Server as HttpsServer } from 'node:https';
 import { readFileSync } from 'node:fs';
 
 import * as session from 'express-session';
+import express, {type Express, NextFunction, type Request, type Response} from 'express';
+import * as bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 import { Adapter, type AdapterOptions, commonTools, EXIT_CODES } from '@iobroker/adapter-core'; // Get common adapter utils
-import { WebServer } from '@iobroker/webserver';
+import { WebServer, createOAuth2Server } from '@iobroker/webserver';
 import { SocketIO } from '@iobroker/ws-server';
 import type { SocketSettings, Store } from '@iobroker/socket-classes';
 
@@ -20,7 +23,7 @@ export class WsAdapter extends Adapter {
     private server: {
         server: null | Server;
         io: null | SocketWS;
-        app: ((req: IncomingMessage, res: OutgoingMessage) => void) | null;
+        app: Express | null;
     } = {
         server: null,
         io: null,
@@ -176,17 +179,30 @@ export class WsAdapter extends Adapter {
                             : process.exit(EXIT_CODES.ADAPTER_REQUESTED_TERMINATION);
                     }
 
-                    this.server.app = (req: IncomingMessage, res: OutgoingMessage): void => {
-                        if (req.url?.includes('socket.io.js')) {
-                            // @ts-expect-error
-                            res.writeHead(200, { 'Content-Type': 'text/plain' });
-                            res.end(this.socketIoFile);
+                    this.server.app = express();
+
+                    this.server.app.use((req: Request, res: Response, next: NextFunction): void => {
+                        const url = req.url.split('?')[0];
+                        if (url === '/auth') {
+                            // User can asc server if authentication enabled
+                            res.setHeader('Content-Type', 'application/json');
+                            res.json({ auth: this.config.auth });
+                        } else if (
+                            this.config.auth &&
+                            (!url || url === '/' || url === '/login.html' || url === '/login')
+                        ) {
+                            res.setHeader('Content-Type', 'text/html');
+                            res.send(readFileSync(`${__dirname}/../public/index.html`));
+                        } else if (url === '/favicon.ico') {
+                            res.setHeader('Content-Type', 'image/x-icon');
+                            res.send(readFileSync(`${__dirname}/../public/favicon.ico`));
+                        } else if (url?.includes('socket.io.js')) {
+                            res.setHeader('Content-Type', 'application/javascript');
+                            res.send(this.socketIoFile);
                         } else {
-                            // @ts-expect-error
-                            res.writeHead(404);
-                            res.end('Not found');
+                            next();
                         }
-                    };
+                    });
 
                     try {
                         const webserver = new WebServer({
@@ -196,6 +212,21 @@ export class WsAdapter extends Adapter {
                         });
 
                         this.server.server = await webserver.init();
+
+                        if (this.config.auth) {
+                            this.server.app.use(cookieParser());
+                            this.server.app.use(bodyParser.urlencoded({ extended: true }));
+                            this.server.app.use(bodyParser.json());
+
+                            // Activate OAuth2 server
+                            createOAuth2Server(this, {
+                                app: this.server.app,
+                                secure: this.config.secure,
+                                accessLifetime: parseInt(this.config.ttl as string, 10) || 3600,
+                                refreshLifetime: 60 * 60 * 24 * 7, // 1 week (Maybe adjustable?)
+                                loginPage: '/login',
+                            });
+                        }
                     } catch (err) {
                         this.log.error(`Cannot create server: ${err}`);
                         this.terminate
@@ -210,6 +241,11 @@ export class WsAdapter extends Adapter {
                             : process.exit(EXIT_CODES.ADAPTER_REQUESTED_TERMINATION);
                         return;
                     }
+
+                    this.server.app.use((req: Request, res: Response): void => {
+                        res.status(404);
+                        res.send('Not found');
+                    });
 
                     let serverListening = false;
                     this.server.server.on('error', e => {

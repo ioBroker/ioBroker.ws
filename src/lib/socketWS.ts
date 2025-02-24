@@ -27,6 +27,7 @@ export class SocketWS extends SocketCommon {
         this.adapter.log.debug(
             `successful connection to socket.io from ${(data.socket || data.connection).remoteAddress}`,
         );
+        // no error
         accept(false);
     };
 
@@ -51,13 +52,14 @@ export class SocketWS extends SocketCommon {
             accept(new Error(message));
         } else {
             // @ts-expect-error
-            accept(new Error(`failed connection to socket.io: ${message}`)); //null, false);
+            accept(new Error(`failed connection to socket.io: ${message}`));
         }
     };
 
     __initAuthentication(authOptions: {
         store: Store;
-        secret: string;
+        secret?: string;
+        oauth2Only?: boolean;
         checkUser?: (
             user: string,
             pass: string,
@@ -76,35 +78,53 @@ export class SocketWS extends SocketCommon {
             authOptions.store = this.store;
         }
 
-        this.server?.use(
-            passportSocket({
-                passport,
-                cookieParser,
-                checkUser: authOptions.checkUser,
-                secret: authOptions.secret, // the session_secret to parse the cookie
-                store: authOptions.store, // we NEED to use a sessionstore. no memorystore, please
-                success: this.#onAuthorizeSuccess, // *optional* callback on success - read more below
-                fail: this.#onAuthorizeFail, // *optional* callback on fail/error - read more below
-            }),
-        );
+        if (!authOptions.oauth2Only) {
+            this.server?.use(
+                passportSocket({
+                    passport,
+                    cookieParser,
+                    checkUser: authOptions.checkUser,
+                    secret: authOptions.secret, // the session_secret to parse the cookie
+                    store: authOptions.store, // we NEED to use a sessionstore. no memorystore, please
+                    success: this.#onAuthorizeSuccess, // *optional* callback on success - read more below
+                    fail: this.#onAuthorizeFail, // *optional* callback on fail/error - read more below
+                }),
+            );
+        }
     }
 
     // Extract username from socket
-    __getUserFromSocket(socket: WebSocketClient, callback: (error: string | null, user?: string) => void): void {
+    __getUserFromSocket(
+        socket: WebSocketClient,
+        callback: (error: string | null, user?: string, expirationTime?: number) => void,
+    ): void {
         let wait = false;
         if (typeof callback !== 'function') {
             return;
         }
 
-        const user = socket.query.user;
-        const pass = socket.query.pass;
+        let user: string | undefined;
+        let pass: string | undefined;
+
+        if (socket.conn.request.headers?.authorization?.startsWith('Basic ')) {
+            const auth = Buffer.from(socket.conn.request.headers.authorization.split(' ')[1], 'base64').toString(
+                'utf8',
+            );
+            const parts = auth.split(':');
+            user = parts.shift();
+            pass = parts.join(':');
+        } else {
+            user = socket.query.user as string;
+            pass = socket.query.pass as string;
+        }
+
         if (user && typeof user === 'string' && pass && typeof pass === 'string') {
             wait = true;
             void this.adapter.checkPassword(user, pass, res => {
                 if (res) {
                     this.adapter.log.debug(`Logged in: ${user}`);
                     if (typeof callback === 'function') {
-                        callback(null, user);
+                        callback(null, user, 0);
                     } else {
                         this.adapter.log.warn('[_getUserFromSocket] Invalid callback');
                     }
@@ -118,34 +138,47 @@ export class SocketWS extends SocketCommon {
                 }
             });
         } else {
+            let accessToken: string | undefined;
             if (socket.conn.request.headers?.cookie) {
                 const cookies: string[] = socket.conn.request.headers.cookie.split(';');
-                const accessSocket = cookies.find(cookie => cookie.split('=')[0] === 'access_token');
-                if (accessSocket) {
-                    const token = accessSocket.split('=')[1];
-                    void this.adapter.getSession(`a:${token}`, (obj: InternalStorageToken | undefined): void => {
-                        if (!obj?.user) {
-                            if (socket._acl) {
-                                socket._acl.user = '';
-                            }
-                            socket.emit(SocketCommon.COMMAND_RE_AUTHENTICATE);
-                            callback('Cannot detect user');
-                        } else {
-                            callback(null, obj.user ? `system.user.${obj.user}` : '');
-                        }
-                    });
-                    return;
+                accessToken = cookies.find(cookie => cookie.split('=')[0] === 'access_token');
+                if (accessToken) {
+                    accessToken = accessToken.split('=')[1];
                 }
+            }
+            if (!accessToken && socket.conn.request.query?.token) {
+                accessToken = socket.conn.request.query.token as string;
+            } else if (!accessToken && socket.conn.request.headers?.authorization?.startsWith('Bearer ')) {
+                accessToken = socket.conn.request.headers.authorization.split(' ')[1];
+            }
+
+            if (accessToken) {
+                void this.adapter.getSession(`a:${accessToken}`, (obj: InternalStorageToken | undefined): void => {
+                    if (!obj?.user) {
+                        if (socket._acl) {
+                            socket._acl.user = '';
+                        }
+                        socket.emit(SocketCommon.COMMAND_RE_AUTHENTICATE);
+                        callback('Cannot detect user');
+                    } else {
+                        callback(null, obj.user ? `system.user.${obj.user}` : '', obj.exp);
+                    }
+                });
+                wait = true;
             }
 
             try {
-                if (socket.conn.request.sessionID) {
+                if (!wait && socket.conn.request.sessionID) {
                     socket._sessionID = socket.conn.request.sessionID;
                     if (this.store) {
                         wait = true;
                         this.store.get(socket.conn.request.sessionID, (_err, obj) => {
                             if (obj?.passport?.user) {
-                                callback(null, obj.passport.user ? `system.user.${obj.passport.user}` : '');
+                                callback(
+                                    null,
+                                    obj.passport.user ? `system.user.${obj.passport.user}` : '',
+                                    obj.cookie.expires ? new Date(obj.cookie.expires).getTime() : 0,
+                                );
                             }
                         });
                     }
@@ -155,7 +188,9 @@ export class SocketWS extends SocketCommon {
             }
         }
 
-        !wait && callback('Cannot detect user');
+        if (!wait) {
+            callback('Cannot detect user');
+        }
     }
 
     __getClientAddress(socket: WebSocketClient): AddressInfo {
@@ -238,8 +273,46 @@ export class SocketWS extends SocketCommon {
 
     // update session ID, but not ofter than 60 seconds
     __updateSession(socket: WebSocketClient): boolean {
-        const sessionId = socket._sessionID;
         const now = Date.now();
+        if (socket._sessionExpiresAt) {
+            // If less than 10 seconds, then recheck the socket
+            if (socket._sessionExpiresAt < Date.now() - 10_000) {
+                let accessToken = socket.conn.request.headers?.cookie
+                    ?.split(';')
+                    .find(c => c.trim().startsWith('access_token='));
+
+                if (accessToken) {
+                    accessToken = accessToken.split('=')[1];
+                } else {
+                    // Try to find in a query
+                    accessToken = socket.conn.request.query?.token as string;
+                    if (!accessToken && socket.conn.request.headers?.authorization?.startsWith('Bearer ')) {
+                        // Try to find in Authentication header
+                        accessToken = socket.conn.request.headers.authorization.split(' ')[1];
+                    }
+                }
+
+                if (accessToken) {
+                    const tokenStr = accessToken.split('=')[1];
+                    void this.store?.get(`a:${tokenStr}`, (err: Error, token: any): void => {
+                        const tokenData = token as InternalStorageToken;
+                        if (err) {
+                            this.adapter.log.error(`Cannot get token: ${err}`);
+                        } else if (!tokenData?.user) {
+                            this.adapter.log.error('No session found');
+                        } else {
+                            socket._sessionExpiresAt = tokenData.exp;
+                        }
+                    });
+                }
+            }
+
+            // Check socket expiration time
+            return socket._sessionExpiresAt > now;
+        }
+
+        const sessionId = socket._sessionID;
+
         if (sessionId && (!socket._lastActivity || now - socket._lastActivity > 10000)) {
             socket._lastActivity = now;
             this.store?.get(
@@ -264,13 +337,6 @@ export class SocketWS extends SocketCommon {
                         if (!socket._sessionTimer) {
                             this.#waitForSessionEnd(socket);
                         }
-                        /*obj.ttl = obj.ttl || (new Date(obj.cookie.expires).getTime() - now);
-                    const expires = new Date();
-                    expires.setMilliseconds(expires.getMilliseconds() + obj.ttl + 10000);
-                    obj.cookie.expires = expires.toISOString();
-                    console.log('Session ' + sessionId + ' expires on ' + obj.cookie.expires);
-
-                    this.store.set(sessionId, obj);*/
                     } else {
                         this.adapter.log.warn('REAUTHENTICATE!');
                         socket.emit(SocketCommon.COMMAND_RE_AUTHENTICATE);

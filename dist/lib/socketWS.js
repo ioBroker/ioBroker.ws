@@ -14,6 +14,7 @@ class SocketWS extends socket_classes_1.SocketCommon {
     }
     #onAuthorizeSuccess = (data, accept) => {
         this.adapter.log.debug(`successful connection to socket.io from ${(data.socket || data.connection).remoteAddress}`);
+        // no error
         accept(false);
     };
     #onAuthorizeFail = (data, message, critical, accept) => {
@@ -29,7 +30,7 @@ class SocketWS extends socket_classes_1.SocketCommon {
         }
         else {
             // @ts-expect-error
-            accept(new Error(`failed connection to socket.io: ${message}`)); //null, false);
+            accept(new Error(`failed connection to socket.io: ${message}`));
         }
     };
     __initAuthentication(authOptions) {
@@ -39,15 +40,17 @@ class SocketWS extends socket_classes_1.SocketCommon {
         else if (!authOptions.store && this.store) {
             authOptions.store = this.store;
         }
-        this.server?.use((0, socket_classes_1.passportSocket)({
-            passport: passport_1.default,
-            cookieParser: cookie_parser_1.default,
-            checkUser: authOptions.checkUser,
-            secret: authOptions.secret, // the session_secret to parse the cookie
-            store: authOptions.store, // we NEED to use a sessionstore. no memorystore, please
-            success: this.#onAuthorizeSuccess, // *optional* callback on success - read more below
-            fail: this.#onAuthorizeFail, // *optional* callback on fail/error - read more below
-        }));
+        if (!authOptions.oauth2Only) {
+            this.server?.use((0, socket_classes_1.passportSocket)({
+                passport: passport_1.default,
+                cookieParser: cookie_parser_1.default,
+                checkUser: authOptions.checkUser,
+                secret: authOptions.secret, // the session_secret to parse the cookie
+                store: authOptions.store, // we NEED to use a sessionstore. no memorystore, please
+                success: this.#onAuthorizeSuccess, // *optional* callback on success - read more below
+                fail: this.#onAuthorizeFail, // *optional* callback on fail/error - read more below
+            }));
+        }
     }
     // Extract username from socket
     __getUserFromSocket(socket, callback) {
@@ -55,15 +58,25 @@ class SocketWS extends socket_classes_1.SocketCommon {
         if (typeof callback !== 'function') {
             return;
         }
-        const user = socket.query.user;
-        const pass = socket.query.pass;
+        let user;
+        let pass;
+        if (socket.conn.request.headers?.authorization?.startsWith('Basic ')) {
+            const auth = Buffer.from(socket.conn.request.headers.authorization.split(' ')[1], 'base64').toString('utf8');
+            const parts = auth.split(':');
+            user = parts.shift();
+            pass = parts.join(':');
+        }
+        else {
+            user = socket.query.user;
+            pass = socket.query.pass;
+        }
         if (user && typeof user === 'string' && pass && typeof pass === 'string') {
             wait = true;
             void this.adapter.checkPassword(user, pass, res => {
                 if (res) {
                     this.adapter.log.debug(`Logged in: ${user}`);
                     if (typeof callback === 'function') {
-                        callback(null, user);
+                        callback(null, user, 0);
                     }
                     else {
                         this.adapter.log.warn('[_getUserFromSocket] Invalid callback');
@@ -81,34 +94,43 @@ class SocketWS extends socket_classes_1.SocketCommon {
             });
         }
         else {
+            let accessToken;
             if (socket.conn.request.headers?.cookie) {
                 const cookies = socket.conn.request.headers.cookie.split(';');
-                const accessSocket = cookies.find(cookie => cookie.split('=')[0] === 'access_token');
-                if (accessSocket) {
-                    const token = accessSocket.split('=')[1];
-                    void this.adapter.getSession(`a:${token}`, (obj) => {
-                        if (!obj?.user) {
-                            if (socket._acl) {
-                                socket._acl.user = '';
-                            }
-                            socket.emit(socket_classes_1.SocketCommon.COMMAND_RE_AUTHENTICATE);
-                            callback('Cannot detect user');
-                        }
-                        else {
-                            callback(null, obj.user ? `system.user.${obj.user}` : '');
-                        }
-                    });
-                    return;
+                accessToken = cookies.find(cookie => cookie.split('=')[0] === 'access_token');
+                if (accessToken) {
+                    accessToken = accessToken.split('=')[1];
                 }
             }
+            if (!accessToken && socket.conn.request.query?.token) {
+                accessToken = socket.conn.request.query.token;
+            }
+            else if (!accessToken && socket.conn.request.headers?.authorization?.startsWith('Bearer ')) {
+                accessToken = socket.conn.request.headers.authorization.split(' ')[1];
+            }
+            if (accessToken) {
+                void this.adapter.getSession(`a:${accessToken}`, (obj) => {
+                    if (!obj?.user) {
+                        if (socket._acl) {
+                            socket._acl.user = '';
+                        }
+                        socket.emit(socket_classes_1.SocketCommon.COMMAND_RE_AUTHENTICATE);
+                        callback('Cannot detect user');
+                    }
+                    else {
+                        callback(null, obj.user ? `system.user.${obj.user}` : '', obj.exp);
+                    }
+                });
+                wait = true;
+            }
             try {
-                if (socket.conn.request.sessionID) {
+                if (!wait && socket.conn.request.sessionID) {
                     socket._sessionID = socket.conn.request.sessionID;
                     if (this.store) {
                         wait = true;
                         this.store.get(socket.conn.request.sessionID, (_err, obj) => {
                             if (obj?.passport?.user) {
-                                callback(null, obj.passport.user ? `system.user.${obj.passport.user}` : '');
+                                callback(null, obj.passport.user ? `system.user.${obj.passport.user}` : '', obj.cookie.expires ? new Date(obj.cookie.expires).getTime() : 0);
                             }
                         });
                     }
@@ -118,7 +140,9 @@ class SocketWS extends socket_classes_1.SocketCommon {
                 // ignore
             }
         }
-        !wait && callback('Cannot detect user');
+        if (!wait) {
+            callback('Cannot detect user');
+        }
     }
     __getClientAddress(socket) {
         let address;
@@ -180,8 +204,44 @@ class SocketWS extends socket_classes_1.SocketCommon {
     }
     // update session ID, but not ofter than 60 seconds
     __updateSession(socket) {
-        const sessionId = socket._sessionID;
         const now = Date.now();
+        if (socket._sessionExpiresAt) {
+            // If less than 10 seconds, then recheck the socket
+            if (socket._sessionExpiresAt < Date.now() - 10_000) {
+                let accessToken = socket.conn.request.headers?.cookie
+                    ?.split(';')
+                    .find(c => c.trim().startsWith('access_token='));
+                if (accessToken) {
+                    accessToken = accessToken.split('=')[1];
+                }
+                else {
+                    // Try to find in a query
+                    accessToken = socket.conn.request.query?.token;
+                    if (!accessToken && socket.conn.request.headers?.authorization?.startsWith('Bearer ')) {
+                        // Try to find in Authentication header
+                        accessToken = socket.conn.request.headers.authorization.split(' ')[1];
+                    }
+                }
+                if (accessToken) {
+                    const tokenStr = accessToken.split('=')[1];
+                    void this.store?.get(`a:${tokenStr}`, (err, token) => {
+                        const tokenData = token;
+                        if (err) {
+                            this.adapter.log.error(`Cannot get token: ${err}`);
+                        }
+                        else if (!tokenData?.user) {
+                            this.adapter.log.error('No session found');
+                        }
+                        else {
+                            socket._sessionExpiresAt = tokenData.exp;
+                        }
+                    });
+                }
+            }
+            // Check socket expiration time
+            return socket._sessionExpiresAt > now;
+        }
+        const sessionId = socket._sessionID;
         if (sessionId && (!socket._lastActivity || now - socket._lastActivity > 10000)) {
             socket._lastActivity = now;
             this.store?.get(sessionId, (_err, obj) => {
@@ -191,13 +251,6 @@ class SocketWS extends socket_classes_1.SocketCommon {
                     if (!socket._sessionTimer) {
                         this.#waitForSessionEnd(socket);
                     }
-                    /*obj.ttl = obj.ttl || (new Date(obj.cookie.expires).getTime() - now);
-                const expires = new Date();
-                expires.setMilliseconds(expires.getMilliseconds() + obj.ttl + 10000);
-                obj.cookie.expires = expires.toISOString();
-                console.log('Session ' + sessionId + ' expires on ' + obj.cookie.expires);
-
-                this.store.set(sessionId, obj);*/
                 }
                 else {
                     this.adapter.log.warn('REAUTHENTICATE!');

@@ -32,11 +32,17 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WsAdapter = void 0;
 const node_crypto_1 = require("node:crypto");
 const node_fs_1 = require("node:fs");
 const session = __importStar(require("express-session"));
+const express_1 = __importDefault(require("express"));
+const bodyParser = __importStar(require("body-parser"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const adapter_core_1 = require("@iobroker/adapter-core"); // Get common adapter utils
 const webserver_1 = require("@iobroker/webserver");
 const ws_server_1 = require("@iobroker/ws-server");
@@ -173,18 +179,31 @@ class WsAdapter extends adapter_core_1.Adapter {
                         ? this.terminate(adapter_core_1.EXIT_CODES.ADAPTER_REQUESTED_TERMINATION)
                         : process.exit(adapter_core_1.EXIT_CODES.ADAPTER_REQUESTED_TERMINATION);
                 }
-                this.server.app = (req, res) => {
-                    if (req.url?.includes('socket.io.js')) {
-                        // @ts-expect-error
-                        res.writeHead(200, { 'Content-Type': 'text/plain' });
-                        res.end(this.socketIoFile);
+                this.server.app = (0, express_1.default)();
+                this.server.app.use((req, res, next) => {
+                    const url = req.url.split('?')[0];
+                    if (url === '/auth') {
+                        // User can asc server if authentication enabled
+                        res.setHeader('Content-Type', 'application/json');
+                        res.json({ auth: this.config.auth });
+                    }
+                    else if (this.config.auth &&
+                        (!url || url === '/' || url === '/login.html' || url === '/login')) {
+                        res.setHeader('Content-Type', 'text/html');
+                        res.send((0, node_fs_1.readFileSync)(`${__dirname}/../public/index.html`));
+                    }
+                    else if (url === '/favicon.ico') {
+                        res.setHeader('Content-Type', 'image/x-icon');
+                        res.send((0, node_fs_1.readFileSync)(`${__dirname}/../public/favicon.ico`));
+                    }
+                    else if (url?.includes('socket.io.js')) {
+                        res.setHeader('Content-Type', 'application/javascript');
+                        res.send(this.socketIoFile);
                     }
                     else {
-                        // @ts-expect-error
-                        res.writeHead(404);
-                        res.end('Not found');
+                        next();
                     }
-                };
+                });
                 try {
                     const webserver = new webserver_1.WebServer({
                         adapter: this,
@@ -192,6 +211,19 @@ class WsAdapter extends adapter_core_1.Adapter {
                         app: this.server.app,
                     });
                     this.server.server = await webserver.init();
+                    if (this.config.auth) {
+                        this.server.app.use((0, cookie_parser_1.default)());
+                        this.server.app.use(bodyParser.urlencoded({ extended: true }));
+                        this.server.app.use(bodyParser.json());
+                        // Activate OAuth2 server
+                        (0, webserver_1.createOAuth2Server)(this, {
+                            app: this.server.app,
+                            secure: this.config.secure,
+                            accessLifetime: parseInt(this.config.ttl, 10) || 3600,
+                            refreshLifetime: 60 * 60 * 24 * 7, // 1 week (Maybe adjustable?)
+                            loginPage: '/login',
+                        });
+                    }
                 }
                 catch (err) {
                     this.log.error(`Cannot create server: ${err}`);
@@ -207,6 +239,10 @@ class WsAdapter extends adapter_core_1.Adapter {
                         : process.exit(adapter_core_1.EXIT_CODES.ADAPTER_REQUESTED_TERMINATION);
                     return;
                 }
+                this.server.app.use((req, res) => {
+                    res.status(404);
+                    res.send('Not found');
+                });
                 let serverListening = false;
                 this.server.server.on('error', e => {
                     if (e.toString().includes('EACCES') && port <= 1024) {
