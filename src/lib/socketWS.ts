@@ -4,18 +4,13 @@ import {
     type PassportHttpRequest,
     type Store,
     type SocketSubscribeTypes,
+    type InternalStorageToken,
 } from '@iobroker/socket-classes';
 import type { Socket as WebSocketClient } from '@iobroker/ws-server';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import type { AddressInfo } from 'node:net';
 import type { WsAdapterConfig } from '../types';
-
-interface InternalStorageToken {
-    token: string;
-    exp: number;
-    user: string;
-}
 
 // From settings used only secure, auth and crossDomain
 export class SocketWS extends SocketCommon {
@@ -161,7 +156,7 @@ export class SocketWS extends SocketCommon {
                         socket.emit(SocketCommon.COMMAND_RE_AUTHENTICATE);
                         callback('Cannot detect user');
                     } else {
-                        callback(null, obj.user ? `system.user.${obj.user}` : '', obj.exp);
+                        callback(null, obj.user ? `system.user.${obj.user}` : '', obj.aExp);
                     }
                 });
                 wait = true;
@@ -301,7 +296,7 @@ export class SocketWS extends SocketCommon {
                         } else if (!tokenData?.user) {
                             this.adapter.log.error('No session found');
                         } else {
-                            socket._sessionExpiresAt = tokenData.exp;
+                            socket._sessionExpiresAt = tokenData.aExp;
                         }
                     });
                 }

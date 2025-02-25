@@ -118,7 +118,7 @@ class SocketWS extends socket_classes_1.SocketCommon {
                         callback('Cannot detect user');
                     }
                     else {
-                        callback(null, obj.user ? `system.user.${obj.user}` : '', obj.exp);
+                        callback(null, obj.user ? `system.user.${obj.user}` : '', obj.aExp);
                     }
                 });
                 wait = true;
@@ -233,7 +233,7 @@ class SocketWS extends socket_classes_1.SocketCommon {
                             this.adapter.log.error('No session found');
                         }
                         else {
-                            socket._sessionExpiresAt = tokenData.exp;
+                            socket._sessionExpiresAt = tokenData.aExp;
                         }
                     });
                 }

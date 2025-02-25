@@ -4,7 +4,7 @@ import type { Server as HttpsServer } from 'node:https';
 import { readFileSync } from 'node:fs';
 
 import * as session from 'express-session';
-import express, {type Express, NextFunction, type Request, type Response} from 'express';
+import express, { type Express, type NextFunction, type Request, type Response } from 'express';
 import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
@@ -184,7 +184,7 @@ export class WsAdapter extends Adapter {
                     this.server.app.use((req: Request, res: Response, next: NextFunction): void => {
                         const url = req.url.split('?')[0];
                         if (url === '/auth') {
-                            // User can asc server if authentication enabled
+                            // User can ask server if authentication enabled
                             res.setHeader('Content-Type', 'application/json');
                             res.json({ auth: this.config.auth });
                         } else if (

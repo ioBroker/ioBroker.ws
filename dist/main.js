@@ -183,7 +183,7 @@ class WsAdapter extends adapter_core_1.Adapter {
                 this.server.app.use((req, res, next) => {
                     const url = req.url.split('?')[0];
                     if (url === '/auth') {
-                        // User can asc server if authentication enabled
+                        // User can ask server if authentication enabled
                         res.setHeader('Content-Type', 'application/json');
                         res.json({ auth: this.config.auth });
                     }
