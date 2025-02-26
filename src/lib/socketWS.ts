@@ -4,12 +4,10 @@ import {
     type PassportHttpRequest,
     type Store,
     type SocketSubscribeTypes,
-    type InternalStorageToken,
 } from '@iobroker/socket-classes';
 import type { Socket as WebSocketClient } from '@iobroker/ws-server';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
-import type { AddressInfo } from 'node:net';
 import type { WsAdapterConfig } from '../types';
 
 // From settings used only secure, auth and crossDomain
@@ -88,137 +86,6 @@ export class SocketWS extends SocketCommon {
         }
     }
 
-    // Extract username from socket
-    __getUserFromSocket(
-        socket: WebSocketClient,
-        callback: (error: string | null, user?: string, expirationTime?: number) => void,
-    ): void {
-        let wait = false;
-        if (typeof callback !== 'function') {
-            return;
-        }
-
-        let user: string | undefined;
-        let pass: string | undefined;
-
-        if (socket.conn.request.headers?.authorization?.startsWith('Basic ')) {
-            const auth = Buffer.from(socket.conn.request.headers.authorization.split(' ')[1], 'base64').toString(
-                'utf8',
-            );
-            const parts = auth.split(':');
-            user = parts.shift();
-            pass = parts.join(':');
-        } else {
-            user = socket.query.user as string;
-            pass = socket.query.pass as string;
-        }
-
-        if (user && typeof user === 'string' && pass && typeof pass === 'string') {
-            wait = true;
-            void this.adapter.checkPassword(user, pass, res => {
-                if (res) {
-                    this.adapter.log.debug(`Logged in: ${user}`);
-                    if (typeof callback === 'function') {
-                        callback(null, user, 0);
-                    } else {
-                        this.adapter.log.warn('[_getUserFromSocket] Invalid callback');
-                    }
-                } else {
-                    this.adapter.log.warn(`Invalid password or user name: ${user}, ${pass[0]}***(${pass.length})`);
-                    if (typeof callback === 'function') {
-                        callback('unknown user');
-                    } else {
-                        this.adapter.log.warn('[_getUserFromSocket] Invalid callback');
-                    }
-                }
-            });
-        } else {
-            let accessToken: string | undefined;
-            if (socket.conn.request.headers?.cookie) {
-                const cookies: string[] = socket.conn.request.headers.cookie.split(';');
-                accessToken = cookies.find(cookie => cookie.split('=')[0] === 'access_token');
-                if (accessToken) {
-                    accessToken = accessToken.split('=')[1];
-                }
-            }
-            if (!accessToken && socket.conn.request.query?.token) {
-                accessToken = socket.conn.request.query.token as string;
-            } else if (!accessToken && socket.conn.request.headers?.authorization?.startsWith('Bearer ')) {
-                accessToken = socket.conn.request.headers.authorization.split(' ')[1];
-            }
-
-            if (accessToken) {
-                void this.adapter.getSession(`a:${accessToken}`, (obj: InternalStorageToken | undefined): void => {
-                    if (!obj?.user) {
-                        if (socket._acl) {
-                            socket._acl.user = '';
-                        }
-                        socket.emit(SocketCommon.COMMAND_RE_AUTHENTICATE);
-                        callback('Cannot detect user');
-                    } else {
-                        callback(null, obj.user ? `system.user.${obj.user}` : '', obj.aExp);
-                    }
-                });
-                wait = true;
-            }
-
-            try {
-                if (!wait && socket.conn.request.sessionID) {
-                    socket._sessionID = socket.conn.request.sessionID;
-                    if (this.store) {
-                        wait = true;
-                        this.store.get(socket.conn.request.sessionID, (_err, obj) => {
-                            if (obj?.passport?.user) {
-                                callback(
-                                    null,
-                                    obj.passport.user ? `system.user.${obj.passport.user}` : '',
-                                    obj.cookie.expires ? new Date(obj.cookie.expires).getTime() : 0,
-                                );
-                            }
-                        });
-                    }
-                }
-            } catch {
-                // ignore
-            }
-        }
-
-        if (!wait) {
-            callback('Cannot detect user');
-        }
-    }
-
-    __getClientAddress(socket: WebSocketClient): AddressInfo {
-        let address;
-        if (socket.connection) {
-            address = socket.connection && socket.connection.remoteAddress;
-        } else {
-            // @ts-expect-error socket.io
-            address = socket.ws._socket.remoteAddress;
-        }
-
-        // @ts-expect-error socket.io
-        if (!address && socket.handshake) {
-            // @ts-expect-error socket.io
-            address = socket.handshake.address;
-        }
-        // @ts-expect-error socket.io
-        if (!address && socket.conn.request?.connection) {
-            // @ts-expect-error socket.io
-            address = socket.conn.request.connection.remoteAddress;
-        }
-
-        if (address && typeof address !== 'object') {
-            return {
-                address,
-                family: address.includes(':') ? 'IPv6' : 'IPv4',
-                port: 0,
-            };
-        }
-
-        return address;
-    }
-
     #waitForSessionEnd(socket: WebSocketClient): void {
         if (socket._sessionTimer) {
             clearTimeout(socket._sessionTimer);
@@ -264,82 +131,6 @@ export class SocketWS extends SocketCommon {
         } else {
             socket?.emit?.(SocketCommon.COMMAND_RE_AUTHENTICATE);
         }
-    }
-
-    // update session ID, but not ofter than 60 seconds
-    __updateSession(socket: WebSocketClient): boolean {
-        const now = Date.now();
-        if (socket._sessionExpiresAt) {
-            // If less than 10 seconds, then recheck the socket
-            if (socket._sessionExpiresAt < Date.now() - 10_000) {
-                let accessToken = socket.conn.request.headers?.cookie
-                    ?.split(';')
-                    .find(c => c.trim().startsWith('access_token='));
-
-                if (accessToken) {
-                    accessToken = accessToken.split('=')[1];
-                } else {
-                    // Try to find in a query
-                    accessToken = socket.conn.request.query?.token as string;
-                    if (!accessToken && socket.conn.request.headers?.authorization?.startsWith('Bearer ')) {
-                        // Try to find in Authentication header
-                        accessToken = socket.conn.request.headers.authorization.split(' ')[1];
-                    }
-                }
-
-                if (accessToken) {
-                    const tokenStr = accessToken.split('=')[1];
-                    void this.store?.get(`a:${tokenStr}`, (err: Error, token: any): void => {
-                        const tokenData = token as InternalStorageToken;
-                        if (err) {
-                            this.adapter.log.error(`Cannot get token: ${err}`);
-                        } else if (!tokenData?.user) {
-                            this.adapter.log.error('No session found');
-                        } else {
-                            socket._sessionExpiresAt = tokenData.aExp;
-                        }
-                    });
-                }
-            }
-
-            // Check socket expiration time
-            return socket._sessionExpiresAt > now;
-        }
-
-        const sessionId = socket._sessionID;
-
-        if (sessionId && (!socket._lastActivity || now - socket._lastActivity > 10000)) {
-            socket._lastActivity = now;
-            this.store?.get(
-                sessionId,
-                (
-                    _err: Error | null,
-                    obj?: {
-                        cookie: {
-                            originalMaxAge: number;
-                            expires: string;
-                            httpOnly: boolean;
-                            path: string;
-                        };
-                        passport: {
-                            user: string;
-                        };
-                    },
-                ): void => {
-                    // obj = {"cookie":{"originalMaxAge":2592000000,"expires":"2020-09-24T18:09:50.377Z","httpOnly":true,"path":"/"},"passport":{"user":"admin"}}
-                    if (obj) {
-                        // start timer
-                        if (!socket._sessionTimer) {
-                            this.#waitForSessionEnd(socket);
-                        }
-                    } else {
-                        this.adapter.log.warn('REAUTHENTICATE!');
-                        socket.emit(SocketCommon.COMMAND_RE_AUTHENTICATE);
-                    }
-                },
-            );
-        }
-        return true;
     }
 
     __getSessionID(socket: WebSocketClient): string | null {
