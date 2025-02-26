@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### 3.0.10 (2025-02-26)
+### **WORK IN PROGRESS**
 * (@GermanBluefox) Added OAuth2 authentication
 
 ### 3.0.5 (2025-02-11)
