@@ -1,3 +1,4 @@
+import { type NextFunction, type Request, type Response } from 'express';
 import { Adapter, type AdapterOptions } from '@iobroker/adapter-core';
 import type { WsAdapterConfig } from './types';
 export declare class WsAdapter extends Adapter {
@@ -15,6 +16,8 @@ export declare class WsAdapter extends Adapter {
         logged_in: boolean;
         user?: string;
     }) => void) => void;
+    detectUser: (req: Request, res: Response, next: NextFunction) => void;
+    serveStaticFile: (req: Request, res: Response, next: NextFunction) => void;
     initWebServer(): void;
     main(): Promise<void>;
 }

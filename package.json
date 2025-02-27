@@ -55,6 +55,8 @@
   "types": "dist/types.d.ts",
   "files": [
     "admin/",
+    "public/",
+    "example/",
     "dist/",
     "io-package.json",
     "LICENSE"
