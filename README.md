@@ -27,22 +27,22 @@ It is useful to read about the [structure of the objects](https://github.com/ioB
 ### Object
 Object is description of data point or group. The group could content other data points in this case it called channel. If a group consists of other channels, in this case it is called device. 
 
-Object is meta information that describes data point and could content: max/min value, unit, name, default value, type of value, information for adapter for communication (e.g., ip address) and so on.
+Object is meta information that describes data point and could content: max/min value, unit, name, default value, type of value, information for adapter for communication (e.g., IP address) and so on.
 
 ### State
-State is the actual value of the data point and presented by javascript object: 
-```
+State is the actual value of the data point and presented by JavaScript object: 
+```json
 {
-    val: VALUE, 
-    ack: ACKNOWLEDGED, 
-    ts: TIMESTAMP, // could be converted into time with "new Date(state.ts)" (In older version of js-controller - "new Date(state.ts * 1000)")
-    lc: TIMESTAMP of last change, 
-    from: ADAPTER_NAME, 
-    q: QUALITY
+    "val": VALUE, 
+    "ack": ACKNOWLEDGED, 
+    "ts": TIMESTAMP, // could be converted into time with "new Date(state.ts)" (In older version of js-controller - "new Date(state.ts * 1000)")
+    "lc": TIMESTAMP of last change, 
+    "from": ADAPTER_NAME, 
+    "q": QUALITY
 }
 ```
 
-States change itself very frequentxly in compare to the objects. (Normally objects should be changed once by creation and that's all) 
+States change itself very frequently in compare to the objects. (Normally objects should be changed once by creation and that's all) 
 
 ### Acknowledgment
 Every state has the attribute `ack`. It shows the direction of command. 
