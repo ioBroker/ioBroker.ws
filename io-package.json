@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "3.0.16",
+    "version": "3.0.17",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "3.0.17": {
+        "en": "Added OAuth2 authentication",
+        "de": "OAuth2 Authentifizierung hinzugefügt",
+        "ru": "Проверка подлинности OAuth2",
+        "pt": "Autenticação de OAuth2 adicionada",
+        "nl": "OAuth2-authenticatie toegevoegd",
+        "fr": "Ajout de l'authentification OAuth2",
+        "it": "Aggiunta autenticazione OAuth2",
+        "es": "Autenticación OAuth2",
+        "pl": "Dodano uwierzytelnianie OAuth2",
+        "uk": "Додано автентифікацію OAuth2",
+        "zh-cn": "添加 OAuth2 认证"
+      },
       "3.0.5": {
         "en": "Corrected address detection\nCorrected language settings",
         "de": "Korrigierte Adresserkennung\nKorrigierte Spracheinstellungen",
