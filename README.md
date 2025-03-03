@@ -69,6 +69,9 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (@GermanBluefox) Corrected the problem with the user rights
+
 ### 3.0.17 (2025-02-28)
 * (@GermanBluefox) Added OAuth2 authentication
 
