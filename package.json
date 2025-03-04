@@ -44,7 +44,7 @@
     "@types/express-session": "^1.18.1",
     "@types/node": "^22.13.5",
     "@types/passport": "^1.0.17",
-    "chai": "^4.5.0",
+    "chai": "^5.2.0",
     "mocha": "^11.1.0",
     "typescript": "~5.8.2"
   },
