@@ -69,6 +69,9 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (@GermanBluefox) Removed the frequent debug output
+
 ### 3.0.18 (2025-03-03)
 * (@GermanBluefox) Corrected the problem with the user rights
 
