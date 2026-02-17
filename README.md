@@ -69,6 +69,10 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (@GermanBluefox) Updated packages
+* (@GermanBluefox) Removed support for node.js 18
+
 ### 3.0.19 (2025-03-04)
 * (@GermanBluefox) Removed the frequent debug output
 
