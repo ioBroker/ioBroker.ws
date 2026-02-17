@@ -145,4 +145,4 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2014-2025 @GermanBluefox <dogafox@gmail.com>
+Copyright (c) 2014-2026 @GermanBluefox <dogafox@gmail.com>
