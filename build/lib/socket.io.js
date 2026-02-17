@@ -1,6 +1,23 @@
 "use strict";
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+/*!
+ * ioBroker WebSockets
+ * Copyright 2020-2025, bluefox <dogafox@gmail.com>
+ * Released under the MIT License.
+ * v 3.0.4 (2025_10_25)
+ */
+if (typeof globalThis.process !== "undefined") {
+  globalThis.location ||= {
+    href: "http://localhost:8081/",
+    protocol: "http:",
+    host: "localhost:8081",
+    pathname: "/",
+    hostname: "localhost",
+    reload: /* @__PURE__ */ __name(() => {
+    }, "reload")
+  };
+}
 const MESSAGE_TYPES = {
   MESSAGE: 0,
   PING: 1,
@@ -52,7 +69,11 @@ class SocketClient {
   log;
   constructor() {
     this.log = {
-      debug: /* @__PURE__ */ __name((text) => DEBUG && console.log(`[${(/* @__PURE__ */ new Date()).toISOString()}] ${text}`), "debug"),
+      debug: /* @__PURE__ */ __name((text) => {
+        if (DEBUG) {
+          console.log(`[${(/* @__PURE__ */ new Date()).toISOString()}] ${text}`);
+        }
+      }, "debug"),
       warn: /* @__PURE__ */ __name((text) => console.warn(`[${(/* @__PURE__ */ new Date()).toISOString()}] ${text}`), "warn"),
       error: /* @__PURE__ */ __name((text) => console.error(`[${(/* @__PURE__ */ new Date()).toISOString()}] ${text}`), "error")
     };
@@ -73,12 +94,17 @@ class SocketClient {
       url = url.split("#")[0];
     }
     this.id = 0;
-    this.connectTimer && clearInterval(this.connectTimer);
-    this.connectTimer = null;
-    this.url = this.url || url || window.location.href;
-    this.options = this.options || JSON.parse(JSON.stringify(options || {}));
+    if (this.connectTimer) {
+      clearInterval(this.connectTimer);
+      this.connectTimer = null;
+    }
+    this.url ||= url || globalThis.location.href;
+    this.options ||= JSON.parse(JSON.stringify(options || {}));
     if (!this.options) {
       throw new Error("No options provided!");
+    }
+    if (options?.WebSocket) {
+      this.options.WebSocket = options?.WebSocket;
     }
     this.options.pongTimeout = parseInt(this.options.pongTimeout, 10) || 6e4;
     this.options.pingInterval = parseInt(this.options.pingInterval, 10) || 5e3;
@@ -89,11 +115,11 @@ class SocketClient {
     this.sessionID = Date.now();
     try {
       if (this.url === "/") {
-        const parts = window.location.pathname.split("/");
-        if (window.location.pathname.endsWith(".html") || window.location.pathname.endsWith(".htm")) {
+        const parts = globalThis.location.pathname.split("/");
+        if (globalThis.location.pathname.endsWith(".html") || globalThis.location.pathname.endsWith(".htm")) {
           parts.pop();
         }
-        this.url = `${window.location.protocol}//${window.location.host}/${parts.join("/")}`;
+        this.url = `${globalThis.location.protocol || "ws:"}//${globalThis.location.host || "localhost"}/${parts.join("/")}`;
       }
       const query = SocketClient.getQuery(this.url);
       if (query.sid) {
@@ -112,7 +138,7 @@ class SocketClient {
       if (this.options?.token) {
         u += `&token=${this.options.token}`;
       }
-      this.socket = new WebSocket(u);
+      this.socket = new (this.options.WebSocket || globalThis.WebSocket)(u);
     } catch (error) {
       this.handlers.error?.forEach((cb) => cb.call(this, error));
       this.close();
@@ -123,100 +149,104 @@ class SocketClient {
       this.log.warn("No READY flag received in 3 seconds. Re-init");
       this.close();
     }, this.options.connectTimeout);
-    this.socket.onopen = () => {
-      this.lastPong = Date.now();
-      this.connectionCount = 0;
-      this.pingInterval = setInterval(() => {
-        if (!this.options) {
-          throw new Error("No options provided!");
-        }
-        if (Date.now() - this.lastPong > (this.options?.pingInterval || 5e3) - 10) {
-          try {
-            this.socket?.send(JSON.stringify([MESSAGE_TYPES.PING]));
-          } catch (e) {
-            this.log.warn(`Cannot send ping. Close connection: ${e}`);
+    if (this.socket) {
+      this.socket.onopen = () => {
+        this.lastPong = Date.now();
+        this.connectionCount = 0;
+        this.pingInterval = setInterval(() => {
+          if (!this.options) {
+            throw new Error("No options provided!");
+          }
+          if (Date.now() - this.lastPong > (this.options?.pingInterval || 5e3) - 10) {
+            try {
+              this.socket?.send(JSON.stringify([MESSAGE_TYPES.PING]));
+            } catch (e) {
+              this.log.warn(`Cannot send ping. Close connection: ${e}`);
+              this.close();
+              this._garbageCollect();
+              return;
+            }
+          }
+          if (Date.now() - this.lastPong > (this.options?.pongTimeout || 6e4)) {
             this.close();
-            this._garbageCollect();
-            return;
           }
+          this._garbageCollect();
+        }, this.options?.pingInterval || 5e3);
+      };
+      this.socket.onclose = (event) => {
+        if (event.code === 3001) {
+          this.log.warn("ws closed");
+        } else {
+          this.log.error(`ws connection error: ${ERRORS[event.code]}`);
         }
-        if (Date.now() - this.lastPong > (this.options?.pongTimeout || 6e4)) {
-          this.close();
+        this.close();
+      };
+      this.socket.onerror = (error) => {
+        if (this.connected && this.socket) {
+          if (this.socket.readyState === 1) {
+            this.log.error(`ws normal error: ${error.type}`);
+          }
+          this.errorHandlers.forEach((cb) => cb.call(this, ERRORS[error.code] || "UNKNOWN"));
         }
-        this._garbageCollect();
-      }, this.options?.pingInterval || 5e3);
-    };
-    this.socket.onclose = (event) => {
-      if (event.code === 3001) {
-        this.log.warn("ws closed");
-      } else {
-        this.log.error(`ws connection error: ${ERRORS[event.code]}`);
-      }
-      this.close();
-    };
-    this.socket.onerror = (error) => {
-      if (this.connected && this.socket) {
-        if (this.socket.readyState === 1) {
-          this.log.error(`ws normal error: ${error.type}`);
+        this.close();
+      };
+      this.socket.onmessage = (message) => {
+        this.lastPong = Date.now();
+        if (!message?.data || typeof message.data !== "string") {
+          console.error(`Received invalid message: ${JSON.stringify(message)}`);
+          return;
         }
-        this.errorHandlers.forEach((cb) => cb.call(this, ERRORS[error.code] || "UNKNOWN"));
-      }
-      this.close();
-    };
-    this.socket.onmessage = (message) => {
-      this.lastPong = Date.now();
-      if (!message?.data || typeof message.data !== "string") {
-        console.error(`Received invalid message: ${JSON.stringify(message)}`);
-        return;
-      }
-      let data;
-      try {
-        data = JSON.parse(message.data);
-      } catch {
-        console.error(`Received invalid message: ${JSON.stringify(message.data)}`);
-        return;
-      }
-      const type = data[0];
-      const id = data[1];
-      const name = data[2];
-      const args = data[3];
-      if (this.authTimeout) {
-        clearTimeout(this.authTimeout);
-        this.authTimeout = null;
-      }
-      if (type === MESSAGE_TYPES.CALLBACK) {
-        this.findAnswer(id, args);
-      } else if (type === MESSAGE_TYPES.MESSAGE) {
-        if (name === "___ready___") {
-          this.connected = true;
-          if (this.wasConnected) {
-            this.reconnectHandlers.forEach((cb) => cb.call(this, true));
+        let data;
+        try {
+          data = JSON.parse(message.data);
+        } catch {
+          console.error(`Received invalid message: ${JSON.stringify(message.data)}`);
+          return;
+        }
+        const type = data[0];
+        const id = data[1];
+        const name = data[2];
+        const args = data[3];
+        if (this.authTimeout) {
+          clearTimeout(this.authTimeout);
+          this.authTimeout = null;
+        }
+        if (type === MESSAGE_TYPES.CALLBACK) {
+          this.findAnswer(id, args);
+        } else if (type === MESSAGE_TYPES.MESSAGE) {
+          if (name === "___ready___") {
+            this.connected = true;
+            if (this.wasConnected) {
+              this.reconnectHandlers.forEach((cb) => cb.call(this, true));
+            } else {
+              this.connectHandlers.forEach((cb) => cb.call(this, true));
+              this.wasConnected = true;
+            }
+            if (this.connectingTimer) {
+              clearTimeout(this.connectingTimer);
+              this.connectingTimer = null;
+            }
+            if (this.pending.length) {
+              this.pending.forEach(({ name: name2, args: args2 }) => this.emit(name2, ...args2));
+              this.pending = [];
+            }
+          } else if (args) {
+            this.handlers[name]?.forEach((cb) => cb.apply(this, args));
           } else {
-            this.connectHandlers.forEach((cb) => cb.call(this, true));
-            this.wasConnected = true;
+            this.handlers[name]?.forEach((cb) => cb.call(this));
           }
-          this.connectingTimer && clearTimeout(this.connectingTimer);
-          this.connectingTimer = null;
-          if (this.pending.length) {
-            this.pending.forEach(({ name: name2, args: args2 }) => this.emit(name2, ...args2));
-            this.pending = [];
+        } else if (type === MESSAGE_TYPES.PING) {
+          if (this.socket) {
+            this.socket.send(JSON.stringify([MESSAGE_TYPES.PONG]));
+          } else {
+            this.log.warn("Cannot do pong: connection closed");
           }
-        } else if (args) {
-          this.handlers[name]?.forEach((cb) => cb.apply(this, args));
+        } else if (type === MESSAGE_TYPES.PONG) {
         } else {
-          this.handlers[name]?.forEach((cb) => cb.call(this));
+          this.log.warn(`Received unknown message type: ${type}`);
         }
-      } else if (type === MESSAGE_TYPES.PING) {
-        if (this.socket) {
-          this.socket.send(JSON.stringify([MESSAGE_TYPES.PONG]));
-        } else {
-          this.log.warn("Cannot do pong: connection closed");
-        }
-      } else if (type === MESSAGE_TYPES.PONG) {
-      } else {
-        this.log.warn(`Received unknown message type: ${type}`);
-      }
-    };
+      };
+    }
     return this;
   }
   _garbageCollect() {
@@ -280,13 +310,17 @@ class SocketClient {
     }
     this.id++;
     if (name === "writeFile" && args && typeof args[2] !== "string" && args[2]) {
-      let binary = "";
-      const bytes = new Uint8Array(args[2]);
-      const len = bytes.byteLength;
-      for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
+      if (typeof globalThis.process !== "undefined") {
+        args[2] = globalThis.Buffer.from(args[2]).toString("base64");
+      } else {
+        let binary = "";
+        const bytes = new Uint8Array(args[2]);
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        args[2] = globalThis.btoa(binary);
       }
-      args[2] = window.btoa(binary);
     }
     try {
       if (args && typeof args[args.length - 1] === "function") {
@@ -351,12 +385,18 @@ class SocketClient {
     }
   }
   close() {
-    this.pingInterval && clearInterval(this.pingInterval);
-    this.pingInterval = null;
-    this.authTimeout && clearTimeout(this.authTimeout);
-    this.authTimeout = null;
-    this.connectingTimer && clearTimeout(this.connectingTimer);
-    this.connectingTimer = null;
+    if (this.pingInterval) {
+      clearInterval(this.pingInterval);
+      this.pingInterval = null;
+    }
+    if (this.authTimeout) {
+      clearTimeout(this.authTimeout);
+      this.authTimeout = null;
+    }
+    if (this.connectingTimer) {
+      clearTimeout(this.connectingTimer);
+      this.connectingTimer = null;
+    }
     if (this.socket) {
       try {
         this.socket.close();
@@ -375,8 +415,10 @@ class SocketClient {
   disconnect = this.close;
   destroy() {
     this.close();
-    this.connectTimer && clearTimeout(this.connectTimer);
-    this.connectTimer = null;
+    if (this.connectTimer) {
+      clearTimeout(this.connectTimer);
+      this.connectTimer = null;
+    }
   }
   _reconnect() {
     if (!this.connectTimer) {
@@ -402,7 +444,7 @@ function connect(url, options) {
   return socketClient;
 }
 __name(connect, "connect");
-window.io = {
+globalThis.io = {
   connect
 };
 //# sourceMappingURL=socket.io.js.map

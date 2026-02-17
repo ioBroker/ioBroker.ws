@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "3.0.19",
+    "version": "4.0.0",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "4.0.0": {
+        "en": "Updated packages\nRemoved support for node.js 18",
+        "de": "Aktualisierte Pakete\nEntfernte Unterstützung für node.js 18",
+        "ru": "Обновленные пакеты\nСнята поддержка node.js 18",
+        "pt": "Pacotes atualizados\nSuporte removido para node.js 18",
+        "nl": "Bijgewerkte pakketten\nOndersteuning voor node.js 18 verwijderd",
+        "fr": "Paquets mis à jour\nSupport supprimé pour node.js 18",
+        "it": "Pacchetti aggiornati\nSupporto rimosso per node.js 18",
+        "es": "Paquetes actualizados\nApoyo eliminado para node.js 18",
+        "pl": "Aktualizacja pakietów\nUsunięte wsparcie dla node.js 18",
+        "uk": "Оновлені пакети\nВидалити підтримку для node.js 18",
+        "zh-cn": "更新软件包\n删除对节点.js 18 的支持"
+      },
       "3.0.19": {
         "en": "Removed the frequent debug output",
         "de": "Entfernen der häufigen Debug-Ausgabe",

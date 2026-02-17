@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.0.0 (2026-02-17)
 * (@GermanBluefox) Updated packages
 * (@GermanBluefox) Removed support for node.js 18
 
