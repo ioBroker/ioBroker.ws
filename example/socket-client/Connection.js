@@ -878,7 +878,7 @@ export class Connection {
         }
     }
     /** Requests data from the server or reads it from the cache */
-    async request({ cacheKey, forceUpdate, commandTimeout, onTimeout, requireAdmin, requireFeatures, 
+    async request({ cacheKey, forceUpdate, commandTimeout, onTimeout, requireAdmin, requireFeatures,
     // requestName,
     executor, }) {
         // TODO: mention requestName in errors
@@ -1757,11 +1757,11 @@ export class Connection {
      */
     cmdExec(
     /** Host name */
-    host, 
+    host,
     /** Command to execute */
-    cmd, 
+    cmd,
     /** Command ID */
-    cmdId, 
+    cmdId,
     /** Timeout of command in ms */
     cmdTimeout) {
         return this.request({

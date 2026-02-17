@@ -11,8 +11,9 @@
         <h1>Example</h1>
         <p>
             This is a minimal example of communication with ioBroker socket server.
-            <br>
-            It will connect to the server and read all states of the adapter "admin" and subscribe to all states of the adapter "admin.0".
+            <br />
+            It will connect to the server and read all states of the adapter "admin" and subscribe to all states of the
+            adapter "admin.0".
         </p>
         <div id="output"></div>
         <script type="module">
@@ -45,17 +46,22 @@
                     })
                     .catch(err => {
                         printLine(`Cannot get authentication status: ${err}`, true);
+                        return false;
                     });
             }
 
             if (
                 !window.location.search.includes('token=') &&
                 !window.localStorage.getItem('refresh_token') &&
-                !window.sessionStorage.getItem('refresh_token') &&
-                isAuthenticationEnabled()
+                !window.sessionStorage.getItem('refresh_token')
             ) {
-                printLine('Please login to the controller and reload the page');
-                window.location.href = `http://${HOST}/login?href=${window.location.href}`;
+                isAuthenticationEnabled()
+                    .then(auth => {
+                        if (auth) {
+                            printLine('Please login to the controller and reload the page');
+                            window.location.href = `http://${HOST}/login?href=${window.location.href}`;
+                        }
+                    });
             }
 
             const socket = new Connection({
