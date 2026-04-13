@@ -69,7 +69,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 4.1.0 (2026-04-13)
 * (@GermanBluefox) Updated packages
 * (@GermanBluefox) Fixed possible bugs
 

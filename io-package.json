@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "4.1.0": {
+        "en": "Updated packages\nFixed possible bugs",
+        "de": "Aktualisierte Pakete\nMögliche Fehler behoben",
+        "ru": "Обновленные пакеты\nИсправленные возможные баги",
+        "pt": "Pacotes atualizados\nCorrigidos possíveis erros",
+        "nl": "Bijgewerkte pakketten\nVaste mogelijke bugs",
+        "fr": "Paquets mis à jour\nCorrection des bugs possibles",
+        "it": "Pacchetti aggiornati\nCorretti possibili bug",
+        "es": "Paquetes actualizados\nErrores fijos posibles",
+        "pl": "Aktualizacja pakietów\nNaprawiono możliwe błędy",
+        "uk": "Оновлені пакети\nВиправлено можливі помилки",
+        "zh-cn": "更新软件包\n固定可能的错误"
+      },
       "4.0.0": {
         "en": "Updated packages\nRemoved support for node.js 18",
         "de": "Aktualisierte Pakete\nEntfernte Unterstützung für node.js 18",
@@ -106,19 +119,6 @@
         "pl": "Adapter został przepisany w TypeScript",
         "uk": "Адаптер був записаний у TypeScript",
         "zh-cn": "适配器在类型脚本中重写"
-      },
-      "2.6.2": {
-        "en": "Corrected call of getObjectView with null parameter",
-        "de": "Korrigierter Anruf von getObject Ansicht mit Null-Parameter",
-        "ru": "Исправленный звонок getObject Просмотр с нулевым параметром",
-        "pt": "Chamada correta de getObject Ver com parâmetro nulo",
-        "nl": "Gecorrigeerde aanroep van getObject Beeld met nul parameter",
-        "fr": "Appel corrigé de getObject Affichage avec paramètre null",
-        "it": "Chiamata corretta di getObject Visualizza con parametro null",
-        "es": "Llamada corregida de getObject Ver con parámetro null",
-        "pl": "Poprawione wywołanie getObject Widok z parametrem null",
-        "uk": "Виправлений виклик getObject Перегляд з параметром null",
-        "zh-cn": "已更正的调取对象 以无效参数查看"
       }
     },
     "authors": [
