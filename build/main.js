@@ -38,6 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WsAdapter = void 0;
 const node_crypto_1 = require("node:crypto");
+const node_path_1 = __importDefault(require("node:path"));
 const node_fs_1 = require("node:fs");
 const session = __importStar(require("express-session"));
 const express_1 = __importDefault(require("express"));
@@ -58,6 +59,7 @@ class WsAdapter extends adapter_core_1.Adapter {
     secret = 'Zgfr56gFe87jJOM';
     certificates;
     bruteForce = {};
+    fileCache = new Map();
     constructor(options = {}) {
         super({
             ...options,
@@ -102,6 +104,39 @@ class WsAdapter extends adapter_core_1.Adapter {
         // d - data
         this.server?.io?.publishInstanceMessageAll(obj.from, obj.message.m, obj.message.s, obj.message.d);
     }
+    readCached(filePath) {
+        const resolved = node_path_1.default.resolve(filePath);
+        let content = this.fileCache.get(resolved);
+        if (!content) {
+            content = (0, node_fs_1.readFileSync)(resolved);
+            this.fileCache.set(resolved, content);
+        }
+        return content;
+    }
+    getContentType(filePath) {
+        const ext = node_path_1.default.extname(filePath).toLowerCase();
+        switch (ext) {
+            case '.html':
+                return 'text/html';
+            case '.js':
+                return 'application/javascript';
+            case '.css':
+                return 'text/css';
+            case '.json':
+                return 'application/json';
+            case '.png':
+                return 'image/png';
+            case '.jpg':
+            case '.jpeg':
+                return 'image/jpeg';
+            case '.svg':
+                return 'image/svg+xml';
+            case '.ico':
+                return 'image/x-icon';
+            default:
+                return 'application/octet-stream';
+        }
+    }
     checkUser = (username, password, cb) => {
         username = (username || '')
             .toString()
@@ -109,6 +144,13 @@ class WsAdapter extends adapter_core_1.Adapter {
             .replace(/\s/g, '_')
             .replace(/\./g, '_')
             .toLowerCase();
+        // Clean up stale brute force entries older than max lockout time (1 hour)
+        const now = Date.now();
+        for (const key of Object.keys(this.bruteForce)) {
+            if (now - this.bruteForce[key].time > 3600000) {
+                delete this.bruteForce[key];
+            }
+        }
         if (this.bruteForce[username] && this.bruteForce[username].errors > 4) {
             let minutes = Date.now() - this.bruteForce[username].time;
             if (this.bruteForce[username].errors < 7) {
@@ -162,7 +204,7 @@ class WsAdapter extends adapter_core_1.Adapter {
     };
     detectUser = (req, res, next) => {
         if (this.config.auth) {
-            // Try to extract user name from query or access token
+            // Try to extract user from query parameters
             if (req.query?.user && req.query.pass) {
                 // Check user and password
                 void this.checkPassword(req.query.user, req.query.pass, (res, user) => {
@@ -174,7 +216,8 @@ class WsAdapter extends adapter_core_1.Adapter {
                 });
                 return;
             }
-            else if (req.query?.token || req.headers.authorization?.startsWith('Bearer ')) {
+            // Try Bearer token from query or Authorization header
+            if (req.query?.token || req.headers.authorization?.startsWith('Bearer ')) {
                 const accessToken = req.query?.token || req.headers.authorization?.split(' ')[1];
                 void this.getSession(`a:${accessToken}`, obj => {
                     if (obj?.user) {
@@ -184,12 +227,18 @@ class WsAdapter extends adapter_core_1.Adapter {
                 });
                 return;
             }
-            else if (req.headers.cookie) {
-                const parts = req.headers.cookie.split(' ');
-                for (let i = 0; i < parts.length; i++) {
-                    const pair = parts[i].split('=');
-                    if (pair[0] === 'access_token') {
-                        void this.getSession(`a:${pair[1]}`, obj => {
+            // Try access_token from cookies
+            if (req.headers.cookie) {
+                const cookies = req.headers.cookie.split(/;\s*/);
+                for (const cookie of cookies) {
+                    const eqIndex = cookie.indexOf('=');
+                    if (eqIndex === -1) {
+                        continue;
+                    }
+                    const name = cookie.substring(0, eqIndex).trim();
+                    if (name === 'access_token') {
+                        const token = cookie.substring(eqIndex + 1).trim();
+                        void this.getSession(`a:${token}`, obj => {
                             if (obj?.user) {
                                 req.user = obj.user.startsWith(`system.adapter.`)
                                     ? obj.user
@@ -201,7 +250,8 @@ class WsAdapter extends adapter_core_1.Adapter {
                     }
                 }
             }
-            else if (req.headers.authorization?.startsWith('Basic ')) {
+            // Try Basic auth
+            if (req.headers.authorization?.startsWith('Basic ')) {
                 const parts = Buffer.from(req.headers.authorization.split(' ')[1], 'base64')
                     .toString('utf8')
                     .split(':');
@@ -225,48 +275,59 @@ class WsAdapter extends adapter_core_1.Adapter {
         next();
     };
     serveStaticFile = (req, res, next) => {
-        const url = req.url.split('?')[0];
+        let url;
+        try {
+            url = decodeURIComponent(req.url.split('?')[0]);
+        }
+        catch {
+            next();
+            return;
+        }
+        // Normalize URL path to prevent traversal via encoded sequences
+        url = node_path_1.default.posix.normalize(url);
         if (this.config.auth && (!url || url === '/' || url === '/index.html')) {
-            if (!req.user || url.includes('..')) {
+            if (!req.user) {
                 res.setHeader('Content-Type', 'text/html');
-                res.send((0, node_fs_1.readFileSync)(`${__dirname}/../public/index.html`));
+                res.send(this.readCached(`${__dirname}/../public/index.html`));
                 return;
             }
             if ((0, node_fs_1.existsSync)(`${__dirname}/../example/index.html`)) {
                 res.setHeader('Content-Type', 'text/html');
-                res.send((0, node_fs_1.readFileSync)(`${__dirname}/../example/index.html`));
+                res.send(this.readCached(`${__dirname}/../example/index.html`));
                 return;
             }
         }
-        else if (!url.includes('..')) {
-            if ((0, node_fs_1.existsSync)(`${__dirname}/../example${url === '/' ? '/index.html' : url}`)) {
-                res.setHeader('Content-Type', url === '/' || url.endsWith('.html') ? 'text/html' : 'text/javascript');
-                res.send((0, node_fs_1.readFileSync)(`${__dirname}/../example${url === '/' ? '/index.html' : url}`));
+        else {
+            // Serve files from example directory with path traversal protection
+            const requestedFile = url === '/' ? '/index.html' : url;
+            const fullPath = node_path_1.default.resolve(`${__dirname}/../example`, requestedFile.slice(1));
+            const exampleDir = node_path_1.default.resolve(`${__dirname}/../example`);
+            if ((fullPath.startsWith(exampleDir + node_path_1.default.sep) || fullPath === exampleDir) && (0, node_fs_1.existsSync)(fullPath)) {
+                res.setHeader('Content-Type', this.getContentType(requestedFile));
+                res.send(this.readCached(fullPath));
                 return;
             }
         }
-        // Special case for "example" file
+        // Special endpoints
         if (url === '/name') {
-            // User can ask server if authentication enabled
-            res.setHeader('Content-Type', 'plain/text');
+            res.setHeader('Content-Type', 'text/plain');
             res.send(this.namespace);
         }
         else if (url === '/auth') {
-            // User can ask server if authentication enabled
             res.setHeader('Content-Type', 'application/json');
             res.json({ auth: this.config.auth });
         }
         else if (this.config.auth && (!url || url === '/' || url === '/login.html' || url === '/login')) {
             res.setHeader('Content-Type', 'text/html');
-            res.send((0, node_fs_1.readFileSync)(`${__dirname}/../public/index.html`));
+            res.send(this.readCached(`${__dirname}/../public/index.html`));
         }
         else if (url === '/manifest.json') {
             res.setHeader('Content-Type', 'application/json');
-            res.send((0, node_fs_1.readFileSync)(`${__dirname}/../public/manifest.json`));
+            res.send(this.readCached(`${__dirname}/../public/manifest.json`));
         }
         else if (url === '/favicon.ico') {
             res.setHeader('Content-Type', 'image/x-icon');
-            res.send((0, node_fs_1.readFileSync)(`${__dirname}/../public/favicon.ico`));
+            res.send(this.readCached(`${__dirname}/../public/favicon.ico`));
         }
         else if (url?.includes('socket.io.js')) {
             res.setHeader('Content-Type', 'application/javascript');
@@ -393,10 +454,16 @@ class WsAdapter extends adapter_core_1.Adapter {
             if (systemConfig) {
                 if (!systemConfig.native?.secret) {
                     systemConfig.native = systemConfig.native || {};
-                    await new Promise(resolve => (0, node_crypto_1.randomBytes)(24, (_err, buf) => {
+                    await new Promise(resolve => (0, node_crypto_1.randomBytes)(24, (err, buf) => {
+                        if (err) {
+                            this.log.error(`Cannot generate secret: ${err.message}`);
+                            resolve();
+                            return;
+                        }
                         this.secret = buf.toString('hex');
-                        void this.extendForeignObject('system.config', { native: { secret: this.secret } });
-                        resolve();
+                        void this.extendForeignObject('system.config', { native: { secret: this.secret } })
+                            .catch(e => this.log.error(`Cannot save secret to system.config: ${e}`))
+                            .then(() => resolve());
                     }));
                 }
                 else {

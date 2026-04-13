@@ -1,6 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import type { Server as HttpServer } from 'node:http';
 import type { Server as HttpsServer } from 'node:https';
+import path from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
 
 import * as session from 'express-session';
@@ -34,7 +35,8 @@ export class WsAdapter extends Adapter {
     private secret = 'Zgfr56gFe87jJOM';
     private certificates: ioBroker.Certificates | undefined;
 
-    private bruteForce: { [ip: string]: { errors: number; time: number } } = {};
+    private bruteForce: { [username: string]: { errors: number; time: number } } = {};
+    private fileCache: Map<string, Buffer> = new Map();
 
     public constructor(options: Partial<AdapterOptions> = {}) {
         super({
@@ -85,6 +87,41 @@ export class WsAdapter extends Adapter {
         this.server?.io?.publishInstanceMessageAll(obj.from, obj.message.m, obj.message.s, obj.message.d);
     }
 
+    private readCached(filePath: string): Buffer {
+        const resolved = path.resolve(filePath);
+        let content = this.fileCache.get(resolved);
+        if (!content) {
+            content = readFileSync(resolved);
+            this.fileCache.set(resolved, content);
+        }
+        return content;
+    }
+
+    private getContentType(filePath: string): string {
+        const ext = path.extname(filePath).toLowerCase();
+        switch (ext) {
+            case '.html':
+                return 'text/html';
+            case '.js':
+                return 'application/javascript';
+            case '.css':
+                return 'text/css';
+            case '.json':
+                return 'application/json';
+            case '.png':
+                return 'image/png';
+            case '.jpg':
+            case '.jpeg':
+                return 'image/jpeg';
+            case '.svg':
+                return 'image/svg+xml';
+            case '.ico':
+                return 'image/x-icon';
+            default:
+                return 'application/octet-stream';
+        }
+    }
+
     checkUser = (
         username: string,
         password: string,
@@ -102,6 +139,14 @@ export class WsAdapter extends Adapter {
             .replace(/\s/g, '_')
             .replace(/\./g, '_')
             .toLowerCase();
+
+        // Clean up stale brute force entries older than max lockout time (1 hour)
+        const now = Date.now();
+        for (const key of Object.keys(this.bruteForce)) {
+            if (now - this.bruteForce[key].time > 3600000) {
+                delete this.bruteForce[key];
+            }
+        }
 
         if (this.bruteForce[username] && this.bruteForce[username].errors > 4) {
             let minutes = Date.now() - this.bruteForce[username].time;
@@ -154,7 +199,7 @@ export class WsAdapter extends Adapter {
 
     detectUser = (req: Request, res: Response, next: NextFunction): void => {
         if (this.config.auth) {
-            // Try to extract user name from query or access token
+            // Try to extract user from query parameters
             if (req.query?.user && req.query.pass) {
                 // Check user and password
                 void this.checkPassword(
@@ -169,7 +214,10 @@ export class WsAdapter extends Adapter {
                     },
                 );
                 return;
-            } else if (req.query?.token || req.headers.authorization?.startsWith('Bearer ')) {
+            }
+
+            // Try Bearer token from query or Authorization header
+            if (req.query?.token || req.headers.authorization?.startsWith('Bearer ')) {
                 const accessToken = (req.query?.token as string) || req.headers.authorization?.split(' ')[1];
                 void this.getSession(`a:${accessToken}`, obj => {
                     if (obj?.user) {
@@ -178,12 +226,20 @@ export class WsAdapter extends Adapter {
                     next();
                 });
                 return;
-            } else if (req.headers.cookie) {
-                const parts = req.headers.cookie.split(' ');
-                for (let i = 0; i < parts.length; i++) {
-                    const pair = parts[i].split('=');
-                    if (pair[0] === 'access_token') {
-                        void this.getSession(`a:${pair[1]}`, obj => {
+            }
+
+            // Try access_token from cookies
+            if (req.headers.cookie) {
+                const cookies = req.headers.cookie.split(/;\s*/);
+                for (const cookie of cookies) {
+                    const eqIndex = cookie.indexOf('=');
+                    if (eqIndex === -1) {
+                        continue;
+                    }
+                    const name = cookie.substring(0, eqIndex).trim();
+                    if (name === 'access_token') {
+                        const token = cookie.substring(eqIndex + 1).trim();
+                        void this.getSession(`a:${token}`, obj => {
                             if (obj?.user) {
                                 req.user = obj.user.startsWith(`system.adapter.`)
                                     ? obj.user
@@ -194,7 +250,10 @@ export class WsAdapter extends Adapter {
                         return;
                     }
                 }
-            } else if (req.headers.authorization?.startsWith('Basic ')) {
+            }
+
+            // Try Basic auth
+            if (req.headers.authorization?.startsWith('Basic ')) {
                 const parts = Buffer.from(req.headers.authorization.split(' ')[1], 'base64')
                     .toString('utf8')
                     .split(':');
@@ -218,46 +277,58 @@ export class WsAdapter extends Adapter {
     };
 
     serveStaticFile = (req: Request, res: Response, next: NextFunction): void => {
-        const url = req.url.split('?')[0];
+        let url: string;
+        try {
+            url = decodeURIComponent(req.url.split('?')[0]);
+        } catch {
+            next();
+            return;
+        }
+
+        // Normalize URL path to prevent traversal via encoded sequences
+        url = path.posix.normalize(url);
 
         if (this.config.auth && (!url || url === '/' || url === '/index.html')) {
-            if (!req.user || url.includes('..')) {
+            if (!req.user) {
                 res.setHeader('Content-Type', 'text/html');
-                res.send(readFileSync(`${__dirname}/../public/index.html`));
+                res.send(this.readCached(`${__dirname}/../public/index.html`));
                 return;
             }
 
             if (existsSync(`${__dirname}/../example/index.html`)) {
                 res.setHeader('Content-Type', 'text/html');
-                res.send(readFileSync(`${__dirname}/../example/index.html`));
+                res.send(this.readCached(`${__dirname}/../example/index.html`));
                 return;
             }
-        } else if (!url.includes('..')) {
-            if (existsSync(`${__dirname}/../example${url === '/' ? '/index.html' : url}`)) {
-                res.setHeader('Content-Type', url === '/' || url.endsWith('.html') ? 'text/html' : 'text/javascript');
-                res.send(readFileSync(`${__dirname}/../example${url === '/' ? '/index.html' : url}`));
+        } else {
+            // Serve files from example directory with path traversal protection
+            const requestedFile = url === '/' ? '/index.html' : url;
+            const fullPath = path.resolve(`${__dirname}/../example`, requestedFile.slice(1));
+            const exampleDir = path.resolve(`${__dirname}/../example`);
+
+            if ((fullPath.startsWith(exampleDir + path.sep) || fullPath === exampleDir) && existsSync(fullPath)) {
+                res.setHeader('Content-Type', this.getContentType(requestedFile));
+                res.send(this.readCached(fullPath));
                 return;
             }
         }
 
-        // Special case for "example" file
+        // Special endpoints
         if (url === '/name') {
-            // User can ask server if authentication enabled
-            res.setHeader('Content-Type', 'plain/text');
+            res.setHeader('Content-Type', 'text/plain');
             res.send(this.namespace);
         } else if (url === '/auth') {
-            // User can ask server if authentication enabled
             res.setHeader('Content-Type', 'application/json');
             res.json({ auth: this.config.auth });
         } else if (this.config.auth && (!url || url === '/' || url === '/login.html' || url === '/login')) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(readFileSync(`${__dirname}/../public/index.html`));
+            res.send(this.readCached(`${__dirname}/../public/index.html`));
         } else if (url === '/manifest.json') {
             res.setHeader('Content-Type', 'application/json');
-            res.send(readFileSync(`${__dirname}/../public/manifest.json`));
+            res.send(this.readCached(`${__dirname}/../public/manifest.json`));
         } else if (url === '/favicon.ico') {
             res.setHeader('Content-Type', 'image/x-icon');
-            res.send(readFileSync(`${__dirname}/../public/favicon.ico`));
+            res.send(this.readCached(`${__dirname}/../public/favicon.ico`));
         } else if (url?.includes('socket.io.js')) {
             res.setHeader('Content-Type', 'application/javascript');
             res.send(this.socketIoFile);
@@ -386,7 +457,7 @@ export class WsAdapter extends Adapter {
                     this.server.io = new SocketWS(settings, this);
                     this.server.io.start(this.server.server, SocketIO, {
                         checkUser: this.checkUser,
-                        store: this.store!,
+                        store: this.store as Store,
                         secret: this.secret,
                     });
                 },
@@ -407,10 +478,16 @@ export class WsAdapter extends Adapter {
                 if (!systemConfig.native?.secret) {
                     systemConfig.native = systemConfig.native || {};
                     await new Promise<void>(resolve =>
-                        randomBytes(24, (_err: Error | null, buf: Buffer): void => {
+                        randomBytes(24, (err: Error | null, buf: Buffer): void => {
+                            if (err) {
+                                this.log.error(`Cannot generate secret: ${err.message}`);
+                                resolve();
+                                return;
+                            }
                             this.secret = buf.toString('hex');
-                            void this.extendForeignObject('system.config', { native: { secret: this.secret } });
-                            resolve();
+                            void this.extendForeignObject('system.config', { native: { secret: this.secret } })
+                                .catch(e => this.log.error(`Cannot save secret to system.config: ${e}`))
+                                .then(() => resolve());
                         }),
                     );
                 } else {

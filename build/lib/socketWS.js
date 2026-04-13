@@ -87,13 +87,18 @@ class SocketWS extends socket_classes_1.SocketCommon {
     }
     publishAll(type, id, obj) {
         if (id === undefined) {
-            console.log('Problem');
+            this.adapter.log.warn('publishAll called with undefined id');
+            return;
         }
-        this.server?.sockets?.connected.forEach(socket => this.publish(socket, type, id, obj));
+        if (this.server?.sockets) {
+            const sockets = this.server.sockets.sockets || this.server.sockets.connected;
+            sockets.forEach(socket => this.publish(socket, type, id, obj));
+        }
     }
     publishFileAll(id, fileName, size) {
         if (id === undefined) {
-            console.log('Problem');
+            this.adapter.log.warn('publishFileAll called with undefined id');
+            return;
         }
         if (this.server?.sockets) {
             const sockets = this.server.sockets.sockets || this.server.sockets.connected;

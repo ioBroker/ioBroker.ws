@@ -9,9 +9,12 @@ export declare class WsAdapter extends Adapter {
     private secret;
     private certificates;
     private bruteForce;
+    private fileCache;
     constructor(options?: Partial<AdapterOptions>);
     onUnload(callback: () => void): void;
     onMessage(obj: ioBroker.Message): void;
+    private readCached;
+    private getContentType;
     checkUser: (username: string, password: string, cb: (error: null | Error, result?: {
         logged_in: boolean;
         user?: string;
