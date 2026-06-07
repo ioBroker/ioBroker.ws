@@ -150,6 +150,8 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 ### 2.3.1 (2022-11-27)
 * (@GermanBluefox) Added `fileChange` event
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 The MIT License (MIT)
 
