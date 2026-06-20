@@ -1,8 +1,8 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import { Adapter, type AdapterOptions } from '@iobroker/adapter-core';
-import type { WsAdapterConfig } from './types';
+import { type WsConfig } from '@iobroker/ws-server-library';
 export declare class WsAdapter extends Adapter {
-    config: WsAdapterConfig;
+    config: WsConfig;
     private server;
     private readonly socketIoFile;
     private store;

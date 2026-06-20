@@ -13,14 +13,12 @@ import { Adapter, type AdapterOptions, commonTools, EXIT_CODES } from '@iobroker
 import { WebServer, createOAuth2Server } from '@iobroker/webserver';
 import { SocketIO } from '@iobroker/ws-server';
 import type { SocketSettings, Store } from '@iobroker/socket-classes';
-
-import type { WsAdapterConfig } from './types';
-import { SocketWS } from './lib/socketWS';
+import { SocketWS, type WsConfig } from '@iobroker/ws-server-library';
 
 type Server = HttpServer | HttpsServer;
 
 export class WsAdapter extends Adapter {
-    declare public config: WsAdapterConfig;
+    declare public config: WsConfig;
     private server: {
         server: null | Server;
         io: null | SocketWS;
@@ -56,7 +54,7 @@ export class WsAdapter extends Adapter {
             },
         });
 
-        this.socketIoFile = readFileSync(`${__dirname}/lib/socket.io.js`).toString('utf-8');
+        this.socketIoFile = readFileSync(require.resolve('@iobroker/ws-server-library/socket.io.js')).toString('utf-8');
         this.on('log', (obj: ioBroker.LogMessage): void => this.server?.io?.sendLog(obj));
     }
 

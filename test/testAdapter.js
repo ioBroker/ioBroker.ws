@@ -1,13 +1,12 @@
 /* jshint -W097 */
 /* jshint strict: false */
 /* jslint node: true */
-const expect = require('chai').expect;
+const assert = require('node:assert');
 const setup = require('@iobroker/legacy-testing');
 
 let objects = null;
 let states = null;
 let onStateChanged = null;
-let sendToID = 1;
 
 const adapterShortName = setup.adapterName.substring(setup.adapterName.indexOf('.') + 1);
 const runningMode = require('../io-package.json').common.mode;
@@ -57,22 +56,24 @@ describe(`Test ${adapterShortName} adapter`, function () {
     });
 
     it(`Test ${adapterShortName} instance object: it must exists`, function (done) {
-        objects.getObject(`system.adapter.${adapterShortName}.0`, function (err, obj) {
-            expect(err).to.be.null;
-            expect(obj).to.be.an('object');
-            expect(obj).not.to.be.null;
+        objects.getObject(`system.adapter.${adapterShortName}.0`, (err, obj) => {
+            assert.strictEqual(err, null);
+            assert.strictEqual(typeof obj, 'object');
+            assert.notStrictEqual(obj, null);
             done();
         });
     });
 
     it(`Test ${adapterShortName} adapter: Check if adapter started`, function (done) {
         this.timeout(60000);
-        checkConnectionOfAdapter(function (res) {
-            if (res) console.log(res);
+        checkConnectionOfAdapter(res => {
+            if (res) {
+                console.log(res);
+            }
             if (runningMode === 'daemon') {
-                expect(res).not.to.be.equal('Cannot check connection');
+                assert.notStrictEqual(res, 'Cannot check connection');
             } else {
-                //??
+                // ??
             }
             done();
         });

@@ -47,7 +47,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const adapter_core_1 = require("@iobroker/adapter-core"); // Get common adapter utils
 const webserver_1 = require("@iobroker/webserver");
 const ws_server_1 = require("@iobroker/ws-server");
-const socketWS_1 = require("./lib/socketWS");
+const ws_server_library_1 = require("@iobroker/ws-server-library");
 class WsAdapter extends adapter_core_1.Adapter {
     server = {
         server: null,
@@ -77,7 +77,7 @@ class WsAdapter extends adapter_core_1.Adapter {
                 this.server?.io?.publishFileAll(id, fileName, size);
             },
         });
-        this.socketIoFile = (0, node_fs_1.readFileSync)(`${__dirname}/lib/socket.io.js`).toString('utf-8');
+        this.socketIoFile = (0, node_fs_1.readFileSync)(require.resolve('@iobroker/ws-server-library/socket.io.js')).toString('utf-8');
         this.on('log', (obj) => this.server?.io?.sendLog(obj));
     }
     onUnload(callback) {
@@ -432,7 +432,7 @@ class WsAdapter extends adapter_core_1.Adapter {
                     language: this.config.language,
                     secret: this.secret,
                 };
-                this.server.io = new socketWS_1.SocketWS(settings, this);
+                this.server.io = new ws_server_library_1.SocketWS(settings, this);
                 this.server.io.start(this.server.server, ws_server_1.SocketIO, {
                     checkUser: this.checkUser,
                     store: this.store,

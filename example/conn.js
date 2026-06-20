@@ -20,9 +20,9 @@
 'use strict';
 
 // The idea of servConn is to use this class later in every addon.
-// The addon just must say, what must be loaded (values, objects, indexes) and
+// The addon just must say what must be loaded (values, objects, indexes), and
 // the class loads it for addon. Authentication will be done automatically, so addon does not care about it.
-// It will be .js file with localData and servConn
+// It will be a `.js` file with localData and servConn
 
 var servConn = {
     _socket:            null,

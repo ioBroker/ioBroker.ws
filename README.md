@@ -31,12 +31,12 @@ Object is meta-information that describes data point and could content: max/min 
 
 ### State
 State is the actual value of the data point and presented by a JavaScript object: 
-```json
-{
+```js
+const state = {
     "val": VALUE, 
     "ack": ACKNOWLEDGED, 
     "ts": TIMESTAMP, // could be converted into time with "new Date(state.ts)" (In older version of js-controller - "new Date(state.ts * 1000)")
-    "lc": TIMESTAMP of last change, 
+    "lc": TIMESTAMP_of_last_change, 
     "from": ADAPTER_NAME, 
     "q": QUALITY
 }
@@ -47,7 +47,7 @@ States change themselves very frequently in comparison to the objects. (Normally
 ### Acknowledgment
 Every state has the attribute `ack`. It shows the direction of command. 
 - If ack=false, it means some other adapter wants to control (write) this variable, so that command will be executed (e.g., light will be switched on).
-- If ack=true, it means that the device informs about new value. (e.g., light was switched on manually or motion was detected)
+- If ack=true, it means that the device informs about new value. (e.g., light was switched on manually, or motion was detected)
  
 **Example**: we have some home automation adapter (HAA) that has one lamp connected under address `haa.0.lamp1`. 
 - Lamp can be switched on manually with a physical switch or via Wi-Fi with the help of HAA. 
@@ -69,6 +69,11 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (@GermanBluefox) Updated packages
+* (@GermanBluefox) Migrated to TypeScript 6.0
+* (@GermanBluefox) Used a common server library for WebSockets
+
 ### 4.1.0 (2026-04-13)
 * (@GermanBluefox) Updated packages
 * (@GermanBluefox) Fixed possible bugs
