@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "4.1.0",
+    "version": "5.0.0",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "5.0.0": {
+        "en": "Updated packages\nMigrated to TypeScript 6.0\nUsed a common server library for WebSockets",
+        "de": "Aktualisierte Pakete\nMigration zu TypeScript 6.0\nEs wurde eine gängige Serverbibliothek für WebSockets verwendet.",
+        "ru": "Обновлены пакеты\nПерешёл на TypeScript 6.0\nИспользовали общую серверную библиотеку для WebSockets.",
+        "pt": "Pacotes atualizados\nMigrado para TypeScript 6.0\nUtilizou-se uma biblioteca de servidor comum para WebSockets.",
+        "nl": "Bijgewerkte pakketten\nOvergestapt naar TypeScript 6.0\nEr werd gebruikgemaakt van een gangbare serverbibliotheek voor WebSockets.",
+        "fr": "Paquets mis à jour\nMigration vers TypeScript 6.0\nUtilisation d'une bibliothèque serveur commune pour les WebSockets",
+        "it": "Pacchetti aggiornati\nMigrazione a TypeScript 6.0\nÈ stata utilizzata una libreria server comune per i WebSocket.",
+        "es": "Paquetes actualizados\nMigrado a TypeScript 6.0\nSe utilizó una biblioteca de servidor común para WebSockets.",
+        "pl": "Zaktualizowane pakiety\nMigracja do TypeScript 6.0\nUżyto wspólnej biblioteki serwera dla WebSockets",
+        "uk": "Оновлені пакети\nПеренесено на TypeScript 6.0\nВикористовував загальну серверну бібліотеку для WebSockets",
+        "zh-cn": "更新包\n已迁移至 TypeScript 6.0\n使用了一个通用的 WebSocket 服务器库"
+      },
       "4.1.0": {
         "en": "Updated packages\nFixed possible bugs",
         "de": "Aktualisierte Pakete\nMögliche Fehler behoben",
@@ -106,19 +119,6 @@
         "pl": "Poprawione wykrywanie adresów\nSkorygowane ustawienia językowe",
         "uk": "Правильне виявлення адреси\nВиправлені налаштування мови",
         "zh-cn": "纠正地址检测\n校正语言设置"
-      },
-      "3.0.4": {
-        "en": "Adapter was rewritten in TypeScript",
-        "de": "Adapter wurde in TypeScript neu geschrieben",
-        "ru": "Адаптер был переписан в TypeScript",
-        "pt": "Adapter foi reescrito no TypeScript",
-        "nl": "Adapter is herschreven in TypeScript",
-        "fr": "Adaptateur a été réécrit dans TypeScript",
-        "it": "L'adattatore è stato riscritto in TypeScript",
-        "es": "Adaptador fue reescrito en TipoScript",
-        "pl": "Adapter został przepisany w TypeScript",
-        "uk": "Адаптер був записаний у TypeScript",
-        "zh-cn": "适配器在类型脚本中重写"
       }
     },
     "authors": [
