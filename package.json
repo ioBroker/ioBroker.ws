@@ -39,7 +39,7 @@
     "@types/express-session": "^1.19.0",
     "@types/node": "^20.19.43",
     "@types/passport": "^1.0.17",
-    "typescript": "~6.0.3"
+    "typescript": "~7.0.2"
   },
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.ws/issues"
