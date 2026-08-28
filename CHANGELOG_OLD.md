@@ -1,4 +1,12 @@
 # Older changes
+## 3.0.18 (2025-03-03)
+* (@GermanBluefox) Corrected the problem with the user rights
+
+[Older changelogs can be found there](CHANGELOG_OLD.md)## License
+The MIT License (MIT)
+
+Copyright (c) 2014-2026 @GermanBluefox <dogafox@gmail.com>
+
 ## 3.0.17 (2025-02-28)
 * (@GermanBluefox) Added OAuth2 authentication
 

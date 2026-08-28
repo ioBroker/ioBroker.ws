@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "5.0.0",
+    "version": "5.0.1",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "5.0.1": {
+        "en": "Updated packages",
+        "de": "Aktualisierte Pakete",
+        "ru": "Обновлены пакеты",
+        "pt": "Pacotes atualizados",
+        "nl": "Bijgewerkte pakketten",
+        "fr": "Paquets mis à jour",
+        "it": "Pacchetti aggiornati",
+        "es": "Paquetes actualizados",
+        "pl": "Zaktualizowane pakiety",
+        "uk": "Оновлені пакети",
+        "zh-cn": "更新包"
+      },
       "5.0.0": {
         "en": "Updated packages\nMigrated to TypeScript 6.0\nUsed a common server library for WebSockets",
         "de": "Aktualisierte Pakete\nMigration zu TypeScript 6.0\nEs wurde eine gängige Serverbibliothek für WebSockets verwendet.",
@@ -106,19 +119,6 @@
         "pl": "Dodano uwierzytelnianie OAuth2",
         "uk": "Додано автентифікацію OAuth2",
         "zh-cn": "添加 OAuth2 认证"
-      },
-      "3.0.5": {
-        "en": "Corrected address detection\nCorrected language settings",
-        "de": "Korrigierte Adresserkennung\nKorrigierte Spracheinstellungen",
-        "ru": "Исправленное обнаружение адреса\nИсправленные языковые настройки",
-        "pt": "Detecção de endereços corrigida\nDefinições de linguagem corretas",
-        "nl": "Gecorrigeerde adresdetectie\nGecorrigeerde taalinstellingen",
-        "fr": "Détection d'adresses corrigée\nRéglages de langue corrigés",
-        "it": "Rilevamento corretto degli indirizzi\nImpostazioni linguistiche corrette",
-        "es": "Detección de direcciones corregida\nAjustes de idiomas corregidos",
-        "pl": "Poprawione wykrywanie adresów\nSkorygowane ustawienia językowe",
-        "uk": "Правильне виявлення адреси\nВиправлені налаштування мови",
-        "zh-cn": "纠正地址检测\n校正语言设置"
       }
     },
     "authors": [
