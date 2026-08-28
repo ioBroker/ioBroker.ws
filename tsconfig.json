@@ -13,6 +13,7 @@
         "noEmitOnError": true,
         "declaration": true,
         "outDir": "./build/",
+        "rootDir": "./src/",
         "removeComments": false,
         "module": "Node16",
         "moduleResolution": "node16",
