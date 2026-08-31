@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "5.0.1",
+    "version": "5.0.2",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "5.0.2": {
+        "en": "Updated packages",
+        "de": "Aktualisierte Pakete",
+        "ru": "Обновлены пакеты",
+        "pt": "Pacotes atualizados",
+        "nl": "Bijgewerkte pakketten",
+        "fr": "Paquets mis à jour",
+        "it": "Pacchetti aggiornati",
+        "es": "Paquetes actualizados",
+        "pl": "Zaktualizowane pakiety",
+        "uk": "Оновлені пакети",
+        "zh-cn": "更新包"
+      },
       "5.0.1": {
         "en": "Updated packages",
         "de": "Aktualisierte Pakete",
@@ -106,19 +119,6 @@
         "pl": "Naprawiono problem z prawami użytkownika",
         "uk": "Виправлено проблему з правами користувачів",
         "zh-cn": "纠正了用户权利的问题"
-      },
-      "3.0.17": {
-        "en": "Added OAuth2 authentication",
-        "de": "OAuth2 Authentifizierung hinzugefügt",
-        "ru": "Проверка подлинности OAuth2",
-        "pt": "Autenticação de OAuth2 adicionada",
-        "nl": "OAuth2-authenticatie toegevoegd",
-        "fr": "Ajout de l'authentification OAuth2",
-        "it": "Aggiunta autenticazione OAuth2",
-        "es": "Autenticación OAuth2",
-        "pl": "Dodano uwierzytelnianie OAuth2",
-        "uk": "Додано автентифікацію OAuth2",
-        "zh-cn": "添加 OAuth2 认证"
       }
     },
     "authors": [

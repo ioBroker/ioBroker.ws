@@ -1,4 +1,7 @@
 # Older changes
+## 3.0.19 (2025-03-04)
+* (@GermanBluefox) Removed the frequent debug output
+
 ## 3.0.18 (2025-03-03)
 * (@GermanBluefox) Corrected the problem with the user rights
 
