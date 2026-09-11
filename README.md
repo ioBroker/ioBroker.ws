@@ -1,4 +1,4 @@
-![Logo](admin/ws.png)
+![Logo](admin/ws.svg)
 # ioBroker.ws
 
 ![Number of Installations](http://iobroker.live/badges/ws-installed.svg) ![Number of Installations](http://iobroker.live/badges/ws-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.ws.svg)](https://www.npmjs.com/package/iobroker.ws)
