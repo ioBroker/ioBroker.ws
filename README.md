@@ -71,6 +71,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 
 ## Changelog
 ### **WORK IN PROGRESS**
+* (@GermanBluefox) Added the HTTP/2 option (enabled by default, with HTTP/1.1 fallback, only used with HTTPS)
 * (@GermanBluefox) Updated packages
 
 ### 5.0.2 (2026-08-31)

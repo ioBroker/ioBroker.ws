@@ -72,6 +72,18 @@
                     "lg": 2,
                     "xl": 2
                 },
+                "http2": {
+                    "hidden": "!data.secure",
+                    "type": "checkbox",
+                    "default": true,
+                    "label": "Use HTTP/2",
+                    "help": "http2_hint",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 2,
+                    "xl": 2
+                },
                 "auth": {
                     "newLine": true,
                     "type": "checkbox",

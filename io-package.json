@@ -179,6 +179,7 @@
     "certPublic": "",
     "certPrivate": "",
     "certChained": "",
+    "http2": true,
     "defaultUser": "admin",
     "leEnabled": false,
     "leUpdate": false,

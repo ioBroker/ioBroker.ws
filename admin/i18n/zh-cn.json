@@ -14,7 +14,9 @@
   "Run as": "运行方式",
   "Secure(HTTPS)": "安全（HTTPS）",
   "Undo": "撤消",
+  "Use HTTP/2": "使用 HTTP/2",
   "Use Lets Encrypt certificates": "使用 Let's Encrypt 证书",
   "Use this instance for automatic update": "使用此实例进行自动更新",
-  "help_tip": "保存后适配器立即使用新配置重新启动"
+  "help_tip": "保存后适配器立即使用新配置重新启动",
+  "http2_hint": "浏览器通过单个连接并行发送多个请求来加载页面。不支持 HTTP/2 的客户端会自动回退到 HTTP/1.1"
 }

@@ -14,7 +14,9 @@
   "Run as": "Correre come",
   "Secure(HTTPS)": "Sicuro (HTTPS)",
   "Undo": "Annullare",
+  "Use HTTP/2": "Usa HTTP/2",
   "Use Lets Encrypt certificates": "Utilizza Let's Encrypt certificates",
   "Use this instance for automatic update": "Utilizza questa istanza per l'aggiornamento automatico",
-  "help_tip": "Al salvataggio, l'adattatore si riavvia immediatamente con la nuova configurazione"
+  "help_tip": "Al salvataggio, l'adattatore si riavvia immediatamente con la nuova configurazione",
+  "http2_hint": "I browser caricano le pagine tramite un'unica connessione con molte richieste parallele. I client senza HTTP/2 passano automaticamente a HTTP/1.1"
 }

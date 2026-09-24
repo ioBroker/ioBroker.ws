@@ -17,8 +17,18 @@ import { SocketWS, type WsConfig } from '@iobroker/ws-server-library';
 
 type Server = HttpServer | HttpsServer;
 
+/** The adapter's `native` configuration: the shape from the library plus what this adapter adds itself. */
+export interface WsAdapterConfig extends WsConfig {
+    /**
+     * Speak HTTP/2, with HTTP/1.1 as fallback for clients that do not offer it. Has an effect only with
+     * {@link WsConfig.secure}: browsers use HTTP/2 over TLS only. Enabled by default; switch it off to
+     * stay with HTTP/1.1.
+     */
+    http2: boolean;
+}
+
 export class WsAdapter extends Adapter {
-    declare public config: WsConfig;
+    declare public config: WsAdapterConfig;
     private server: {
         server: null | Server;
         io: null | SocketWS;
@@ -374,9 +384,16 @@ export class WsAdapter extends Adapter {
                             adapter: this,
                             secure: this.config.secure,
                             app: this.server.app,
+                            // HTTP/2 with HTTP/1.1 fallback, only if secure. Instances created before this option
+                            // existed have no value, and it is on by default, so only an explicit `false` switches it off
+                            http2: this.config.http2 !== false,
                         });
 
-                        this.server.server = await webserver.init();
+                        // An HTTP/2 server is created with `allowHTTP1: true`, so it serves HTTP/1.1 clients
+                        // through the same `request`/`upgrade` events - and a browser opens the WebSocket on a
+                        // separate HTTP/1.1 connection anyway. @iobroker/ws-server and @iobroker/socket-classes
+                        // still type their server as http/https only, hence the cast.
+                        this.server.server = (await webserver.init()) as Server;
 
                         if (this.config.auth) {
                             this.server.app.use(cookieParser());

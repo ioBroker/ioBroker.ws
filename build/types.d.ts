@@ -11,6 +11,7 @@ export interface WsAdapterConfig {
     certPublic: string;
     certPrivate: string;
     certChained: string;
+    http2: boolean;
     defaultUser: string;
     leEnabled: boolean;
     leUpdate: boolean;

@@ -14,7 +14,9 @@
   "Run as": "Uruchom jako",
   "Secure(HTTPS)": "Bezpieczne (HTTPS)",
   "Undo": "Cofnij",
+  "Use HTTP/2": "Używaj HTTP/2",
   "Use Lets Encrypt certificates": "Użyj Let's Encrypt certificates",
   "Use this instance for automatic update": "Użyj tej instancji do automatycznej aktualizacji",
-  "help_tip": "Po zapisaniu adapter natychmiast uruchamia się ponownie z nową konfiguracją"
+  "help_tip": "Po zapisaniu adapter natychmiast uruchamia się ponownie z nową konfiguracją",
+  "http2_hint": "Przeglądarki ładują strony przez jedno połączenie z wieloma równoległymi żądaniami. Klienci bez HTTP/2 automatycznie korzystają z HTTP/1.1"
 }

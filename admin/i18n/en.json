@@ -14,7 +14,9 @@
   "Run as": "Run as",
   "Secure(HTTPS)": "Secure(HTTPS)",
   "Undo": "Undo",
+  "Use HTTP/2": "Use HTTP/2",
   "Use Lets Encrypt certificates": "Use Let's Encrypt certificates",
   "Use this instance for automatic update": "Use this instance for automatic update",
-  "help_tip": "On save the adapter restarts with new configuration immediately"
+  "help_tip": "On save the adapter restarts with new configuration immediately",
+  "http2_hint": "Browsers load the pages over a single connection with many parallel requests. Clients without HTTP/2 automatically fall back to HTTP/1.1"
 }
