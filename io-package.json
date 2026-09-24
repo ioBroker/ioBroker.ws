@@ -29,19 +29,6 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
-      "5.1.0": {
-        "en": "Added the HTTP/2 option (enabled by default, with HTTP/1.1 fallback, only used with HTTPS)\nUpdated packages",
-        "de": "Option HTTP/2 hinzugefügt (standardmäßig aktiviert, mit HTTP/1.1-Fallback, nur mit HTTPS)\nNeue Pakete",
-        "ru": "Добавлена опция HTTP/2 (включена по умолчанию, с резервным вариантом HTTP/1.1, используется только с HTTPS)\nОбновленные пакеты",
-        "pt": "Adicionada a opção HTTP/2 (ativada por padrão, com o HTTP/1.1, só com HTTPS)\nPacotes novos",
-        "nl": "De HTTP/2 optie toegevoegd (standaard ingeschakeld, met HTTP/1.1 fallback, alleen gebruikt met HTTPS)\nBijgewerkte pakketten",
-        "fr": "Ajout de l'option HTTP/2 (activée par défaut, avec repli HTTP/1.1, uniquement en HTTPS)\nPackages mis à jour",
-        "it": "Aggiunta l'opzione HTTP/2 (di default, con fallback HTTP/1.1, usata solo con HTTPS)\nPacchi nuovi",
-        "es": "Se ha añadido la opción HTTP/2 (activada por defecto, con HTTP/1.1, solo se usa con HTTPS)\nPaquetes nuevos",
-        "pl": "Dodano opcję HTTP/2 (domyślnie włączona, z protokołem protokołu HTTP/1.1, używana tylko z HTTPS)\nZaktualizowane pakiety",
-        "uk": "Додано параметр HTTP/2 (увімкнено за замовчуванням, із запасним HTTP/1.1, використовується лише з HTTPS)\nОновлені пакети",
-        "zh-cn": "添加了 HTTP/2 选项（默认启用，使用 HTTP/1.1 备用，仅用于 HTTPS）\n更新的软件包"
-      },
       "5.0.2": {
         "en": "Updated packages",
         "de": "Aktualisierte Pakete",
