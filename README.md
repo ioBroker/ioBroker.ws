@@ -70,7 +70,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 5.1.0 (2026-09-24)
 * (@GermanBluefox) Added the HTTP/2 option (enabled by default, with HTTP/1.1 fallback, only used with HTTPS)
 * (@GermanBluefox) Updated packages
 
@@ -88,7 +88,3 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 ### 4.1.0 (2026-04-13)
 * (@GermanBluefox) Updated packages
 * (@GermanBluefox) Fixed possible bugs
-
-### 4.0.0 (2026-02-17)
-* (@GermanBluefox) Updated packages
-* (@GermanBluefox) Removed support for node.js 18

@@ -1,4 +1,8 @@
 # Older changes
+## 4.0.0 (2026-02-17)
+* (@GermanBluefox) Updated packages
+* (@GermanBluefox) Removed support for node.js 18
+
 ## 3.0.19 (2025-03-04)
 * (@GermanBluefox) Removed the frequent debug output
 
