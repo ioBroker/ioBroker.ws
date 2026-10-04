@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "5.1.1",
+    "version": "5.1.2",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "5.1.2": {
+        "en": "The copy of the browser client under `build/lib/socket.io.js` is refreshed by the build instead of staying behind. It had stopped at the version of April and still carried the query string of the page into the WebSocket address without encoding it again, so a page whose address contains an encoded `#` - a colour of a chart, for example - produced an address with a fragment, which a browser refuses to open a WebSocket to. Only web 8.x reads this copy; web 9.x takes the client from `@iobroker/ws-server-library` and was never affected",
+        "de": "Die Kopie des Browserclients unter `build/lib/socket.io.js` wird vom Build aktualisiert und nicht. Es hatte in der Version von April aufgehört und trotzdem die Abfragezeichenfolge der Seite in die WebSocket-Adresse übernommen, ohne sie erneut zu codieren. Eine Seite mit `#`, z. B. einer Diagrammfarbe, erzeugte eine Adresse mit Fragment, für das ein Browser keinen WebSocket öffnet. Nur Web 8.x liest diese Kopie; Web 9.x nimmt den Client von `@iobroker /ws-server-library` und war nie betroffen",
+        "ru": "Копия браузерного клиента в разделе `build/lib/socket.io.js` обновляется сборкой, а не остается в прежнем состоянии. В версии, выпущенной в апреле, строка запроса страницы по-прежнему передавалась в адрес WebSocket без повторного кодирования, поэтому страница, адрес которой содержит закодированный символ `#` (например, цвет диаграммы), выдавал адрес с фрагментом, на который браузер отказывается открывать WebSocket. Только web 8.x читает эту копию; web 9.x берет клиент из `@iobroker /ws-server-library` и никогда не была затронута",
+        "pt": "A cópia do cliente do navegador em `build/lib/socket.io.js` é atualizada pela compilação em vez de ficar. Ele parou na versão de abril e ainda carregava a string de consulta da página para o endereço WebSocket sem codificá-la novamente, então uma página cujo endereço contém um `#` - uma cor de gráfico, por exemplo - produz um endereço com um fragmento, no qual o navegador se recusa a abrir um WebSocket. Só a web 8.x lê essa cópia; a web 9.x pega o cliente de `@iobroker /ws-server-library` e nunca foi afetada",
+        "nl": "De kopie van de browserclient onder `build/lib/socket.io.js` wordt door de build vernieuwd in plaats van achter te blijven. Het was gestopt bij de versie van April en had nog steeds de queryreeks van de pagina naar het WebSocket-adres gebracht zonder deze opnieuw te coderen, dus een pagina waarvan het adres een gecodeerde `#` bevat - een kleur van een diagram bijvoorbeeld - leverde een adres op met een fragment, waarvoor een browser weigert een WebSocket te openen. Alleen Web 8.x leest deze kopie; web 9.x neemt de client over van `@iobroker /ws-server-library` en werd nooit beïnvloed",
+        "fr": "La copie du client du navigateur sous build/lib/socket.io.js est actualisée par la version au lieu d'y rester. Il s'était arrêté dans la version d'avril et transportait toujours la chaîne de requête de la page dans l'adresse WebSocket sans l'encoder à nouveau. Ainsi, une page dont l'adresse contient un « # » codé, la couleur d'un graphique, par exemple, produisait une adresse avec un fragment, auquel le navigateur refuse d'ouvrir un WebSocket. Seul le Web 8.x lit cette copie ; Web 9.x utilise le client de @iobroker /ws-server-library et n'a jamais été affecté",
+        "it": "La copia del browser client in `build/lib/socket.io.js` viene aggiornata dalla build invece di rimanere. Si era fermato alla versione di aprile e conteneva ancora la stringa di query della pagina nell'indirizzo WebSocket senza codificarla di nuovo, quindi una pagina con un «#» codificato, ad esempio, ha prodotto un indirizzo con un frammento a cui un browser rifiuta di aprire un WebSocket. Solo web 8.x legge questa copia; web 9.x prende il client da @iobroker /ws-server-library e non è mai stato colpito",
+        "es": "La compilación actualiza la copia del cliente del navegador en `build/lib/socket.io.js` en lugar de quedarse atrás. Se detuvo en la versión de abril y aún llevaba la cadena de consulta de la página a la dirección WebSocket sin volver a codificarla, por lo que una página cuya dirección contiene un `#` codificado (el color de un gráfico, por ejemplo) producía una dirección con un fragmento en el que el navegador se niega a abrir un WebSocket. Solo la web 8.x lee esta copia; la web 9.x toma el cliente de `@iobroker /ws-server-library` y nunca se vio afectada",
+        "pl": "Kopia klienta przeglądarki pod `build/lib/socket.io.js` jest odświeżana przez kompilację zamiast pozostawać w tyle. Zatrzymał się w kwietniowej wersji i nadal przenosił ciąg zapytania strony na adres WebSocket bez ponownego kodowania go, więc strona, której adres zawiera zakodowany „#” - kolor wykresu, na przykład - wytworzyła adres z fragmentem, do którego przeglądarka odmawia otwarcia WebSocket. Tylko web 8.x odczytuje tę kopię; web 9.x pobiera klienta z `@iobroker /ws-server-library` i nigdy nie został dotknięty",
+        "uk": "Копія клієнта браузера у розділі `build/lib/socket.io.js` оновлюється збіркою замість того, щоб залишатися позаду. Він зупинився у версії квітня і все ще переніс рядок запиту сторінки в адресу WebSocket, не кодуючи її знову, тому сторінка, адреса якої містить закодований `#` - колір діаграми, наприклад, - створила адресу з фрагментом, якому браузер відмовляється відкривати WebSocket. Лише web 8.x читає цю копію; web 9.x бере клієнт з `@iobroker /ws-server-library` і ніколи не зазнав впливу",
+        "zh-cn": "“build/lib/socket.io.js” 下的浏览器客户端副本由编译版本刷新，而不是留在后面。它在4月的版本中已停止，并且仍然将该页面的查询字符串传送到WebSocket地址中，而没有再次对其进行编码，因此一个地址包含已编码的`#`（例如图表的颜色）的页面生成了一个带有片段的地址，但浏览器拒绝向其打开WebSocket。只有 Web 8.x 可以读取这个副本；web 9.x 从 '@iobroker /ws-server-library `获取客户端，从未受到影响"
+      },
       "5.1.1": {
         "en": "Added the HTTP/2 option (enabled by default, with HTTP/1.1 fallback, only used with HTTPS)\nUpdated packages",
         "de": "Option HTTP/2 hinzugefügt (standardmäßig aktiviert, mit HTTP/1.1-Fallback, nur mit HTTPS)\nNeue Pakete",
@@ -106,19 +119,6 @@
         "pl": "Aktualizacja pakietów\nUsunięte wsparcie dla node.js 18",
         "uk": "Оновлені пакети\nВидалити підтримку для node.js 18",
         "zh-cn": "更新软件包\n删除对节点.js 18 的支持"
-      },
-      "3.0.19": {
-        "en": "Removed the frequent debug output",
-        "de": "Entfernen der häufigen Debug-Ausgabe",
-        "ru": "Снят частый вывод отладки",
-        "pt": "Removido a saída de depuração frequente",
-        "nl": "De frequente debug-uitvoer is verwijderd",
-        "fr": "Supprimé la sortie de débogage fréquente",
-        "it": "Rimozione dell'uscita di debug frequente",
-        "es": "Eliminar la producción de depuración frecuente",
-        "pl": "Usunięto częste wyjście debugowania",
-        "uk": "Вилучено часте дебвуг",
-        "zh-cn": "删除频繁调试输出"
       }
     },
     "authors": [
