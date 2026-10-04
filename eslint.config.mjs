@@ -5,15 +5,15 @@ export default [
     {
         languageOptions: {
             parserOptions: {
-                allowDefaultProject: {
-                    allow: ['*.js', '*.mjs'],
+                projectService: {
+                    allowDefaultProject: ['*.js', '*.mjs', '*.mts'],
                 },
                 tsconfigRootDir: import.meta.dirname,
             },
         },
     },
     {
-        ignores: ['build/*', 'example/*', 'test/*', 'eslint.config.mjs', 'prettier.config.mjs', 'tasks.js'],
+        ignores: ['build/*', 'example/*', 'test/*', 'eslint.config.mjs', 'prettier.config.mjs'],
     },
     {
         // disable temporary the rule 'jsdoc/require-param' and enable 'jsdoc/require-jsdoc'

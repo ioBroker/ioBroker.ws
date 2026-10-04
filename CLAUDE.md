@@ -8,7 +8,7 @@ ioBroker.ws is a WebSocket communication adapter for ioBroker. It enables web ap
 
 ## Commands
 
-- **Build:** `npm run build` (compiles TypeScript via `tsconfig.build.json`, then runs `tasks.js` to copy socket.io shim and type defs)
+- **Build:** `npm run build` (compiles TypeScript via `tsconfig.build.json`, then runs `node tasks.mts` to copy the socket.io shim)
 - **Lint:** `npm run lint`
 - **Test all:** `npm test` (runs integration tests via mocha with `--exit`)
 - **Test package only:** `npm run test:package`
@@ -34,7 +34,7 @@ Three main classes form the core:
 - `@iobroker/webserver` - HTTP/HTTPS server management with Let's Encrypt support
 - `express` v5 with `express-session`, `cookie-parser`, `body-parser`
 
-**Post-build step (`tasks.js`):** Copies `node_modules/@iobroker/ws/dist/esm/socket.io.js` to `build/lib/socket.io.js` (client-side compatibility shim) and `src/types.d.ts` to `build/types.d.ts`.
+**Post-build step (`tasks.mts`):** Copies the `socket.io.js` export of `@iobroker/ws-server-library` to `build/lib/socket.io.js` (client-side compatibility shim). The file is run from source by node's type stripping (`node tasks.mts`), so it must stay free of non-erasable TypeScript syntax; `tsconfig.tasks.json` type-checks it (`npm run check`).
 
 ## Configuration
 
