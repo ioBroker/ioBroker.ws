@@ -5,7 +5,7 @@ var __name = (target, value) => __defProp(target, "name", { value, configurable:
  * ioBroker WebSockets
  * Copyright 2020-2026, bluefox <dogafox@gmail.com>
  * Released under the MIT License.
- * v 3.1.2 (2026_09_22)
+ * v 3.1.3 (2026_10_04)
  */
 if (typeof globalThis.process !== "undefined") {
   globalThis.location ||= {
@@ -126,6 +126,7 @@ class SocketClient {
     this.options.pingInterval = parseInt(this.options.pingInterval, 10) || 5e3;
     this.options.connectTimeout = parseInt(this.options.connectTimeout, 10) || 3e3;
     this.options.authTimeout = parseInt(this.options.authTimeout, 10) || 3e3;
+    this.options.callbackTimeout = parseInt(this.options.callbackTimeout, 10) || 3e4;
     this.options.connectInterval = parseInt(this.options.connectInterval, 10) || 1e3;
     this.options.connectMaxAttempt = parseInt(this.options.connectMaxAttempt, 10) || 5;
     this.sessionID = Date.now();
@@ -323,7 +324,8 @@ class SocketClient {
         this.close();
       }, this.options?.authTimeout || 3e3);
     }
-    this.callbacks.push({ id, cb, ts: DEBUG ? 3e5 : Date.now() + 3e4 });
+    const ttl = DEBUG ? 3e5 : this.options?.callbackTimeout ?? 3e4;
+    this.callbacks.push({ id, cb, ts: Date.now() + ttl });
     this.socket?.send(JSON.stringify([MESSAGE_TYPES.CALLBACK, id, name, args]));
   }
   findAnswer(id, args) {

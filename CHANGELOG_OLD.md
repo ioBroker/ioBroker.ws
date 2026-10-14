@@ -1,4 +1,9 @@
 # Older changes
+## 5.0.0 (2026-06-20)
+* (@GermanBluefox) Updated packages
+* (@GermanBluefox) Migrated to TypeScript 6.0
+* (@GermanBluefox) Used a common server library for WebSockets
+
 ## 4.1.0 (2026-04-13)
 * (@GermanBluefox) Updated packages
 * (@GermanBluefox) Fixed possible bugs

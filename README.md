@@ -70,7 +70,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 -->
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 5.1.3 (2026-10-14)
 * (@GermanBluefox) Updated packages
 
 ### 5.1.2 (2026-10-04)
@@ -85,8 +85,3 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 
 ### 5.0.1 (2026-08-28)
 * (@GermanBluefox) Updated packages
-
-### 5.0.0 (2026-06-20)
-* (@GermanBluefox) Updated packages
-* (@GermanBluefox) Migrated to TypeScript 6.0
-* (@GermanBluefox) Used a common server library for WebSockets
