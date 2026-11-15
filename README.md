@@ -73,6 +73,7 @@ It is suggested to use [socket class](https://github.com/ioBroker/socket-client)
 ### **WORK IN PROGRESS**
 * (@GermanBluefox) Removed the `process.exit()` fallback: `terminate()` always exists with js-controller 6, and `process.exit()` would end the whole host process in compact mode
 * (@GermanBluefox) Added the license section to the README
+* (@GermanBluefox) Removed news entries of versions that were not published to npm (#201)
 
 ### 5.1.3 (2026-10-14)
 * (@GermanBluefox) Updated packages
