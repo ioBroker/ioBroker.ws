@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "ws",
-    "version": "5.1.3",
+    "version": "5.1.4",
     "titleLang": {
       "en": "Native Web socket",
       "de": "Native Web socket",
@@ -29,6 +29,19 @@
       "zh-cn": "该适配器允许与ioBroker通信不同的Web应用程序"
     },
     "news": {
+      "5.1.4": {
+        "en": "Removed the `process.exit()` fallback: `terminate()` always exists with js-controller 6, and `process.exit()` would end the whole host process in compact mode\nAdded the license section to the README\nRemoved news entries of versions that were not published to npm (#201)",
+        "de": "Fallback `process.exit () `entfernt: `terminate ()` gibt es immer mit JS-Controller 6, und `process.exit () `beendet den ganzen Host-Prozess im Kompaktmodus\nLizenzteil zur README hinzugefügt\nNewseinträge nicht auf npm veröffentlichter Versionen entfernt (#201)",
+        "ru": "Убран резервный вариант `process.exit () `: `terminate ()` всегда существует в js-controller 6, а `process.exit () `завершит весь хост-процесс в компактном режиме\nДобавлен раздел лицензий в README\nУдалены новостные записи версий, которые не были опубликованы в npm (#201)",
+        "pt": "Removido o fallback `process.exit () `: `terminate ()` sempre existe com o js-controller 6 e `process.exit () `encerraria todo o processo no modo compacto\nAdicionou a seção de licença ao README\nNotícias removidas de versões não publicadas no npm (#201)",
+        "nl": "De `process.exit () `fallback verwijderd: `terminate ()` bestaat altijd met js-controller 6, en `process.exit () `zou het hele hostproces in compacte modus beëindigen\nDe licentiesectie toegevoegd aan de README\nNieuwsberichten verwijderd van versies die niet op npm zijn gepubliceerd (#201)",
+        "fr": "Suppression du fallback « process.exit () » : « terminate () » existe toujours avec js-controller 6, et « process.exit () » mettrait fin à tout le processus hôte en mode compact\nAjout de la section licence au README\nSuppression des articles de versions non publiées sur npm (#201)",
+        "it": "Rimosso il fallback process.exit (): terminate () esiste sempre con js-controller 6 e process.exit () terminerebbe l'intero processo host in modalità compatta\nAggiunta la sezione licenze al README\nRimosse le notizie delle versioni non pubblicate su npm (#201)",
+        "es": "Se eliminó la alternativa `process.exit () `: `terminate ()` siempre existe en js-controller 6 y `process.exit () `terminaría todo el proceso del host en modo compacto\nAñadió la sección de licencias al README\nSe eliminaron las noticias de las versiones que no se publicaron en npm (#201)",
+        "pl": "Usunięto rezerwę `process.exit () `: `()` zawsze istnieje z js-controller 6, a `process.exit () `zakończyłby cały proces hosta w trybie kompaktowym\nDodano sekcję licencji do README\nUsunięto wpisy wiadomości wersji, które nie zostały opublikowane w npm (#201)",
+        "uk": "Вилучено резервну копію `process.exit () `: `terminate ()` завжди існує з js-контролером 6, а `process.exit () `завершить весь процес хосту в компактному режимі\nДодано розділ ліцензії до README\nВидалені записи новин версій, які не були опубліковані в npm (#201)",
+        "zh-cn": "移除了 `process.exit () `后备选项：`terminate () `始终存在于js-controller 6中，`process.exit () `将在紧凑模式下结束整个宿主进程\n在自述文件中添加了许可证部分\n删除了未发布到 npm 的版本的新闻条目 (#201)"
+      },
       "5.1.3": {
         "en": "Updated packages",
         "de": "Neue Pakete",

@@ -1,4 +1,7 @@
 # Older changes
+## 5.0.1 (2026-08-28)
+* (@GermanBluefox) Updated packages
+
 ## 5.0.0 (2026-06-20)
 * (@GermanBluefox) Updated packages
 * (@GermanBluefox) Migrated to TypeScript 6.0
